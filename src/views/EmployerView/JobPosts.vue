@@ -2,7 +2,7 @@
   <v-app>
     <employer-navbar />
     <v-main >
-      <v-col md="6" class="pa-4">
+      <v-col md="12" class="pa-4">
             <v-card outlined color="#1B5E20" >
             <v-spacer></v-spacer>
       <job-posting-card />
