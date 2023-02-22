@@ -3,7 +3,7 @@
     <employer-navbar />
     <v-main >
       <v-col md="12" class="pa-4">
-            <v-card outlined color="#1B5E20" >
+            <v-card outlined color="yellow" >
             <v-spacer></v-spacer>
       <job-posting-card />
       </v-card>
