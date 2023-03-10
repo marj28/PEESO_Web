@@ -18,7 +18,7 @@
       <v-card class="mx-auto">
         <v-list two-line>
           <v-list-item-group
-            v-model="selected"
+            
             active-class="green--text"
             multiple
           >

@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <AdminNavbar />
+      <admin-navbar />
       <v-main>
         <FormCard />
       </v-main>
@@ -8,11 +8,9 @@
   </template>
     
     <script>
-  import AdminNavbar from "../Navigation/AdminNavbar.vue";
   import FormCard from "@/views/AdminView/CardHolder/FormCard.vue";
   export default {
     components: {
-      AdminNavbar,
       FormCard,
     },
   };

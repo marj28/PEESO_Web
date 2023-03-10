@@ -5,10 +5,7 @@
         <v-col md="12" class="pa-4">
           <v-card outlined color="#1B5E20">
           <v-spacer></v-spacer>
-          <AddTraining
-            :visible="showAddTraining"
-            @close="showAddTraining = true"
-          />
+          <add-training />
           </v-card>
         </v-col>
     </v-main>
@@ -16,15 +13,12 @@
 </template>
   
   <script>
-import AddTraining from '@/views/AdminView/AddTraining.vue'
 
 export default {
   components: {
-    AddTraining
   },
   data: () => ({
       search: "",
-      showAddTraining: false,
     }),
 };
 </script>

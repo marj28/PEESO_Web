@@ -28,7 +28,7 @@
         <v-stepper-items>
           <!-- First Stepper -->
           <v-stepper-content step="1">
-            <v-card class="mb-12" color="grey lighten-4">
+            <v-card>
               <v-card-text>
                 <v-container>
                   <v-row>
@@ -41,15 +41,7 @@
                         color="green"
                       ></v-text-field>
                     </v-col>
-                    <!-- <v-col cols="12" sm="12" md="4">
-                        <v-text-field
-                          label="Trade Name"
-                          required
-                          outlined
-                          dense
-                          color="green"
-                        ></v-text-field>
-                      </v-col> -->
+                    
                     <v-col cols="12" sm="12" md="4">
                       <v-text-field
                         label="Acronym / Abbreviation"
@@ -69,28 +61,6 @@
                       >
                       </v-select>
                     </v-col>
-                    <!-- <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Tax Identification Number"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col> -->
-                    <!-- <v-col cols="12" sm="12" md="3">
-                      <v-select
-                        :items="etype"
-                        label="Employer Type"
-                        required
-                        multiple
-                        small-chips
-                        outlined
-                        dense
-                        color="green"
-                      >
-                      </v-select>
-                    </v-col> -->
                     <v-col cols="12" sm="6" md="6">
                       <v-select
                         :items="totalworkforce"
@@ -101,15 +71,6 @@
                       >
                       </v-select>
                     </v-col>
-                    <!-- <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Major Industry Group"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col> -->
                     <v-col cols="12" sm="6" md="3">
                       <v-text-field
                         label="Province"
@@ -159,14 +120,14 @@
               Continue
             </v-btn>
 
-            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false">
+            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false" text color="warning">
               Cancel
             </v-btn>
           </v-stepper-content>
 
            <!-- Second Stepper -->
            <v-stepper-content step="2">
-            <v-card class="mb-12" color="grey lighten-4">
+            <v-card>
               <v-card-text>
                 <v-container fluid>
                   <v-row>
@@ -220,15 +181,6 @@
                         color="green"
                       ></v-text-field>
                     </v-col>
-                    <!-- <v-col cols="12" sm="3" md="3">
-                      <v-text-field
-                        label="Fax Number"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col> -->
                     <v-col cols="12" sm="3" md="3">
                       <v-text-field
                         label="E-mail Address"
@@ -247,12 +199,12 @@
             <v-btn id="v-btn-c" color="success" @click="e1 = 3">
               Continue
             </v-btn>
-            <v-btn @click="e1 = 1" class="ma-2"> Back </v-btn>
+            <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
           </v-stepper-content>
 
           <!-- Third Stepper -->
           <v-stepper-content step="3">
-            <v-card class="mb-12" color="grey lighten-4">
+            <v-card>
               <v-card-text>
                 <v-container fluid>
                   <v-row>
@@ -398,7 +350,7 @@
             <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
               Save
             </v-btn>
-            <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+            <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -406,8 +358,8 @@
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
             <v-card-title class="text-h5"> UNSAVED CHANGES </v-card-title>
-
-            <v-card-text>
+            <v-divider color="success"></v-divider>
+            <v-card-text class="mt-2">
               You have made changes in your profile. Do you want to save or
               discard it?
             </v-card-text>
@@ -415,7 +367,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn color="green darken-1" text @click="dialog = false">
+              <v-btn color="orange darken-1" text @click="dialog = false">
                 Discard
               </v-btn>
 

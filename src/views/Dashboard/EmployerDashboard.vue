@@ -7,9 +7,9 @@
       <v-row class="pa-1">
         <v-col cols="12" md="6" class="ml-2">
           <appointment-card />
-          <applicant-card />
+          <!-- <applicant-card /> -->
         </v-col>
-        <v-col>
+        <v-col class="mt-4">
           <job-posting-card />
         </v-col>
       </v-row>

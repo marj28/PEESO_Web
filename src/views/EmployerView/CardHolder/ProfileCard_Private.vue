@@ -140,7 +140,7 @@
               Continue
             </v-btn>
 
-            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false">
+            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false" text color="warning">
               Cancel
             </v-btn>
           </v-stepper-content>
@@ -219,7 +219,7 @@
             <v-btn id="v-btn-c" color="success" @click="e1 = 3">
               Continue
             </v-btn>
-            <v-btn @click="e1 = 1" class="ma-2"> Back </v-btn>
+            <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
           </v-stepper-content>
 
           <!-- Third Stepper -->
@@ -370,7 +370,7 @@
             <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
               Save
             </v-btn>
-            <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+            <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -378,8 +378,8 @@
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
             <v-card-title class="text-h5"> UNSAVED CHANGES </v-card-title>
-
-            <v-card-text>
+            <v-divider color="success"></v-divider>
+            <v-card-text class="mt-2">
               You have made changes in your profile. Do you want to save or
               discard it?
             </v-card-text>
@@ -387,7 +387,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn color="green darken-1" text @click="dialog = false">
+              <v-btn color="orange darken-1" text @click="dialog = false">
                 Discard
               </v-btn>
 

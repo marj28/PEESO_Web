@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <ApplicantNavbar />
+    <applicant-navbar />
     <v-main>
       <v-col>
         <v-card outlined color="#1B5E20">
@@ -17,7 +17,7 @@
             <v-avatar size="100">
               <img src="@/assets/form2.png" />
             </v-avatar>
-            Community-based Training for Enterprise Development (CBTED)
+            Project Update Virtual and Digital Training
           </v-card-title>
           <v-container>
             <h5
@@ -29,11 +29,9 @@
                 white--text
               "
             >
-              The LGU Tagum continuous its thrust to conduct skills training in
-              partnership with TESDA to equip people with necessary skills
-              needed in the labor market. PEESO aims to tap health and wellness
-              industry, construction and other sector to provide free trainings
-              for those practitioners with no National Certificate.
+              A program which aims to provide virtual and digital training
+              opportunities for Tagumenyos. This is an alternative route for the
+              constituents to acquire work onsite or even work from home.
             </h5>
             <v-divider dark></v-divider>
             <v-col
@@ -45,31 +43,26 @@
                 color="success"
                 class="text-center mb-6"
                 dark
-                @click="CBTED_Register = true"
+                @click="UpdateForm_Register = true"
               >
                 Register
               </v-btn>
             </v-col>
           </v-container>
         </v-card>
-        <v-card class="mx-auto" v-show="CBTED_Register">
-          <cbted-form />
+        <v-card class="mx-auto" v-show="UpdateForm_Register">
+          <update-form />
         </v-card>
       </v-col>
-      <!-- <CBTEDForm /> -->
     </v-main>
   </v-app>
 </template>
-  <script>
-import ApplicantNavbar from "@/views/Navigation/ApplicantNavbar.vue";
-//   import CBTEDForm from "@/views/ApplicantView/TrainingForms/CBTEDForm.vue"
+      <script>
 export default {
   components: {
-    ApplicantNavbar,
-    //   CBTEDForm,
   },
   data: () => ({
-    CBTED_Register: false,
+    UpdateForm_Register: false,
   }),
 };
 </script>

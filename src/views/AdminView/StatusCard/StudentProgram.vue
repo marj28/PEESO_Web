@@ -5,10 +5,7 @@
           <v-col md="12" class="pa-4">
             <v-card outlined color="#1B5E20">
             <v-spacer></v-spacer>
-            <AddProgram
-              :visible="showAddProgram"
-              @close="showAddProgram = true"
-            />
+            <add-program />
             </v-card>
           </v-col>
       </v-main>
@@ -16,15 +13,12 @@
   </template>
     
     <script>
-  import AddProgram from '@/views/AdminView/AddProgram.vue'
   
   export default {
     components: {
-        AddProgram
     },
     data: () => ({
         search: "",
-        showAddProgram: false,
       }),
   };
   </script>

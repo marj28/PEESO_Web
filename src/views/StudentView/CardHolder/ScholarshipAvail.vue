@@ -31,59 +31,81 @@
                   <v-card-title>
                     <span class="text-h5">{{ formTitle }}</span>
                   </v-card-title>
-
+                  <v-divider color="success"></v-divider>
                   <v-card-text>
                     <v-container>
                       <v-row>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                          <b class="green--text">Program Name:</b>  {{ editedItem.program_name }}
+                          <!-- <v-text-field
                             v-model="editedItem.program_name"
                             label="Program Name"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                          <b class="green--text">Offering Company:</b>  {{ editedItem.offering_company }}
+                          <!-- <v-text-field
                             v-model="editedItem.offering_company"
                             label="Offering Company"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                          <b class="green--text">Date of Filing:</b>  {{ editedItem.dateoffiling }}
+                          <!-- <v-text-field
                             v-model="editedItem.dateoffiling"
                             label="Date of Filing"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                          <b class="green--text">Applicant Count:</b>  {{ editedItem.applicant_count }}
+                          <!-- <v-text-field
                             v-model="editedItem.applicant_count"
                             label="Applicant Count"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12" sm="12" md="12">
-                          <v-textarea
+                          <b class="green--text">Program Details:</b>  
+                          <br>
+                          {{ editedItem.program_details }}
+                          <!-- <v-textarea
                             auto-grow
                             v-model="editedItem.program_details"
                             label="Job Details"
-                            disabled
+                            readonly
+                            color="success"
+                            outlined
+                            dense
                             style="font-size: small; text-align: justify;"
-                          ></v-textarea>
+                          ></v-textarea> -->
                         </v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>
 
-                  <v-card-actions>
+                  <v-card-actions class="mt-n6">
                     <v-spacer></v-spacer>
-                    <v-btn color="green darken-1" text @click="close">
+                    <v-btn color="orange darken-1" text @click="close">
                       Back
                     </v-btn>
-                    <v-btn color="green darken-1" text  @click.stop="dialog1 = true" value="save">
+                    <v-btn color="green darken-1" dark  @click.stop="dialog1 = true" value="save">
                       Apply
                     </v-btn>
                   </v-card-actions>
@@ -103,7 +125,7 @@
             
 
             <v-card-text class="mt-2">
-              You have applied to the Program Posting by {{ this.offering_company }}. Do you want to continue with the application process? If Yes, please press "Continue". All your data will be pass to the PEESO Administrator.
+              You have applied to this Program Posting. Do you want to continue with the application process? If Yes, please press "Continue". All your data will be pass to the PEESO Administrator.
             </v-card-text>
 
             <v-card-actions>

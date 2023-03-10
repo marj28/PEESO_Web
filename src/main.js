@@ -8,11 +8,12 @@ import store from './store'
 // import "bootstrap/dist/css/bootstrap.min.css"
 
 import './FormsRegistration'
-import './Applicant/TrainingForms'
+import './views/ApplicantView/TrainingForms'
 import './views/Navigation'
 import './views/EmployerView/CardHolder'
 import './views/ApplicantView/CardHolder'
 import './views/StudentView/CardHolder'
+import './views/AdminView/CardHolder'
 
 Vue.config.productionTip = false
 

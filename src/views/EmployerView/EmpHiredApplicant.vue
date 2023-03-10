@@ -2,7 +2,7 @@
     <v-app>
       <employer-navbar />
       <v-main >
-        <applicant-card />
+        <hired-applicant-card />
       </v-main>
     </v-app>      
     </template>

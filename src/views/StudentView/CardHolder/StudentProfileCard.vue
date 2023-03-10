@@ -293,7 +293,7 @@
               Continue
             </v-btn>
 
-            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false">
+            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false" text color="warning">
               Cancel
             </v-btn>
           </v-stepper-content>
@@ -421,7 +421,7 @@
             <v-btn id="v-btn-c" color="success" @click="e1 = 3">
               Continue
             </v-btn>
-            <v-btn @click="e1 = 1" class="ma-2"> Back </v-btn>
+            <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
           </v-stepper-content>
 
           <!-- Third Stepper -->
@@ -435,7 +435,7 @@
                         Do you have brother's & sister's enjoying the same
                         scholarship program?
                       </p>
-                      <v-radio-group v-model="radios" mandatory>
+                      <v-radio-group  mandatory>
                         <v-radio label="Yes" value="Yes" color="success"></v-radio>
                         <v-radio label="No" value="No" color="success"></v-radio>
                       </v-radio-group>
@@ -470,7 +470,7 @@
               </v-card-text>
             </v-card>
 
-            <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+            <v-btn @click="e1 = 2" class="ma-2" text color="warning" > Back </v-btn>
             <v-btn
               class="ma-2"
               color="success"
@@ -486,8 +486,8 @@
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
             <v-card-title class="text-h5"> UNSAVED CHANGES </v-card-title>
-
-            <v-card-text>
+            <v-divider color="success"></v-divider>
+            <v-card-text class="mt-2">
               You have made changes in your profile. Do you want to save or
               discard it?
             </v-card-text>
@@ -495,7 +495,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn color="green darken-1" text @click="dialog = false">
+              <v-btn color="orange darken-1" text @click="dialog = false">
                 Discard
               </v-btn>
 

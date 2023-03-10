@@ -31,52 +31,67 @@
                   <v-card-title>
                     <span class="text-h5">{{ formTitle }}</span>
                   </v-card-title>
-
+                  <v-divider color="success"></v-divider>
                   <v-card-text>
                     <v-container>
                       <v-row>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                          <b class="green--text">Program Name:</b>  {{ editedItem.program_name }}
+                          <!-- <v-text-field
                             v-model="editedItem.program_name"
                             label="Program Name"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                          <b class="green--text">Offering Company:</b>  {{ editedItem.offering_company }}
+                          <!-- <v-text-field
                             v-model="editedItem.offering_company"
                             label="Offering Company"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
-                        <v-col cols="12" sm="6" md="6">
-                          <v-text-field
+                        <v-col cols="12" sm="6" md="6" >
+                          <b class="green--text">Date of Application:</b>  {{ editedItem.dateofapplication }}
+                          <!-- <v-text-field
                             v-model="editedItem.dateofapplication"
                             label="Date of Application"
-                            disabled
-                          ></v-text-field>
+                            readonly
+                            color="success"
+                            outlined
+                            dense
+                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-textarea
+                          <b class="green--text">Program Details:</b>  
+                          <br>
+                          {{ editedItem.program_details }}
+                          <!-- <v-textarea
                             auto-grow
                             v-model="editedItem.program_details"
                             label="Program Details"
-                            disabled
+                            readonly
+                            color="success"
+                            outlined
+                            dense
                             style="font-size: small; text-align: justify;"
-                          ></v-textarea>
+                          ></v-textarea> -->
                         </v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>
 
-                  <v-card-actions>
+                  <v-card-actions class="mt-n6">
                     <v-spacer></v-spacer>
-                    <v-btn color="green darken-1" text @click="close">
+                    <v-btn color="orange darken-1" text @click="close">
                       Back
                     </v-btn>
-                    <!-- <v-btn color="green darken-1" text  @click.stop="dialog1 = true" value="save">
-                      Apply
-                    </v-btn> -->
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -117,7 +132,7 @@ export default {
   }),
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "View Job Application";
+      return this.editedIndex === -1 ? "New Item" : "View Program Application";
     },
   },
   watch: {
@@ -144,7 +159,7 @@ export default {
           program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
         {
-          program_name: "DOST Scholar",
+          program_name: "DOST Nani",
           offering_company: "DOST",
           dateofapplication: "11-28-2022",
           program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
@@ -155,37 +170,6 @@ export default {
           dateofapplication: "11-28-2022",
           program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
-        {
-          program_name: "DOST Scholar",
-          offering_company: "DOST",
-          dateofapplication: "11-28-2022",
-          program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
-        },
-        {
-          program_name: "DOST Scholar",
-          offering_company: "DOST",
-          dateofapplication: "11-28-2022",
-          program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
-        },
-        {
-          program_name: "DOST Scholar",
-          offering_company: "DOST",
-          dateofapplication: "11-28-2022",
-          program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
-        },
-        {
-          program_name: "DOST Scholar",
-          offering_company: "DOST",
-          dateofapplication: "11-28-2022",
-          program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
-        },
-        {
-          program_name: "DOST Scholar",
-          offering_company: "DOST",
-          dateofapplication: "11-28-2022",
-          program_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
-        },
-
         {
           program_name: "DOST Scholar",
           offering_company: "DOST",

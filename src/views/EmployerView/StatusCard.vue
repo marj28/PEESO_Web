@@ -36,7 +36,7 @@
         dark
         class="pa-2 rounded-lg"
         style="background: linear-gradient(75.7deg,rgb(34, 126, 34) 3.8%,rgb(99, 162, 17) 87.1%);"
-        @click="$router.push({ path: 'EmployerApplicant' })"
+        @click="$router.push({ path: 'EmployerHiredApplicant' })"
       >
         <h2 class="ma-1">
           <v-icon dark right size="40"> mdi-account-check-outline </v-icon> 57

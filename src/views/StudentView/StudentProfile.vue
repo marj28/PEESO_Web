@@ -2,7 +2,7 @@
   <v-app>
     <student-navbar />
     <v-main>
-      <profile-card />
+      <student-profile-card />
     </v-main>
   </v-app>
 </template>

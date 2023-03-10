@@ -31,66 +31,89 @@
                     <v-card-title>
                       <span class="text-h5">{{ formTitle }}</span>
                     </v-card-title>
-  
+                    <v-divider color="success"></v-divider>
                     <v-card-text>
                       <v-container>
                         <v-row>
                           <v-col cols="12" sm="6" md="6">
-                            <v-text-field
+                            <b class="green--text">Company Name:</b>  {{ editedItem.company_name }}
+                            <!-- <v-text-field
                               v-model="editedItem.company_name"
                               label="Company Name"
-                              disabled
-                            ></v-text-field>
+                              readonly
+                              color="success"
+                              dense
+                              outlined
+                            ></v-text-field> -->
                           </v-col>
                           <v-col cols="12" sm="6" md="6">
-                            <v-text-field
+                            <b class="green--text">Position:</b>  {{ editedItem.position }}
+                            <!-- <v-text-field
                               v-model="editedItem.position"
                               label="Position"
-                              disabled
-                            ></v-text-field>
+                              readonly
+                              color="success"
+                              dense
+                              outlined
+                            ></v-text-field> -->
                           </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <v-text-field
+                          <v-col cols="12" sm="6" md="6" class="mt-n4">
+                            <b class="green--text">Job Location:</b>  {{ editedItem.job_location }}
+                            <!-- <v-text-field
                               v-model="editedItem.job_location"
                               label="Job Location"
-                              disabled
-                            ></v-text-field>
+                              readonly
+                              color="success"
+                              dense
+                              outlined
+                            ></v-text-field> -->
                           </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <v-text-field
+                          <v-col cols="12" sm="6" md="6" class="mt-n4">
+                            <b class="green--text">Status of Employment:</b>  {{ editedItem.statusofemployment }}
+                            <!-- <v-text-field
                               v-model="editedItem.statusofemployment"
                               label="Status of Employment"
-                              disabled
-                            ></v-text-field>
+                              readonly
+                              color="success"
+                              dense
+                              outlined
+                            ></v-text-field> -->
                           </v-col>
-                          <v-col cols="12" sm="6" md="6">
-                            <v-text-field
+                          <v-col cols="12" sm="6" md="6" class="mt-n4">
+                            <b class="green--text">Date of Application:</b>  {{ editedItem.dateofapplication }}
+                            <!-- <v-text-field
                               v-model="editedItem.dateofapplication"
                               label="Date of Application"
-                              disabled
-                            ></v-text-field>
+                              readonly
+                              color="success"
+                              dense
+                              outlined
+                            ></v-text-field> -->
                           </v-col>
-                          <v-col cols="12" sm="12" md="12">
-                            <v-textarea
+                          <v-col cols="12" sm="12" md="12" class="mt-n4">
+                            <b class="green--text">Job Details:</b>  
+                            <br>
+                            {{ editedItem.job_details }}
+                            <!-- <v-textarea
                               auto-grow
                               v-model="editedItem.job_details"
                               label="Job Details"
-                              disabled
+                              readonly
+                              color="success"
+                              dense
+                              outlined
                               style="font-size: small; text-align: justify;"
-                            ></v-textarea>
+                            ></v-textarea> -->
                           </v-col>
                         </v-row>
                       </v-container>
                     </v-card-text>
   
-                    <v-card-actions>
+                    <v-card-actions class="mt-n6">
                       <v-spacer></v-spacer>
-                      <v-btn color="green darken-1" text @click="close">
+                      <v-btn color="orange darken-1" text @click="close">
                         Back
                       </v-btn>
-                      <!-- <v-btn color="green darken-1" text  @click.stop="dialog1 = true" value="save">
-                        Apply
-                      </v-btn> -->
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -100,30 +123,6 @@
               </template>
             </v-data-table>
           </v-card-text>
-  
-          <!-- <v-dialog v-model="dialog1" max-width="290">
-            <v-card>
-              <v-card-title class="text-h5" color="success"> APPLY TO THIS JOB </v-card-title>
-              <v-divider color="success"></v-divider>
-              
-  
-              <v-card-text class="mt-2">
-                You have applied to the Job Post by {{ this.company_name }}. Do you want to continue with the application process? If Yes, please press "Continue". All your data including your resume will be pass to the employer.
-              </v-card-text>
-  
-              <v-card-actions>
-                <v-spacer></v-spacer>
-  
-                <v-btn color="green darken-1" text @click="dialog1 = false" >
-                  Cancel
-                </v-btn>
-  
-                <v-btn color="green darken-1" text @click="dialog1 = false, dialog = false" type="submit">
-                  Continue
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
         </v-card>
       </v-col>
     </div>

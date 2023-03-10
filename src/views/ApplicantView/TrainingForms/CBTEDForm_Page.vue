@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <ApplicantNavbar />
+    <applicant-navbar />
     <v-main>
       <v-col>
         <v-card outlined color="#1B5E20">
@@ -17,7 +17,7 @@
             <v-avatar size="100">
               <img src="@/assets/form2.png" />
             </v-avatar>
-            Community-based Training for Economic Opportunity CEEO-Star Program
+            Community-based Training for Enterprise Development (CBTED)
           </v-card-title>
           <v-container>
             <h5
@@ -29,10 +29,11 @@
                 white--text
               "
             >
-              Encourage Tagumenyos to engage in entrepreneurial activities for
-              individual sustainability and city's economic boost. This is a
-              program which offers micro-entrepreneurs training in financial
-              management and business operations.
+              The LGU Tagum continuous its thrust to conduct skills training in
+              partnership with TESDA to equip people with necessary skills
+              needed in the labor market. PEESO aims to tap health and wellness
+              industry, construction and other sector to provide free trainings
+              for those practitioners with no National Certificate.
             </h5>
             <v-divider dark></v-divider>
             <v-col
@@ -44,33 +45,26 @@
                 color="success"
                 class="text-center mb-6"
                 dark
-                @click="CEEO_Register = true"
+                @click="CBTED_Register = true"
               >
                 Register
               </v-btn>
             </v-col>
           </v-container>
         </v-card>
-        <v-card class="mx-auto" v-show="CEEO_Register">
-          <ceeo-form />
+        <v-card class="mx-auto" v-show="CBTED_Register">
+          <cbted-form />
         </v-card>
       </v-col>
-      <!-- <CBTEDForm /> -->
     </v-main>
   </v-app>
 </template>
-    <script>
-import ApplicantNavbar from "@/views/Navigation/ApplicantNavbar.vue";
-import CEEOForm from './CEEOForm.vue';
-//   import CBTEDForm from "@/views/ApplicantView/TrainingForms/CBTEDForm.vue"
+  <script>
 export default {
   components: {
-    ApplicantNavbar,
-    CEEOForm,
-    //   CBTEDForm,
   },
   data: () => ({
-    CEEO_Register: false,
+    CBTED_Register: false,
   }),
 };
 </script>

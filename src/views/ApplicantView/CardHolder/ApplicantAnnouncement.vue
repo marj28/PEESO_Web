@@ -186,13 +186,6 @@
         ],
         items: [
           {
-            name: 'Meeting',
-            when: 'August 29, 2023 , 8:00 AM',
-            where: 'City Government of Tagum - AVR 5',
-            who: 'DOST Scholar',
-            why: 'Renewal of Scholarship',
-          },
-          {
             name: 'Training',
             when: 'August 29, 2023 , 8:00 AM',
             where: 'City Government of Tagum - AVR 5',
@@ -222,34 +215,6 @@
           },
           {
             name: 'Filing',
-            when: 'August 29, 2023 , 8:00 AM',
-            where: 'City Government of Tagum - AVR 5',
-            who: 'DOST Scholar',
-            why: 'Renewal of Scholarship',
-          },
-          {
-            name: 'Filing',
-            when: 'August 29, 2023 , 8:00 AM',
-            where: 'City Government of Tagum - AVR 5',
-            who: 'DOST Scholar',
-            why: 'Renewal of Scholarship',
-          },
-          {
-            name: 'Bayanihan',
-            when: 'August 29, 2023 , 8:00 AM',
-            where: 'City Government of Tagum - AVR 5',
-            who: 'DOST Scholar',
-            why: 'Renewal of Scholarship',
-          },
-          {
-            name: 'Meeting',
-            when: 'August 29, 2023 , 8:00 AM',
-            where: 'City Government of Tagum - AVR 5',
-            who: 'DOST Scholar',
-            why: 'Renewal of Scholarship',
-          },
-          {
-            name: 'Meeting',
             when: 'August 29, 2023 , 8:00 AM',
             where: 'City Government of Tagum - AVR 5',
             who: 'DOST Scholar',

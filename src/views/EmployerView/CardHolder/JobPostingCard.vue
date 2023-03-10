@@ -4,21 +4,23 @@
       <v-toolbar flat dark color="#1B5E20">
         <v-toolbar-title>JOB POSTING </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details outlined
-          rounded dense></v-text-field>
         <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details outlined rounded
+          dense></v-text-field>
+        <v-divider vertical class="mx-2" inset></v-divider>
 
-        <v-dialog v-model="dialog" max-width="550px" persistent>
+        <v-dialog v-model="dialog" max-width="700px" persistent>
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on">
-              <v-icon> mdi-plus </v-icon> NEW JOB POST
+              <v-icon> mdi-plus </v-icon> New Job Post
             </v-btn>
           </template>
-
           <v-card>
             <v-card-title>
-              <span class="text-h5">Create Job Post</span>
+              <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
+            <v-divider color="success"></v-divider>
             <v-stepper v-model="e1">
               <v-stepper-header style="font-size: 14px">
                 <v-stepper-step :complete="e1 > 1" step="1" style="height=" color="warning">
@@ -45,22 +47,22 @@
                     <v-card-text>
                       <v-row>
                         <v-col cols="12" sm="12" md="6">
-                          <v-select :items="purposeofvacancy" label="Purpose of Vacancy" outlined dense color="green">
+                          <v-select :items="purposeofvacancy" label="Purpose of Vacancy" outlined dense color="green" v-model="editedItem.purposeofvacancy" >
                           </v-select>
                         </v-col>
                         <v-col cols="12" sm="12" md="6">
-                          <v-select :items="classificationofvacancy" label="Classification of Vacancy" outlined dense
+                          <v-select :items="classificationofvacancy" label="Classification of Vacancy" outlined dense v-model="editedItem.classificationofvacancy"
                             color="green">
                           </v-select>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-text-field label="Position Title" v-model="editedItem.position_title" required outlined
-                            dense color="green">
+                          <v-text-field label="Position Title" v-model="editedItem.position_title" required outlined dense
+                            color="green">
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-textarea label="Job Description" v-model="editedItem.job_description" required outlined
-                            dense color="green">
+                          <v-textarea label="Job Description" v-model="editedItem.job_description" required outlined dense auto-grow
+                            color="green">
                           </v-textarea>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
@@ -73,7 +75,7 @@
                             color="green"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
-                          <v-text-field label="Salary" v-model="editedItem.salary" type="number" required outlined dense
+                          <v-text-field label="Salary" v-model="editedItem.salary" type="text" required outlined dense
                             color="green"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
@@ -81,8 +83,8 @@
                             outlined dense color="green"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="6">
-                          <v-text-field label="Posting Date: (mm/dd/year) " v-model="editedItem.posting_date"
-                            type="date" required dense outlined color="green">
+                          <v-text-field label="Posting Date: (mm/dd/year) " v-model="editedItem.posting_date" type="date"
+                            required dense outlined color="green">
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="6">
@@ -97,7 +99,7 @@
                   <v-btn id="v-btn-c" color="success" @click="e1 = 2">
                     Continue
                   </v-btn>
-                  <v-btn @click="dialog = false" class="ma-2">
+                  <v-btn @click="dialog = false" class="ma-2" color="warning" text>
                     Cancel
                   </v-btn>
                 </v-stepper-content>
@@ -108,12 +110,12 @@
                     <v-card-text>
                       <v-row>
                         <v-col cols="12" sm="12" md="12">
-                          <v-select :items="educational_level" label="Educational Level" outlined dense color="green">
+                          <v-select :items="educational_level" label="Educational Level" outlined dense color="green" v-model="editedItem.educational_level">
                           </v-select>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-text-field label="Course Requirement" v-model="editedItem.course_requirement" required outlined
-                            dense color="green">
+                          <v-text-field label="Course Requirement" v-model="editedItem.course_requirement" required
+                            outlined dense color="green">
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="12" style="margin-top: -30px">
@@ -130,13 +132,13 @@
                           </v-col>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-select :items="sex_preference" label="Sex Preference" outlined dense color="green">
+                          <v-select :items="sex_preference" label="Sex Preference" outlined dense color="green" v-model="editedItem.sex_preference">
                           </v-select>
                         </v-col>
                       </v-row>
                     </v-card-text>
                   </v-card>
-                  <v-btn @click="e1 = 1" class="ma-2"> Back </v-btn>
+                  <v-btn @click="e1 = 1" class="ma-2" color="warning" text> Back </v-btn>
                   <v-btn class="ma-2" color="success" @click="e1 = 3">
                     Continue
                   </v-btn>
@@ -160,12 +162,12 @@
                           For each identified vacant position.
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-text-field label="Work Experience (month/s): " v-model="editedItem.work_experience"
-                            required outlined dense color="green" type="number"></v-text-field>
+                          <v-text-field label="Work Experience (month/s): " v-model="editedItem.work_experience" required
+                            outlined dense color="green" type="number"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-text-field label="Required License: " v-model="editedItem.required_license" required
-                            outlined dense color="green"></v-text-field>
+                          <v-text-field label="Required License: " v-model="editedItem.required_license" required outlined
+                            dense color="green"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
                           <v-text-field label="Other qualifications: " v-model="editedItem.other_qualification" required
@@ -173,7 +175,7 @@
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
                           <v-select :items="employability_skills" label="Employability Skills" outlined multiple
-                            small-chips dense color="green">
+                            small-chips dense color="green" v-model="editedItem.employability_skills">
                           </v-select>
                         </v-col>
 
@@ -190,7 +192,7 @@
                     </v-card-text>
                   </v-card>
 
-                  <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+                  <v-btn @click="e1 = 2" class="ma-2" color="warning" text> Back </v-btn>
                   <v-btn class="ma-2" color="success" @click="save">
                     Save
                   </v-btn>
@@ -239,14 +241,20 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon small class="mr-2" @click="viewItem(item)">
+      <!-- <v-icon small class="mr-2" @click="viewItem(item)">
+        mdi-eye
+      </v-icon> -->
+
+      <v-icon small class="mr-2" @click="goToJobposting(item)" color="success">
         mdi-eye
       </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)">
+
+      <v-icon small class="mr-2" @click="editItem(item)" color="warning">
         mdi-pencil
       </v-icon>
 
-      <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+
+      <v-icon @click="deleteItem(item)" color="error" small> mdi-delete </v-icon>
     </template>
     <template slot="item.switch1" slot-scope="{ item }">
       <v-switch v-model="item.switch1" color="success" dense></v-switch>
@@ -258,6 +266,9 @@
 /* eslint-disable */
 
 export default {
+  props:{
+    admin: Boolean
+  },
   components: {},
 
   data: () => ({
@@ -274,7 +285,7 @@ export default {
     employability_skills: [
       "Planning and Organizing",
       "Social Perceptiveness",
-      "innovation",
+      "Innovation",
       "Multi-tasking",
       "Work Standards/Ethics",
       "Stress Tolerance",
@@ -355,19 +366,93 @@ export default {
       "Service Trades",
       "Architecture",
     ],
-    desserts: [],
+
     editedIndex: -1,
     editedItem: {
-      
     },
-    defaultItem: {
-      
-    },
+    defaultItem: [],
+    desserts: [
+            {
+                id: 1,
+                position_title: "Data Programmer",
+                placeofwork: "Tagum City",
+                vacancy_count: "21",
+                natureofwork: "Permanent",
+                vacancy_count: "57",
+                switch1: true,
+                purposeofvacancy: "Replacement",
+                classificationofvacancy: "Clerical",
+                job_description: "A database programmer specializes in developing and maintaining database programs, modifying them according to their clients' needs. They design and write codes for different programs, establish and implement test systems, troubleshoot problems, solve concerns or issues, and upgrade systems as necessary. They may also establish data security plans and implement protocols to protect company and client data. Moreover, a database programmer maintains an active communication line with co-workers, working together to ensure a smooth workflow and provide optimal services to clients.",
+                salary: "PHP 45,000",
+                valid_until: "2023-03-05",
+                educational_level: 'Elementary Level',
+                course_requirement: "IT",
+                pwd: "yes",
+                pwd_1: "Hearing",
+                sex_preference: "Female",
+                requirements: "optional",
+                work_experience: "12",
+                required_license: "None",
+                other_qualification: "None",
+                employability_skills: "Teamwork",
+                ofw: "yes",
+            },
+            {
+                id: 2,
+                position_title: "Data Controller",
+                placeofwork: "Tagum City",
+                vacancy_count: "21",
+                natureofwork: "Part-time",
+                vacancy_count: "57",
+                switch1: false,
+                purposeofvacancy: "Expansion",
+                classificationofvacancy: "Managerial",
+                job_description: "The data controller is the person or company that determines what purposes for which and how the data will be processed. Therefore, if your company decides ‘why’ and ‘how’ the data should be processed, it is the data controller.",
+                salary: "45",
+                valid_until: "2023-03-05",
+                educational_level: "College Level",
+                course_requirement: "IT",
+                pwd: "yes",
+                pwd_1: "Hearing",
+                sex_preference: "Female",
+                requirements: "optional",
+                work_experience: "8",
+                required_license: "None",
+                other_qualification: "None",
+                employability_skills: "Innovation",
+                ofw: "yes",
+            },
+            {
+                id: 3,
+                position_title: "Data Analyst",
+                placeofwork: "Tagum City",
+                vacancy_count: "21",
+                natureofwork: "Contractual",
+                vacancy_count: "57",
+                switch1: false,
+                purposeofvacancy: "Additional Manpower",
+                classificationofvacancy: "Technical",
+                job_description: "A data analyst collects and stores data on sales numbers, market research, logistics, linguistics, or other behaviors. They bring technical expertise to ensure the quality and accuracy of that data, then process, design, and present it in ways to help people, businesses, and organizations make better decisions.",
+                salary: "45",
+                valid_until: "2023-03-05",
+                educational_level: "Senior High School Level",
+                course_requirement: "IT",
+                pwd: "yes",
+                pwd_1: "Hearing",
+                sex_preference: "Female",
+                requirements: "optional",
+                work_experience: "2",
+                required_license: "None",
+                other_qualification: "None",
+                employability_skills: "Multi-tasking",
+                ofw: "yes",
+            },
+        ],
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "New Job Post" : "Edit Job Post";
     },
   },
 
@@ -381,195 +466,21 @@ export default {
   },
 
   created() {
-    this.initialize();
+    // this.defaultItem.push(this.desserts.find(e => e.id == this.$route.params.id));
+    // console.log("defaultitem=>",this.defaultItem);
+    console.log(this.employer);
   },
-
   methods: {
-    initialize() {
-      this.desserts = [
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: true,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: false,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: false,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: false,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: true,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: false,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-        {
-          position_title: "Data Analyst",
-          placeofwork: "Tagum City",
-          vacancy_count: "21",
-          natureofwork: "Full-Time",
-          vacancy_count: "57",
-          switch1: true,
-          purposeofvacancy: "",
-          classificationofvacancy: "",
-          job_description: "Nani Koreeeeee",
-          salary: "45",
-          valid_until: "March 6,, 2023",
-          educational_level: "Elementary",
-          course_requirement: "IT",
-          pwd: "yes",
-          pwd_1: "Hearing",
-          sex_preference: "Female",
-          requirements: "optional",
-          work_experience: "None",
-          required_license: "None",
-          other_qualification: "None",
-          employability_skills: "None",
-          ofw: "yes",
-        },
-      ];
+    goToJobposting(item) {
+      
+      this.$router.push(`/JobPostingId/${item.id}/${this.admin}`);
     },
 
-    editItem(item) {
+    editItem(item) {      
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-
-    viewItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-
     deleteItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);

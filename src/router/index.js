@@ -24,9 +24,9 @@ import StudentAnnouncement_Page from '../views/StudentView/StudentAnnouncement_P
 import JobPosts from '../views/EmployerView/JobPosts.vue'
 import EmpAppointment from '../views/EmployerView/EmpAppointment.vue'
 import EmployerProfile from '../views/EmployerView/EmployerProfile.vue'
-import AddJobPost from '../views/EmployerView/AddJobPost.vue'
 import EmployerApplicant from '../views/EmployerView/EmpApplicant.vue'
-
+import EmployerHiredApplicant from '../views/EmployerView/EmpHiredApplicant.vue'
+import JobPostingId from '../views/EmployerView/CardHolder/JobPostingId.vue'
 
 //Applicant View
 import ApplicantProfile from '../views/ApplicantView/ApplicantProfile.vue'
@@ -35,9 +35,9 @@ import AppliedTraining_Page from '../views/ApplicantView/AppliedTraining_Page.vu
 import AppliedJobs_Page from '../views/ApplicantView/AppliedJobs_Page.vue'
 import AvailableJobs_Page from '../views/ApplicantView/AvailableJobs_Page.vue'
 import ApplicantAnnouncement_Page from '../views/ApplicantView/ApplicantAnnouncement_Page.vue'
-import CBTEDForm_Page from '../Applicant/TrainingForms/CBTEDForm_Page.vue'
-import CEEOForm_Page from '../Applicant/TrainingForms/CEEOForm_Page.vue'
-import UpdateForm_Page from '../Applicant/TrainingForms/UpdateForm_Page.vue'
+import CBTEDForm_Page from '../views/ApplicantView/TrainingForms/CBTEDForm_Page.vue'
+import CEEOForm_Page from '../views/ApplicantView/TrainingForms/CEEOForm_Page.vue'
+import UpdateForm_Page from '../views/ApplicantView/TrainingForms/UpdateForm_Page.vue'
 
 //Admin View
 import AdminProfile from '../views/AdminView/AdminProfile.vue'
@@ -57,15 +57,25 @@ import ProcessingList from '../views/AdminView/ListHolder/ProcessingList.vue'
 import TrainingOffer from '../views/AdminView/StatusCard/TrainingOffer.vue'
 import StudentProgram from '../views/AdminView/StatusCard/StudentProgram.vue'
 import AdminJobPost from '../views/AdminView/StatusCard/AdminJobPost.vue'
+import AdminAnnouncement from '../views/AdminView/AdminAnnouncement.vue'
 
-import OpenJobs from '../views/AdminView/StatusCard/OpenJobs.vue'
 import HiredApplicants from '../views/AdminView/StatusCard/HiredApplicants.vue'
 import DailyApplicants from '../views/AdminView/StatusCard/DailyApplicants.vue'
 import DialogStudentList from '../views/AdminView/Dialog/DialogStudentList.vue'
 
+import AdminApplicant from "../views/AdminView/AdminApplicant.vue"
+
+import DataTable from "../views/DataTable.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
+
+  {
+    path: '/DataTable',
+    name: 'DataTable',
+    component: DataTable
+  },
     //authentication
   {
     path: '/',
@@ -146,14 +156,20 @@ const routes = [
     component: EmployerApplicant
   },
   {
+    path: '/EmployerHiredApplicant',
+    name: 'EmployerHiredApplicant',
+    component: EmployerHiredApplicant
+  },
+  {
     path: '/EmployerProfile',
     name: 'EmployerProfile',
     component: EmployerProfile
   },
   {
-    path: '/AddJobPost',
-    name: 'AddJobPost',
-    component: AddJobPost
+    // path: '/JobPostingId/:id?',
+    path: '/JobPostingid/:id/:admin',
+    name: 'JobPostingId',
+    component: JobPostingId
   },
   //applicant_view
   {
@@ -203,6 +219,11 @@ const routes = [
   },
   
   //admin_view
+  {
+    path: '/AdminApplicant',
+    name: 'AdminApplicant',
+    component: AdminApplicant
+  },
   {
     path: '/AdminProfile',
     name: 'AdminProfile',
@@ -284,9 +305,9 @@ const routes = [
     component: AdminJobPost
   },
   {
-    path: '/OpenJobs',
-    name: 'OpenJobs',
-    component: OpenJobs
+    path: '/AdminAnnouncement',
+    name: 'AdminAnnouncement',
+    component: AdminAnnouncement
   },
   {
     path: '/HiredApplicants',

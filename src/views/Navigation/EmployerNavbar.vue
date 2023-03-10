@@ -14,16 +14,14 @@
           <v-avatar size="100">
             <img src="@/assets/download.png" alt="" />
           </v-avatar>
-          <p class="white--text subheading mt-1 text-center">Username</p>
+          <p class="white--text subheading mt-1 text-center">Employer</p>
         </v-flex>
-        <v-flex class="mt-5">
-          <h1 class="white--text subheading mt-1 text-center">User Title</h1>
+        <v-flex class="mt-3">
+          <h3 class="white--text subheading mt-1 text-center">Alfalink Solution</h3>
         </v-flex>
-
-        <v-flex class="mt-4 mb-4"> </v-flex>
       </v-layout>
     </v-container>
-      
+    <v-divider dark></v-divider>  
 
       <v-list shaped class="clickable">
         <template v-for="item in items">
@@ -86,7 +84,7 @@
         </v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-div>
+      <div>
         <v-text-field
           hide-details
           append-icon="mdi-magnify"
@@ -96,13 +94,13 @@
           rounded
         ></v-text-field>
         <!-- <v-icon class="button" dark>mdi-notif </v-icon> -->
-      </v-div>
-      <v-div class="ml-4">
+      </div>
+      <div class="ml-4">
         <v-icon class="button" dark>mdi-bell-badge-outline </v-icon>
-      </v-div>
-      <v-div class="ml-4">
+      </div>
+      <div class="ml-4">
         <v-icon class="button" dark>mdi-message-badge-outline </v-icon>
-      </v-div>
+      </div>
     </v-app-bar>
   </div>
 </template>
@@ -131,7 +129,7 @@ export default {
       },
       { icon: "mdi-account-box", text: "Profile", route: "/EmployerProfile" },
       { icon: "", text: "", route: "" },
-      { icon: "mdi-logout", text: "Log Out", route: "/login" },
+      { icon: "mdi-logout", text: "Log Out", route: "/" },
     ],
   }),
   methods: {

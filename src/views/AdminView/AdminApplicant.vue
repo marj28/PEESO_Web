@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <employer-navbar />
+      <admin-navbar />
       <v-main >
         <applicant-card />
       </v-main>

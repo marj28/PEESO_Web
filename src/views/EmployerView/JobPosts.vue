@@ -5,7 +5,7 @@
       <v-col md="12" class="pa-4">
             <v-card outlined color="#1B5E20" >
             <v-spacer></v-spacer>
-      <job-posting-card />
+      <job-posting-card :admin="false"/>
       </v-card>
       </v-col>
     </v-main>
