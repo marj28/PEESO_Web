@@ -10,7 +10,7 @@
             rounded dark dense></v-text-field>
         </v-card-title>
         <v-card-text>
-          <v-data-table :headers="headers" :items="desserts" :search="search" class="btn-hover elevation-1 pa-4">
+          <v-data-table :headers="headers" :items="desserts" :search="search" class="btn-hover elevation-1 pa-4" @click:row="editItem">
             <template v-slot:top>
               <v-dialog v-model="dialog" max-width="700px" tile>
                 <v-card>
@@ -23,23 +23,15 @@
                       <v-row>
                         <v-col cols="12" sm="6" md="6">
                           <b class="green--text">Facilitator Name:</b>  {{ editedItem.facilitator_name }}
-                          <!-- <v-text-field v-model="editedItem.facilitator_name" label="Facilitator Name" readonly dense
-                            color="green" outlined></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
                           <b class="green--text">Training Name:</b>  {{ editedItem.training_name }}
-                          <!-- <v-text-field v-model="editedItem.training_name" label="Training Name" readonly dense
-                            color="green" outlined></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
                           <b class="green--text">Training Location:</b>  {{ editedItem.training_location }}
-                          <!-- <v-text-field v-model="editedItem.training_location" label="Training Location" readonly dense
-                            color="green" outlined></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
                           <b class="green--text">Date of Application:</b>  {{ editedItem.dateofapplication }}
-                          <!-- <v-text-field v-model="editedItem.dateofapplication" label="Date of Application" readonly dense
-                            color="green" outlined></v-text-field> -->
                         </v-col>
                       </v-row>
                       <v-row>
@@ -47,9 +39,6 @@
                           <b class="green--text">Training Details:</b>  
                           <br>
                           {{ editedItem.training_details }}
-                          <!-- <v-textarea auto-grow v-model="editedItem.training_details" label="TRAINING DETAILS" readonly dense
-                            color="green" outlined
-                            style="font-size: small; text-align: justify;"></v-textarea> -->
                         </v-col>
                       </v-row>
                     </v-container>
@@ -64,9 +53,9 @@
                 </v-card>
               </v-dialog>
             </template>
-            <template v-slot:item.actions="{ item }">
+            <!-- <template v-slot:item.actions="{ item }">
               <v-icon small class="" @click="editItem(item)"> mdi-eye </v-icon>
-            </template>
+            </template> -->
           </v-data-table>
         </v-card-text>
       </v-card>
@@ -87,10 +76,10 @@ export default {
         sortable: false,
         value: "facilitator_name",
       },
-      { text: "TRAINING NAME", value: "training_name" },
-      { text: "TRAINING LOCATION", value: "training_location" },
+      { text: "TRAINING NAME", value: "training_name",  sortable: false, },
+      { text: "TRAINING LOCATION", value: "training_location",  sortable: false, },
       { text: "DATE OF APPLICATION", align: "center", value: "dateofapplication" },
-      { text: "Action", align: "center", value: "actions", sortable: false },
+      // { text: "Action", align: "center", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,

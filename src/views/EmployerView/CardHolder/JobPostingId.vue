@@ -1,9 +1,6 @@
 <template>
     <v-app>
         <div class="div">
-            
-            <!-- <v-if {{ employer }}="false" admin-navbar/>
-            <v-else employer-navbar/> -->
             <admin-navbar v-if="this.$route.params.admin === 'true'"></admin-navbar>
             <employer-navbar v-else></employer-navbar>
         </div>
@@ -80,7 +77,7 @@
     </v-app>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+// import { mapActions, mapGetters } from 'vuex';
 
 export default {
     data: () => ({

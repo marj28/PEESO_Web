@@ -132,7 +132,7 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="success" text @click="dialog = false">
+                  <v-btn color="success" text @click="$router.push({ name: 'LoginPage' }) ">
                     I Disagree
                   </v-btn>
                   <v-btn color="success" text @click="dialog = false">

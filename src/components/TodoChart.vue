@@ -1,18 +1,13 @@
 <template>
   <div>
     <v-card class="pa-2" elevation="20">
-      <apexcharts
-      height="300"
-      type="bar"
-      :options="chartOptions"
-      :series="series" 
-    ></apexcharts>
+      <apexcharts height="300" type="bar" :options="chartOptions" :series="series"></apexcharts>
     </v-card>
-    
+
   </div>
 </template>
     
-    <script>
+<script>
 import VueApexCharts from "vue-apexcharts";
 
 export default {
@@ -26,6 +21,18 @@ export default {
         chart: {
           id: "basic-bar",
           type: "bar",
+        },
+        grid: {
+          xaxis: {
+            lines: {
+              show: false
+            }
+          },
+          yaxis: {
+            lines: {
+              show: false
+            }
+          }
         },
         responsive: [
           {
@@ -64,7 +71,7 @@ export default {
   },
 };
 </script>
-  <style scoped>
+<style scoped>
 /* #chart {
   max-width: 650px;
   margin: 35px auto;

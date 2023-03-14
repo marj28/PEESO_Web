@@ -8,10 +8,10 @@
 </template>
   
   <script>
-import ProfileCard from "@/views/AdminView/CardHolder/ProfileCard.vue";
+
 export default {
   components: {
-    ProfileCard,
+    
   },
 };
 </script>

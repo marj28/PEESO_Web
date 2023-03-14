@@ -1,7 +1,7 @@
 <template>
   <v-col md="12" class="pa-4">
     <v-data-iterator :items="items" :items-per-page.sync="itemsPerPage" :page.sync="page" :search="search"
-      :sort-by="sortBy.toLowerCase()" :sort-desc="sortDesc" hide-default-footer>
+      :sort-by="sortBy.toLowerCase()" :sort-desc="sortDesc" hide-default-footer >
       <template v-slot:header>
         <v-toolbar dark color="#80a211" class="mb-1">
           <v-text-field v-model="search" clearable flat solo-inverted hide-details prepend-inner-icon="mdi-magnify"
@@ -50,7 +50,7 @@
 
       <template v-slot:footer>
         <v-row class="mt-2" align="center" justify="center">
-          <span class="grey--text">Items per page</span>
+          <span class="grey--text pa-4">Items per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
               <v-btn dark text color="#116530" class="ml-2" v-bind="attrs" v-on="on">

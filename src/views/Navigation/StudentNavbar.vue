@@ -11,6 +11,7 @@
           </v-flex>
           <v-flex class="mt-3">
             <h3 class="white--text subheading mt-1 text-center">Fer Rari</h3>
+            <p class="white--text subtitle-2">Current Program Associated: TESDA </p>
           </v-flex>
         </v-layout>
       </v-container>

@@ -171,6 +171,8 @@ const routes = [
     name: 'JobPostingId',
     component: JobPostingId
   },
+
+  
   //applicant_view
   {
     path: '/ApplicantProfile',

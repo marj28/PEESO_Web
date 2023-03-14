@@ -5,7 +5,7 @@
       <StatusCard />
       <v-divider light class="test"></v-divider>
       <v-row class="pa-1">
-        <v-col cols="12" md="6" class="ml-2">
+        <v-col cols="12" md="6" class="ml-2 mt-4">
           <appointment-card />
           <!-- <applicant-card /> -->
         </v-col>

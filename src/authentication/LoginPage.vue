@@ -40,10 +40,11 @@
                       <v-divider></v-divider>
                       <v-col align="center" justify="space-around" style="margin-bottom:  -90px">
                         New User?
-                        <div color="yellow" class="btn yellow--text subtitle-2" dark
+                        <br />
+                        <v-text class="green--text"  type="button" xs
                           @click="$router.push({ name: 'RegisterPage' })">
                           REGISTER
-                        </div>
+                      </v-text>
                       </v-col>
                     </v-col>
                   </v-row>

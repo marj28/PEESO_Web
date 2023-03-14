@@ -24,6 +24,7 @@
             :items="desserts"
             :search="search"
             class="btn-hover elevation-1 pa-4"
+            @click:row="editItem"
           >
             <template v-slot:top>
               <v-dialog v-model="dialog" max-width="700px" tile>
@@ -37,51 +38,17 @@
                       <v-row>
                         <v-col cols="12" sm="6" md="6">
                           <b class="green--text">Program Name:</b>  {{ editedItem.program_name }}
-                          <!-- <v-text-field
-                            v-model="editedItem.program_name"
-                            label="Program Name"
-                            readonly
-                            color="success"
-                            outlined
-                            dense
-                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6">
                           <b class="green--text">Offering Company:</b>  {{ editedItem.offering_company }}
-                          <!-- <v-text-field
-                            v-model="editedItem.offering_company"
-                            label="Offering Company"
-                            readonly
-                            color="success"
-                            outlined
-                            dense
-                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="6" md="6" >
                           <b class="green--text">Date of Application:</b>  {{ editedItem.dateofapplication }}
-                          <!-- <v-text-field
-                            v-model="editedItem.dateofapplication"
-                            label="Date of Application"
-                            readonly
-                            color="success"
-                            outlined
-                            dense
-                          ></v-text-field> -->
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
                           <b class="green--text">Program Details:</b>  
                           <br>
                           {{ editedItem.program_details }}
-                          <!-- <v-textarea
-                            auto-grow
-                            v-model="editedItem.program_details"
-                            label="Program Details"
-                            readonly
-                            color="success"
-                            outlined
-                            dense
-                            style="font-size: small; text-align: justify;"
-                          ></v-textarea> -->
                         </v-col>
                       </v-row>
                     </v-container>
@@ -96,9 +63,9 @@
                 </v-card>
               </v-dialog>
             </template>
-            <template v-slot:item.actions="{ item }">
+            <!-- <template v-slot:item.actions="{ item }">
               <v-icon small class="" @click="editItem(item)"> mdi-eye </v-icon>
-            </template>
+            </template> -->
           </v-data-table>
         </v-card-text>
       </v-card>
@@ -118,9 +85,9 @@ export default {
         sortable: false,
         value: "program_name",
       },
-      { text: "OFFERING COMPANY", value: "offering_company" },
+      { text: "OFFERING COMPANY", value: "offering_company", sortable: false, },
       { text: "DATE OF APPLICATION", align: "center", value: "dateofapplication" },
-      { text: "Action", align: "center", value: "actions", sortable: false },
+      // { text: "Action", align: "center", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,

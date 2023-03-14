@@ -11,20 +11,20 @@
         </v-col>
         <v-col cols="12" md="6">
           <v-card class="pa-2" elevation="20">
-            <Donut />
+            <DonutComponent />
           </v-card>
         </v-col>
       </v-row>
 
       <v-row class="pa-4">
         <v-col cols="12" md="6" sm="12">
-          <Chart />
+          <ChartComponent />
         </v-col>
         <v-col cols="6" md="3" sm="6">
-          <Chart />
+          <StudentChart />
         </v-col>
         <v-col cols="6" md="3" sm="6">
-          <Chart />
+          <ApplicantChart />
         </v-col>
       </v-row>
     </v-main>
@@ -33,21 +33,13 @@
 </template>
   
   <script>
-import AdminNavbar from "../Navigation/AdminNavbar.vue";
-import Chart from "@/components/ChartComponent.vue";
-import TodoChart from "@/components/TodoChart.vue";
-import Donut from "@/components/DonutComponent.vue";
 import Sample from "@/components/SampleComponent.vue";
 import StatusCard from "@/views/AdminView/StatusCard.vue";
 
 export default {
   components: {
-    AdminNavbar,
-    Chart,
-    Donut,
     Sample,
     StatusCard,
-    TodoChart,
   },
 
   data: () => ({}),

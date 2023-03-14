@@ -1,17 +1,13 @@
 <template>
   <div>
     <v-card class="pa-2">
-      <apexcharts
-      height="300"
-      :options="chartOptions"
-      :series="series"
-    ></apexcharts>
+      <apexcharts height="300" :options="chartOptions" :series="series"></apexcharts>
     </v-card>
-    
+
   </div>
 </template>
   
-  <script>
+<script>
 import VueApexCharts from "vue-apexcharts";
 
 export default {
@@ -29,6 +25,18 @@ export default {
           // sparkline: {
           //   enabled: true,
           // },
+        },
+        grid: {
+          xaxis: {
+            lines: {
+              show: false
+            }
+          },
+          yaxis: {
+            lines: {
+              show: false
+            }
+          }
         },
         responsive: [
           {
@@ -60,13 +68,13 @@ export default {
         },
         colors: ["#388E3C"],
         xaxis: {
-          categories: [1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          categories: ["Student", "Applicant", "Employer"],
         },
       },
       series: [
         {
           name: "series-1",
-          data: [30, 40, 45, 50, 49, 60, 70],
+          data: [30, 40, 45],
         },
       ],
     };

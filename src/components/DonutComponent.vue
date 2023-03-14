@@ -1,12 +1,6 @@
 <template>
   <div>
-    <apexchart
-      height="300"
-      type="pie"
-      :options="options"
-      :series="series"
-      foreColor="black"
-    ></apexchart>
+      <apexcharts class="pa-2" elevation="20" height="300" type="pie" :options="options" :series="series"></apexcharts>
   </div>
 </template>
 
@@ -16,12 +10,12 @@ import VueApexCharts from "vue-apexcharts";
 export default {
   name: "DonutChart",
   components: {
-    apexchart: VueApexCharts,
+    apexcharts: VueApexCharts,
   },
   data: function () {
     return {
       options: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        labels: ['Waiting Job Applicant', 'Hired Job Applicant', 'Waiting Student Applicant', 'Associated Student Applicant', 'Employer'],
         theme: {
           mode: "light",
           monochrome: {
@@ -44,7 +38,7 @@ export default {
         ],
       },
       series: [44, 55, 41, 17, 15],
-      
+
     };
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <employer-navbar />
+    <employer-navbar/>
     <v-main >
       <v-col md="12" class="pa-4">
             <v-card outlined color="#1B5E20" >

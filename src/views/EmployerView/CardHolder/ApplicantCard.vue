@@ -12,8 +12,8 @@
               rounded dark dense></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table :headers="headers" :items="desserts" :search="search"
-              class="btn-hover elevation-1 pa-4" v-model="selected">
+            <v-data-table :headers="headers" :items="desserts" :search="search" @click:row="editItem"
+              class="btn-hover elevation-1 pa-4">
               <template v-slot:top>
                 <v-dialog v-model="dialog" max-width="550px" tile>
                   <v-card>
@@ -34,6 +34,10 @@
                           <h4 class="green--text mt-n3 "> Job Application</h4>
                           <p class="mb-12">{{ editedItem.jobpostingapplied }}</p>
                         </v-col>
+                        <v-col cols="12" sm="12" md="12">
+                          <h4 class="green--text mt-n12 "> Additional Details</h4>
+                          <p class="mb-12">{{ editedItem.details }}</p>
+                        </v-col>
                       </v-row>
                     </v-card-text>
 
@@ -42,7 +46,7 @@
                       <v-btn color="orange darken-1" text @click="close">
                         Back
                       </v-btn>
-                      <v-btn color="green darken-1" dark @click="sinagmembro(editedItem)">
+                      <v-btn color="green darken-1" dark @click="hiredApplicants(editedItem)">
                         Hire
                       </v-btn>
                       <!-- <template slot="item.actions" slot-scope="props">
@@ -54,11 +58,11 @@
                   </v-card>
                 </v-dialog>
               </template>
-              <template v-slot:item.actions="{ item }">
+              <!-- <template v-slot:item.actions="{ item }">
                 <v-icon small @click="editItem(item)" color="green" >
                   mdi-eye
                 </v-icon>
-              </template>
+              </template> -->
               <!-- <template slot="item.actions" slot-scope="props">
                 <v-btn color="green" dark @click="() => sinagmembro(props.item)">
                   Hire
@@ -70,19 +74,21 @@
       </v-col>
       <!-- sinag -->
       <v-col md="6" cols="12">
-        <v-card height="450" class="wrapper">
-          <div class="text-center ">
-            <v-alert dense dark color="#1B5E20">
-              HIRED APPLICANTS
-            </v-alert>
-          </div>
-          <v-data-table :headers="hireheaders" :items="hired" :hide-default-footer="true" :items-per-page="20" scrollable>
-          </v-data-table>
-          <!-- <template v-slot:item.actions="{ item }">
-                <v-icon small class="" @click="editItem(item)">
-                  mdi-eye
-                </v-icon>
-              </template> -->
+        <v-card class="wrapper" color="#1B5E20">
+          <v-card-title class="subtitle-2">
+            HIRED APPLICANTS LIST
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+            <v-text-field v-model="hiredsearch" append-icon="mdi-magnify" label="Search" single-line hide-details outlined dark
+              rounded dense></v-text-field>
+          </v-card-title>
+          <v-card-text>
+            <v-data-table :headers="hireheaders" :items="hired"  :items-per-page="20"
+              :search="hiredsearch" class="btn-hover elevation-1 pa-4">
+            </v-data-table>
+          </v-card-text>
+
         </v-card>
       </v-col>
     </v-row>
@@ -106,28 +112,30 @@ export default {
       hireheaders: [
         {
           text: 'First Name',
+          align: 'left',
           sortable: false,
           value: 'firstname',
         },
         {
           text: 'Last Name',
+          align: 'left',
           sortable: false,
           value: 'lastname',
         },
         {
           text: 'Contact Number',
+          align: 'center',
           sortable: false,
           value: 'contact_number',
         },
-        // { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
       hired: [],
 
       editedItem: [],
-      sinagmembers: [],
-      non_sinagmembers: [],
+      applicants: [],
       selected: [],
       search: '',
+      hiredsearch: '',
       headers: [
         {
           text: 'First Name',
@@ -153,7 +161,6 @@ export default {
           sortable: false,
           value: 'contact_number',
         },
-        { text: 'Actions', value: 'actions', align: 'center', sortable: false },
       ],
 
       desserts: [
@@ -162,18 +169,21 @@ export default {
           lastname: "Rendon",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
         {
           firstname: "Rey",
           lastname: "Alcala",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
         {
           firstname: "Honey",
           lastname: "Curay",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
 
         {
@@ -181,6 +191,7 @@ export default {
           lastname: "Roble",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
       ],
     }
@@ -192,14 +203,10 @@ export default {
   //   },
   // },
   methods: {
-    // 
-    
+    // viewApplicant(editItem){
 
-
-
-
-    
-    sinagmembro(item) {
+    // },
+    hiredApplicants(item) {
       this.hired.push({ firstname: item.firstname, lastname: item.lastname, contact_number: item.contact_number })
       this.desserts = this.desserts.filter((nem) => nem.firstname !== item.firstname);
       this.dialog = false;
@@ -208,7 +215,7 @@ export default {
       console.log("Na Hire Nani bai");// eslint-disable-line no-console
     },
     editItem(item) {
-      this.editedIndex = this.sinagmembers.indexOf(item)
+      this.editedIndex = this.applicants.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
       console.log(this.editedItem)// eslint-disable-line no-console
@@ -222,9 +229,9 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.sinagmembers[this.editedIndex], this.editedItem)
+        Object.assign(this.applicants[this.editedIndex], this.editedItem)
       } else {
-        this.sinagmembers.push(this.editedItem)
+        this.applicants.push(this.editedItem)
 
       }
       this.close()

@@ -25,6 +25,7 @@
               :items="desserts"
               :search="search"
               class="btn-hover elevation-1 pa-4"
+              @click:row="editItem"
             >
               <template v-slot:top>
                   <v-dialog v-model="dialog" max-width="550px" tile>
@@ -39,44 +40,15 @@
                           <v-row>
                             <v-col cols="12" sm="12" md="12">
                               <b class="green--text">Business Name:</b>  {{ editedItem.business_name }}
-                              <!-- <v-text-field
-                                v-model="editedItem.business_name"
-                                label="Business Name"
-                                outlined
-                                readonly
-                                color="success"
-                                dense
-                              ></v-text-field> -->
                             </v-col>
                             <v-col cols="12" sm="12" md="12">
                               <b class="green--text">Business Location:</b>  {{ editedItem.location }}
-                              <!-- <v-text-field
-                                v-model="editedItem.location"
-                                label="Location" outlined
-                                readonly
-                                color="success"
-                                dense
-                              ></v-text-field> -->
                             </v-col>
                             <v-col cols="12" sm="12" md="12">
                               <b class="green--text">Business Email:</b>  {{ editedItem.email_address }}
-                              <!-- <v-text-field
-                                v-model="editedItem.email_address"
-                                label="Email Address" outlined
-                                readonly
-                                color="success"
-                                dense
-                              ></v-text-field> -->
                             </v-col>
                             <v-col cols="12" sm="12" md="12">
                               <b class="green--text">Business Contact Number:</b>  {{ editedItem.contact_number }}
-                              <!-- <v-text-field
-                                v-model="editedItem.contact_number"
-                                label="Contact Number" outlined
-                                readonly
-                                color="success"
-                                dense
-                              ></v-text-field> -->
                             </v-col>
                           </v-row>
                         </v-container>
@@ -94,11 +66,11 @@
                     </v-card>
                   </v-dialog>
               </template>
-              <template v-slot:item.actions="{ item }">
+              <!-- <template v-slot:item.actions="{ item }">
                 <v-icon small class="" @click="editItem(item)">
                   mdi-eye
                 </v-icon>
-              </template>
+              </template> -->
             </v-data-table>
           </v-card-text>
         </v-card>
@@ -121,7 +93,7 @@
         { text: "LOCATION", value: "location" },
         { text: "EMAIL ADDRESS", value: "email_address" },
         { text: "CONTACT NUMBER", value: "contact_number" },
-        { text: "Action", value: "actions", sortable: false },
+        // { text: "Action", value: "actions", sortable: false },
       ],
       desserts: [],
       editedIndex: -1,

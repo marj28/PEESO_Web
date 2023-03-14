@@ -40,14 +40,6 @@
           </v-row>
           <v-row style="margin-top: -35px">
             <v-col cols="5">
-              <v-subheader class="ml-5">Department</v-subheader>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field outlined dense color="success"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row style="margin-top: -35px">
-            <v-col cols="5">
               <v-subheader class="ml-5">Email Address</v-subheader>
             </v-col>
             <v-col cols="6">
@@ -55,51 +47,7 @@
               <v-btn color="success" dark small  right="true" class="ma-2 "> SAVE </v-btn>
             </v-col>
           </v-row>
-          <v-divider></v-divider>
-        
-          <h3 class="ma-2 pa-2 green--text">Company Profile</h3>
-          <v-spacer></v-spacer>
-          <v-row>
-            <v-col cols="5">
-              <v-subheader class="ml-5">Company Name</v-subheader>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field outlined dense color="success"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row style="margin-top: -35px">
-            <v-col cols="5">
-              <v-subheader class="ml-5">Industry</v-subheader>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field outlined dense color="success"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row style="margin-top: -35px">
-            <v-col cols="5">
-              <v-subheader class="ml-5">Company Address</v-subheader>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field outlined dense color="success"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row style="margin-top: -35px">
-            <v-col cols="5">
-              <v-subheader class="ml-5">Contact Number</v-subheader>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field outlined dense color="success"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row style="margin-top: -35px">
-            <v-col cols="5">
-              <v-subheader class="ml-5">Website</v-subheader>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field outlined dense color="success"></v-text-field>
-              <v-btn color="success" dark small  right="true" class="ma-2 "> SAVE </v-btn>
-            </v-col>
-          </v-row>
+          
           <v-row>
             
           </v-row>

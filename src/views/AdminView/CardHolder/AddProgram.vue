@@ -1,76 +1,70 @@
 <template>
   <v-data-table :headers="headers" :search="search" :items="desserts" sort-by="calories" class="elevation-1">
     <template v-slot:top>
-      <v-toolbar flat color="#1B5E20">
-        <v-toolbar-title class="white--text">STUDENT PROGRAMS</v-toolbar-title>
-        <v-spacer></v-spacer>
+      <v-card flat color="#1B5E20">
+        <v-card-title class="white--text">STUDENT PROGRAMS
           <v-spacer></v-spacer>
           <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-            outlined
-            rounded
-            dark
-            dense
-          ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details outlined
+            rounded dark dense cols="6"></v-text-field>
           <v-divider class="mx-4" vertical inset dark></v-divider>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on">
-              <v-icon> mdi-plus </v-icon> NEW PROGRAM
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
-            <v-divider color="success"></v-divider>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="editedItem.program_name" label="Program Name" color="success" outlined
-                      dense></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="editedItem.offering_company" label="Offering Company" color="success"
-                      outlined dense class="mt-n8"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.dateoffiling" label="Date of Filing" color="success" outlined
-                      dense class="mt-n8" type="date"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.endoffiling" label="End of Filing" color="success" outlined dense
-                      class="mt-n8" type="date"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="editedItem.applicant_count" label="Applicant Count" color="success" outlined dense
-                      class="mt-n8" type="number"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-textarea v-model="editedItem.program_description" label="Program Description" color="success"
-                      outlined dense auto-grow clearable class="mt-n8 mb-n12"></v-textarea>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+          <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="success" dark class="mt-1" v-bind="attrs" v-on="on">
+                <v-icon> mdi-plus </v-icon> NEW PROGRAM
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">{{ formTitle }}</span>
+              </v-card-title>
+              <v-divider color="success"></v-divider>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="12" md="12">
+                      <v-text-field v-model="editedItem.program_name" label="Program Name" color="success" outlined required
+                        dense></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="12">
+                      <v-text-field v-model="editedItem.offering_company" label="Offering Company" color="success"
+                        outlined dense class="mt-n8"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field v-model="editedItem.dateoffiling" label="Date of Filing" color="success" outlined
+                        dense class="mt-n8" type="date"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field v-model="editedItem.endoffiling" label="End of Filing" color="success" outlined dense
+                        class="mt-n8" type="date"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="12">
+                      <v-text-field v-model="editedItem.applicant_count" label="Applicant Count" color="success" outlined
+                        dense class="mt-n8" type="number"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="12">
+                      <v-textarea v-model="editedItem.program_description" label="Program Description" color="success"
+                        outlined dense auto-grow clearable class="mt-n8 mb-n12"></v-textarea>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="orange darken-1" text @click="close">
-                Cancel
-              </v-btn>
-              <v-btn color="green darken-1" dark @click="save">
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="orange darken-1" text @click="close">
+                  Cancel
+                </v-btn>
+                <v-btn color="green darken-1" dark @click="save">
+                  Save
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-card-title>
+
+       
         <v-dialog v-model="dialog1" max-width="500px">
           <v-card>
             <v-card-title>
@@ -81,39 +75,29 @@
               <v-container>
                 <v-row>
                   <v-col cols="12" sm="12" md="12">
-                    <b class="green--text">Program Name:</b>  {{ editedItem.program_name }}
+                    <b class="green--text">Program Name:</b> {{ editedItem.program_name }}
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <b class="green--text">Offering Company:</b>  {{ editedItem.offering_company }}
-                    <!-- <v-text-field v-model="editedItem.offering_company" label="Offering Company" color="success"
-                      outlined dense class="mt-n8" readonly></v-text-field> -->
+                    <b class="green--text">Offering Company:</b> {{ editedItem.offering_company }}
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <b class="green--text">Date of Filing:</b>  {{ editedItem.dateoffiling }}
-                    <!-- <v-text-field v-model="editedItem.dateoffiling" label="Date of Filing" color="success" outlined
-                      dense class="mt-n8" type="date" readonly></v-text-field> -->
+                    <b class="green--text">Date of Filing:</b> {{ editedItem.dateoffiling }}
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <b class="green--text">End of Filing:</b>  {{ editedItem.endoffiling }}
-                    <!-- <v-text-field v-model="editedItem.endoffiling" label="End of Filing" color="success" outlined dense
-                      class="mt-n8" type="date" readonly></v-text-field> -->
+                    <b class="green--text">End of Filing:</b> {{ editedItem.endoffiling }}
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <b class="green--text">Applicant Count:</b>  {{ editedItem.applicant_count }}
-                    <!-- <v-text-field v-model="editedItem.applicant_count" label="Applicant Count" color="success" outlined dense
-                      class="mt-n8" type="number" readonly></v-text-field> -->
+                    <b class="green--text">Applicant Count:</b> {{ editedItem.applicant_count }}
                   </v-col>
                   <v-col cols="12" sm="12" md="12" class="mb-n6">
-                    <b class="green--text">Program Description:</b>  {{ editedItem.program_description }}
-                    <!-- <v-textarea v-model="editedItem.program_description" label="Program Description" color="success"
-                      outlined dense auto-grow clearable class="mt-n8 mb-n12" readonly></v-textarea> -->
+                    <b class="green--text">Program Description:</b> {{ editedItem.program_description }}
                   </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
-              <v-btn color="green darken-1" block dark @click="dialog1 = false" >
+              <v-btn color="green darken-1" block dark @click="dialog1 = false">
                 Exit
               </v-btn>
             </v-card-actions>
@@ -132,12 +116,12 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      </v-toolbar>
+      </v-card>
     </template>
     <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="viewItem(item)" color="success">
-                mdi-eye
-            </v-icon>
+        mdi-eye
+      </v-icon>
       <v-icon small class="mr-2" @click="editItem(item)" color="warning">
         mdi-pencil
       </v-icon>
@@ -162,7 +146,7 @@ export default {
         sortable: false,
         value: "program_name",
       },
-      { text: "OFFERING COMPANY", value: "offering_company" },
+      { text: "OFFERING COMPANY", value: "offering_company", sortable: false, },
       { text: "DATE OF FILING", value: "dateoffiling" },
       { text: "END OF FILING", value: "endoffiling" },
       { text: "APPLICANT COUNT", value: "applicant_count" },
@@ -213,7 +197,7 @@ export default {
           program_name: "DOST Scholarship",
           offering_company: "Department of Science and Technology",
           dateoffiling: "February 21, 2023",
-          endoffiling: "March 5, 2023",
+          endoffiling: "March 6, 2023",
           applicant_count: "50",
           program_description:
             "Lorem ipsum dolor sit amet. Et internos libero non quos animi et eaque iste sed suscipit consequuntur et illum aliquid et quibusdam nostrum. Est quasi sint 33 aperiam quis eum aliquam quod rem quia repellendus.",
@@ -221,19 +205,19 @@ export default {
         {
           program_name: "TESDA Scholarship",
           offering_company: "Technical Education and Skills Development Authority",
-          dateoffiling: "February 21, 2023",
+          dateoffiling: "February 15, 2023",
           endoffiling: "March 5, 2023",
-          applicant_count: "50",
+          applicant_count: "250",
           program_description:
             "Lorem ipsum dolor sit amet. Et internos libero non quos animi et eaque iste sed suscipit consequuntur et illum aliquid et quibusdam nostrum. Est quasi sint 33 aperiam quis eum aliquam quod rem quia repellendus.",
         },
       ];
     },
     viewItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
-            this.editedItem = Object.assign({}, item);
-            this.dialog1 = true;
-        },
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog1 = true;
+    },
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);

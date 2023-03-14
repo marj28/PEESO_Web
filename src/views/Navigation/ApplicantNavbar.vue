@@ -81,11 +81,16 @@ export default {
     items: [
       { icon: "mdi-home", text: "Dashboard", route: "/ApplicantDashboard" },
       { icon: "mdi-crosshairs-gps", text: "Job Hunt", route: "/AvailableJobs" },
-      { icon: "mdi-application-settings", text: "Job Applications", route: "/AppliedJobs" },
+      { icon: "mdi-application-settings", text: "Jobs Applied", route: "/AppliedJobs" },
       {
         icon: "mdi-application-settings-outline",
-        text: "Training Applications",
+        text: "Trainings Applied",
         route: "/AppliedTraining",
+      },
+      {
+        icon: "mdi-crosshairs",
+        text: "Available Trainings",
+        route: "/AvailableTraining",
       },
       { icon: "mdi-printer-outline", text: "Print PDS", route: "/PrintDocument" },
       {

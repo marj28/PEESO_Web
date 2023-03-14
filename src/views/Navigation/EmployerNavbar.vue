@@ -122,11 +122,11 @@ export default {
         text: "Appointments",
         route: "/EmployerAppointments",
       },
-      {
-        icon: "mdi-clipboard-file-outline",
-        text: "Applicants",
-        route: "/EmployerApplicant",
-      },
+      // {
+      //   icon: "mdi-clipboard-file-outline",
+      //   text: "Applicants",
+      //   route: "/EmployerApplicant",
+      // },
       { icon: "mdi-account-box", text: "Profile", route: "/EmployerProfile" },
       { icon: "", text: "", route: "" },
       { icon: "mdi-logout", text: "Log Out", route: "/" },

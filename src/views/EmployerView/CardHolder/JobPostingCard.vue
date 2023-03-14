@@ -327,11 +327,11 @@ export default {
       "Technical",
     ],
     headers: [
-      { text: "Position Title", value: "position_title" },
-      { text: "Place of Work", value: "placeofwork" },
-      { text: "Nature of Work", value: "natureofwork" },
-      { text: "Vacancy Count", value: "vacancy_count" },
-      { text: "Job Post Status", value: "switch1" },
+      { text: "Position Title", value: "position_title", sortable: false, },
+      { text: "Place of Work", value: "placeofwork", sortable: false, },
+      { text: "Nature of Work", value: "natureofwork", sortable: false, },
+      { text: "Vacancy Count", value: "vacancy_count", sortable: false, },
+      { text: "Job Post Status", value: "switch1", sortable: false, },
       { text: "Actions", value: "actions", sortable: false },
     ],
     natureofwork: [
@@ -388,7 +388,7 @@ export default {
                 educational_level: 'Elementary Level',
                 course_requirement: "IT",
                 pwd: "yes",
-                pwd_1: "Hearing",
+                pwd_1: "Hearing" ,
                 sex_preference: "Female",
                 requirements: "optional",
                 work_experience: "12",
@@ -471,11 +471,11 @@ export default {
     console.log(this.employer);
   },
   methods: {
-    goToJobposting(item) {
-      
+    goToJobposting(item) {      
       this.$router.push(`/JobPostingId/${item.id}/${this.admin}`);
     },
 
+    
     editItem(item) {      
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);

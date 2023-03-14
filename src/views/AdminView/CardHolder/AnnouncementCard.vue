@@ -1,72 +1,72 @@
 <template>
     <v-data-table :headers="headers" :items="desserts" :search="search" class="">
         <template v-slot:top>
-            <v-toolbar flat dark color="#1B5E20">
-                <v-toolbar-title>ANNOUNCEMENT POST </v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details
-                    outlined rounded dense></v-text-field>
-                <v-divider class="mx-4" vertical inset></v-divider>
+            <v-card flat dark color="#1B5E20">
+                <v-card-title>ANNOUNCEMENT POST
+                    <v-spacer></v-spacer>
+                    <v-spacer></v-spacer>
+                    <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details
+                        outlined rounded dense></v-text-field>
+                    <v-divider class="mx-4" vertical inset></v-divider>
 
-                <v-dialog v-model="dialog" max-width="550px" persistent>
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="success" dark class="mb-2" v-bind="attrs" v-on="on">
-                            <v-icon> mdi-plus </v-icon> NEW ANNOUNCEMENT
-                        </v-btn>
-                    </template>
+                    <v-dialog v-model="dialog" max-width="550px" persistent>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn color="success" dark class="mt-1" v-bind="attrs" v-on="on">
+                                <v-icon> mdi-plus </v-icon> NEW ANNOUNCEMENT
+                            </v-btn>
+                        </template>
 
-                    <v-card>
-                        <v-card-title>
-                            <span class="text-h5" color="green">{{formTitle}}</span>
-                        </v-card-title>
-                        <v-divider color="green"></v-divider>
+                        <v-card>
+                            <v-card-title>
+                                <span class="text-h5" color="green">{{ formTitle }}</span>
+                            </v-card-title>
+                            <v-divider color="green"></v-divider>
 
-                        <v-card-text>
-                            <v-container fluid>
-                                <v-row>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-text-field label="Announcement Title" required outlined dense color="green"
-                                            v-model="editedItem.announcement_title">
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col cols="6" sm="6" md="6">
-                                        <v-text-field label="Date" type="date" required outlined dense color="green"
-                                            v-model="editedItem.date" class="mt-n6">
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col cols="6" sm="6" md="6">
-                                        <v-text-field label="Time" type="time" required outlined dense color="green"
-                                            v-model="editedItem.time" class="mt-n6">
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-text-field label="Location" type="text" required outlined dense color="green"
-                                            v-model="editedItem.location" class="mt-n6">
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-text-field label="Participants" type="text" required outlined dense
-                                            color="green" v-model="editedItem.participants" class="mt-n6">
-                                        </v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-textarea label="Details" type="text" required outlined dense color="green"
-                                            v-model="editedItem.details" class="mt-n6" auto-grow clearable>
-                                        </v-textarea>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                            <v-container style="margin-top: -80px">
-                                <v-btn id="v-btn-c" color="success" @click=save>
-                                    Save
-                                </v-btn>
-                                <v-btn @click="dialog = false" class="ma-2" text color="warning"> Cancel </v-btn>
-                            </v-container>
+                            <v-card-text>
+                                <v-container fluid>
+                                    <v-row>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field label="Announcement Title" required outlined dense color="green"
+                                                v-model="editedItem.announcement_title">
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="6" sm="6" md="6">
+                                            <v-text-field label="Date" type="date" required outlined dense color="green"
+                                                v-model="editedItem.date" class="mt-n6">
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="6" sm="6" md="6">
+                                            <v-text-field label="Time" type="time" required outlined dense color="green"
+                                                v-model="editedItem.time" class="mt-n6">
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field label="Location" type="text" required outlined dense color="green"
+                                                v-model="editedItem.location" class="mt-n6">
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-text-field label="Participants" type="text" required outlined dense
+                                                color="green" v-model="editedItem.participants" class="mt-n6">
+                                            </v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12" md="12">
+                                            <v-textarea label="Details" type="text" required outlined dense color="green"
+                                                v-model="editedItem.details" class="mt-n6" auto-grow clearable>
+                                            </v-textarea>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                                <v-container style="margin-top: -80px">
+                                    <v-btn id="v-btn-c" color="success" @click=save>
+                                        Save
+                                    </v-btn>
+                                    <v-btn @click="dialog = false" class="ma-2" text color="warning"> Cancel </v-btn>
+                                </v-container>
 
-                        </v-card-text>
-                    </v-card>
-                    <!-- <v-dialog v-model="dialog1" max-width="290">
+                            </v-card-text>
+                        </v-card>
+                        <!-- <v-dialog v-model="dialog1" max-width="290">
                         <v-card>
                             <v-card-title class="text-h5"> UNSAVED CHANGES </v-card-title>
 
@@ -88,7 +88,10 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog> -->
-                </v-dialog>
+                    </v-dialog>
+
+                </v-card-title>
+
                 <v-dialog v-model="dialog1" max-width="550px" persistent>
                     <v-card>
                         <v-card-title>
@@ -100,46 +103,27 @@
                             <v-container fluid>
                                 <v-row>
                                     <v-col cols="12" sm="12" md="12">
-                                        <b class="green--text">Announcement Title:</b>  {{ editedItem.announcement_title }}
-                                        <!-- <v-text-field label="Announcement Title" required outlined dense color="green"
-                                            v-model="editedItem.announcement_title" readonly>
-                                        </v-text-field> -->
+                                        <b class="green--text">Announcement Title:</b> {{ editedItem.announcement_title }}
                                     </v-col>
                                     <v-col cols="6" sm="6" md="6">
-                                        <b class="green--text">Date:</b>  {{ editedItem.date }}
-                                        <!-- <v-text-field label="Date" type="date" required outlined dense color="green"
-                                            v-model="editedItem.date" class="mt-n6" readonly>
-                                        </v-text-field> -->
+                                        <b class="green--text">Date:</b> {{ editedItem.date }}
                                     </v-col>
                                     <v-col cols="6" sm="6" md="6">
-                                        <b class="green--text">Time:</b>  {{ editedItem.time }}
-                                        <!-- <v-text-field label="Time" type="time" required outlined dense color="green"
-                                            v-model="editedItem.time" class="mt-n6" readonly>
-                                        </v-text-field> -->
+                                        <b class="green--text">Time:</b> {{ editedItem.time }}
                                     </v-col>
                                     <v-col cols="12" sm="12" md="12">
-                                        <b class="green--text">Location:</b>  {{ editedItem.location }}
-                                        <!-- <v-text-field label="Location" type="text" required outlined dense color="green"
-                                            v-model="editedItem.location" class="mt-n6" readonly>
-                                        </v-text-field> -->
+                                        <b class="green--text">Location:</b> {{ editedItem.location }}
                                     </v-col>
                                     <v-col cols="12" sm="12" md="12">
-                                        <b class="green--text">Participants:</b>  {{ editedItem.participants }}
-                                        <!-- <v-text-field label="Participants" type="text" required outlined dense
-                                            color="green" v-model="editedItem.participants" class="mt-n6" readonly>
-                                        </v-text-field> -->
+                                        <b class="green--text">Participants:</b> {{ editedItem.participants }}
                                     </v-col>
                                     <v-col cols="12" sm="12" md="12">
-                                        <b class="green--text">Details:</b>  {{ editedItem.details }}
-                                        <!-- <v-textarea label="Details" type="text" required outlined dense color="green"
-                                            v-model="editedItem.details" class="mt-n6" auto-grow clearable readonly>
-                                        </v-textarea> -->
+                                        <b class="green--text">Details:</b> {{ editedItem.details }}
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container class="mt-n6">
-                                <!-- <v-spacer class="d-flex justify-space-between align-end"></v-spacer> -->
-                                <v-btn @click="dialog1 = false"  color="success" block> Exit </v-btn>
+                                <v-btn @click="dialog1 = false" color="success" block> Exit </v-btn>
                             </v-container>
 
                         </v-card-text>
@@ -157,9 +141,9 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-            </v-toolbar>
+            </v-card>
         </template>
-        <template v-slot:item.actions="{ item }"> 
+        <template v-slot:item.actions="{ item }">
             <v-icon small class="mr-2" @click="viewItem(item)" color="success">
                 mdi-eye
             </v-icon>
