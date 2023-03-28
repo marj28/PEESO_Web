@@ -27,6 +27,7 @@ import EmployerProfile from '../views/EmployerView/EmployerProfile.vue'
 import EmployerApplicant from '../views/EmployerView/EmpApplicant.vue'
 import EmployerHiredApplicant from '../views/EmployerView/EmpHiredApplicant.vue'
 import JobPostingId from '../views/EmployerView/CardHolder/JobPostingId.vue'
+import AppointmentId from '../views/EmployerView/CardHolder/AppointmentId.vue'
 
 //Applicant View
 import ApplicantProfile from '../views/ApplicantView/ApplicantProfile.vue'
@@ -170,6 +171,12 @@ const routes = [
     path: '/JobPostingid/:id/:admin',
     name: 'JobPostingId',
     component: JobPostingId
+  },
+  {
+    // path: '/AppointmentId/:id?',
+    path: '/Appointmentid/:id',
+    name: 'AppointmentId',
+    component: AppointmentId
   },
 
   

@@ -57,14 +57,15 @@
                                         </v-col>
                                     </v-row>
                                 </v-container>
-                                <v-container style="margin-top: -80px">
-                                    <v-btn id="v-btn-c" color="success" @click=save>
-                                        Save
-                                    </v-btn>
-                                    <v-btn @click="dialog = false" class="ma-2" text color="warning"> Cancel </v-btn>
-                                </v-container>
-
                             </v-card-text>
+                            <v-card-actions style="margin-top: -50px">
+                                <v-spacer></v-spacer>
+                                <v-btn id="v-btn-c" color="success" @click=save>
+                                    Save
+                                </v-btn>
+                                <v-btn @click="dialog = false" class="ma-2" text color="warning"> Cancel </v-btn>
+                            </v-card-actions>
+
                         </v-card>
                         <!-- <v-dialog v-model="dialog1" max-width="290">
                         <v-card>
@@ -96,6 +97,9 @@
                     <v-card>
                         <v-card-title>
                             <span class="text-h5" color="green">View Announcement</span>
+                            <v-spacer></v-spacer>
+                            <v-btn @click="(dialog = true), (dialog1 = false)" color="warning" icon small class="mt-2">
+                                <v-icon>mdi-pencil</v-icon> </v-btn>
                         </v-card-title>
                         <v-divider color="green"></v-divider>
 
@@ -122,11 +126,11 @@
                                     </v-col>
                                 </v-row>
                             </v-container>
-                            <v-container class="mt-n6">
-                                <v-btn @click="dialog1 = false" color="success" block> Exit </v-btn>
-                            </v-container>
-
                         </v-card-text>
+                        <v-card-actions class="mt-n6">
+                            <v-spacer></v-spacer>
+                            <v-btn @click="dialog1 = false" medium color="success"> Exit </v-btn>
+                        </v-card-actions>
                     </v-card>
                 </v-dialog>
                 <v-dialog v-model="dialogDelete" max-width="500px">
@@ -147,9 +151,9 @@
             <v-icon small class="mr-2" @click="viewItem(item)" color="success">
                 mdi-eye
             </v-icon>
-            <v-icon small class="mr-2" @click="editItem(item)" color="warning">
+            <!-- <v-icon small class="mr-2" @click="editItem(item)" color="warning">
                 mdi-pencil
-            </v-icon>
+            </v-icon> -->
 
             <v-icon small @click="deleteItem(item)" color="error"> mdi-delete </v-icon>
         </template>

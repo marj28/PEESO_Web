@@ -2,17 +2,12 @@
   <div>
     <v-col>
       <v-card outlined color="#1B5E20">
-        <v-card-title
-          class="d-flex flex-column justify-space-between align-center"
-        >
+        <v-card-title class="d-flex flex-column justify-space-between align-center">
           <v-avatar size="100">
             <img src="@/assets/download.png" />
           </v-avatar>
         </v-card-title>
-        <v-card-text
-          class="d-flex flex-column justify-space-between align-center"
-          style="color: white"
-        >
+        <v-card-text class="d-flex flex-column justify-space-between align-center" style="color: white">
           <p class="font-weight-black">Student Name</p>
         </v-card-text>
       </v-card>
@@ -37,449 +32,217 @@
         </v-stepper-header>
 
         <v-stepper-items>
-          <!-- First Stepper -->
-          <v-stepper-content step="1">
-            <v-card>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="4">
-                      <v-text-field
-                        label="Surname"
-                        required
-                        dense
-                        outlined
-                        autofocus
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="4">
-                      <v-text-field
-                        label="First Name"
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="4">
-                      <v-text-field
-                        label="Middle Name"
-                        required
-                        dense
-                        outlined
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Date of Birth"
-                        type="date"
-                        required
-                        dense
-                        outlined
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Citizenship"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Contact Details / Mobile No."
-                        type="number"
-                        required
-                        dense
-                        outlined
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Email Address"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                        type="email"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6">
-                      <v-text-field
-                        label="Present Address"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6">
-                      <v-text-field
-                        label="Permanent Address"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Last School Year Attended 2021-2022"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                        type="number"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Grade Level S.Y. 2021-2022"
-                        required
-                        dense
-                        outlined
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="School Attended for S.Y. 2022-2023"
-                        required
-                        dense
-                        outlined
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field
-                        label="Grade Level for S.Y. 2022-2023"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="12">
-                      <v-select
-                        :items="parentsStatus"
-                        label="Current Status of Parents"
-                        outlined
-                        dense
-                        multiple
-                        small-chips
-                        color="success"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-spacer></v-spacer>
-                    <v-col cols="12" sm="12" md="7">
-                      <v-text-field
-                        label="Father's Full Name"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="2">
-                      <v-text-field
-                        label="Contact No."
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                        type="number"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Occupation"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="7">
-                      <v-text-field
-                        label="Mother's Full Name"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="2">
-                      <v-text-field
-                        label="Contact No."
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                        type="number"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Occupation"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="7">
-                      <v-text-field
-                        label="Guardian's Full Name"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="2">
-                      <v-text-field
-                        label="Contact No."
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                        type="number"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Occupation"
-                        required
-                        outlined
-                        dense
-                        color="success"
-                        clearable
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
+          <v-form ref="formes" v-model="valid" lazy-validation>
+            <!-- First Stepper -->
+            <v-stepper-content step="1">
+              <v-card>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="4">
+                        <v-text-field label="Surname" required dense outlined autofocus color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="4">
+                        <v-text-field label="First Name" outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="4">
+                        <v-text-field label="Middle Name" required dense outlined color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Date of Birth" type="date" required dense outlined color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Citizenship" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Contact Details / Mobile No." type="number" required dense outlined
+                          color="success" clearable :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Email Address" required outlined dense color="success" clearable type="email"
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-text-field label="Present Address" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-text-field label="Permanent Address" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Last School Year Attended 2021-2022" required outlined dense color="success"
+                          clearable type="number" :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Grade Level S.Y. 2021-2022" required dense outlined color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="School Attended for S.Y. 2022-2023" required dense outlined color="success"
+                          clearable :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="3">
+                        <v-text-field label="Grade Level for S.Y. 2022-2023" required outlined dense color="success"
+                          clearable :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-select :items="parentsStatus" label="Current Status of Parents" outlined dense multiple
+                          small-chips color="success" :rules="rules">
+                        </v-select>
+                      </v-col>
+                      <v-spacer></v-spacer>
+                      <v-spacer></v-spacer>
+                      <v-col cols="12" sm="12" md="7">
+                        <v-text-field label="Father's Full Name" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="2">
+                        <v-text-field label="Contact No." required outlined dense color="success" clearable type="number"
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-text-field label="Occupation" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="7">
+                        <v-text-field label="Mother's Full Name" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="2">
+                        <v-text-field label="Contact No." required outlined dense color="success" clearable type="number"
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-text-field label="Occupation" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="7">
+                        <v-text-field label="Guardian's Full Name" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="2">
+                        <v-text-field label="Contact No." required outlined dense color="success" clearable type="number"
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-text-field label="Occupation" required outlined dense color="success" clearable
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
 
-            <v-btn id="v-btn-c" color="success" @click="e1 = 2">
-              Continue
-            </v-btn>
+              <v-btn id="v-btn-c" color="success" @click="validate">
+                Continue
+              </v-btn>
+            </v-stepper-content>
 
-            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false" text color="warning">
-              Cancel
-            </v-btn>
-          </v-stepper-content>
+            <!-- Second Stepper -->
+            <v-stepper-content step="2">
+              <v-card>
+                <v-card-text>
+                  <v-container fluid>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <p class="font-weight-bold green--text" style="margin-top: -20px" autofocus>
+                          ELEMENTARY
+                        </p>
+                      </v-col>
+                      <v-spacer></v-spacer>
+                      <v-text-field outlined autofocus dense color="success" clearable label="Name of School">
+                      </v-text-field>
+                      <v-text-field outlined dense label="Year / Level" color="success" clearable>
+                      </v-text-field>
+                      <v-text-field outlined dense color="success" clearable label="Date of Attendance" type="date">
+                      </v-text-field>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <p class="font-weight-bold green--text" style="margin-top: -20px" autofocus>
+                          JUNIOR HIGH SCHOOL
+                        </p>
+                      </v-col>
+                      <v-spacer></v-spacer>
+                      <v-text-field outlined dense color="success" clearable label="Name of School">
+                      </v-text-field>
+                      <v-text-field outlined dense label="Year / Level" color="success" clearable>
+                      </v-text-field>
+                      <v-text-field outlined dense color="success" clearable label="Date of Attendance" type="date">
+                      </v-text-field>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <p class="font-weight-bold green--text" style="margin-top: -20px">
+                          SENIOR HIGH SCHOOL
+                        </p>
+                      </v-col>
+                      <v-spacer></v-spacer>
+                      <v-text-field outlined dense color="success" clearable label="Name of School">
+                      </v-text-field>
+                      <v-text-field outlined dense label="Year / Level" color="success" clearable>
+                      </v-text-field>
+                      <v-text-field outlined dense color="success" clearable label="Date of Attendance" type="date">
+                      </v-text-field>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
 
-          <!-- Second Stepper -->
-          <v-stepper-content step="2">
-            <v-card>
-              <v-card-text>
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="12">
-                      <p
-                        class="font-weight-bold green--text"
-                        style="margin-top: -20px"
-                        autofocus
-                      >
-                        ELEMENTARY
-                      </p>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                      outlined
-                      autofocus
-                      dense
-                      color="success"
-                      clearable
-                      label="Name of School"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      outlined
-                      dense
-                      label="Year / Level"
-                      color="success"
-                      clearable
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      outlined
-                      dense
-                      color="success"
-                      clearable
-                      label="Date of Attendance"
-                      type="date"
-                    >
-                    </v-text-field>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="12">
-                      <p
-                        class="font-weight-bold green--text"
-                        style="margin-top: -20px"
-                        autofocus
-                      >
-                        JUNIOR HIGH SCHOOL
-                      </p>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                      outlined
-                      dense
-                      color="success"
-                      clearable
-                      label="Name of School"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      outlined
-                      dense
-                      label="Year / Level"
-                      color="success"
-                      clearable
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      outlined
-                      dense
-                      color="success"
-                      clearable
-                      label="Date of Attendance"
-                      type="date"
-                    >
-                    </v-text-field>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="12">
-                      <p
-                        class="font-weight-bold green--text"
-                        style="margin-top: -20px"
-                      >
-                        SENIOR HIGH SCHOOL
-                      </p>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                      outlined
-                      dense
-                      color="success"
-                      clearable
-                      label="Name of School"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      outlined
-                      dense
-                      label="Year / Level"
-                      color="success"
-                      clearable
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      outlined
-                      dense
-                      color="success"
-                      clearable
-                      label="Date of Attendance"
-                      type="date"
-                    >
-                    </v-text-field>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
+              <v-btn id="v-btn-c" color="success" @click="e1 = 3">
+                Continue
+              </v-btn>
+              <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
+            </v-stepper-content>
 
-            <v-btn id="v-btn-c" color="success" @click="e1 = 3">
-              Continue
-            </v-btn>
-            <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
-          </v-stepper-content>
+            <!-- Third Stepper -->
+            <v-stepper-content step="3">
+              <v-card>
+                <v-card-text>
+                  <v-container fluid>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="6">
+                        <p>
+                          Do you have brother's & sister's enjoying the same
+                          scholarship program?
+                        </p>
+                        <v-radio-group mandatory>
+                          <v-radio label="Yes" value="Yes" color="success"></v-radio>
+                          <v-radio label="No" value="No" color="success"></v-radio>
+                        </v-radio-group>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <p>If yes, kindly state their name(s):</p>
+                        <v-text-field hint="Names here" outlined dense color="success"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <p class="text-subtitle-2 text-center green--text">
+                          We hereby certify the correctness of the above
+                          information.
+                        </p>
+                      </v-col>
+                      <v-spacer></v-spacer>
+                      <v-col cols="12" sm="12" md="4">
+                        <v-file-input label="Attached ID here" dense color="success" outlined
+                          prepend-icon="mdi-camera"></v-file-input>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
 
-          <!-- Third Stepper -->
-          <v-stepper-content step="3">
-            <v-card >
-              <v-card-text>
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="6">
-                      <p>
-                        Do you have brother's & sister's enjoying the same
-                        scholarship program?
-                      </p>
-                      <v-radio-group  mandatory>
-                        <v-radio label="Yes" value="Yes" color="success"></v-radio>
-                        <v-radio label="No" value="No" color="success"></v-radio>
-                      </v-radio-group>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6">
-                      <p>If yes, kindly state their name(s):</p>
-                      <v-text-field
-                        hint="Names here"
-                        outlined
-                        dense
-                        color="success"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="12">
-                      <p class="text-subtitle-2 text-center green--text">
-                        We hereby certify the correctness of the above
-                        information.
-                      </p>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-col cols="12" sm="12" md="4">
-                      <v-file-input
-                        label="Attached ID here"
-                        dense
-                        color="success"
-                        outlined
-                        prepend-icon="mdi-camera"
-                      ></v-file-input>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
-
-            <v-btn @click="e1 = 2" class="ma-2" text color="warning" > Back </v-btn>
-            <v-btn
-              class="ma-2"
-              color="success"
-              @click="dialog = true"
-              value="save"
-            >
-              Save
-            </v-btn>
-          </v-stepper-content>
+              <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
+              <v-btn class="ma-2" color="success" @click="dialog = true" value="save">
+                Save
+              </v-btn>
+            </v-stepper-content>
+          </v-form>
         </v-stepper-items>
       </v-stepper>
       <v-row>
@@ -499,12 +262,7 @@
                 Discard
               </v-btn>
 
-              <v-btn
-                color="green darken-1"
-                text
-                @click="dialog = false"
-                type="submit"
-              >
+              <v-btn color="green darken-1" text @click="dialog = false" type="submit">
                 Save
               </v-btn>
             </v-card-actions>
@@ -514,10 +272,14 @@
     </v-col>
   </div>
 </template>
-  <script>
+<script>
 export default {
   components: {},
   data: () => ({
+    valid: true,
+    rules: [
+      v => !!v || 'Required',
+    ],
     e1: 1,
     dialog: false,
     activePicker: null,
@@ -545,6 +307,13 @@ export default {
   methods: {
     save(date) {
       this.$refs.menu.save(date);
+    },
+    validate() {
+      this.$refs.formes.validate()
+      let v = this.$refs.formes.validate()
+      if (v) {
+        this.e1 = this.e1 + 1
+      }
     },
     scrollup() {
       window.scrollTo(0, 0);

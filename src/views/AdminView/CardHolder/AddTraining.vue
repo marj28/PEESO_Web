@@ -73,6 +73,8 @@
           <v-card>
             <v-card-title>
               <span class="text-h5">VIEW TRAINING</span>
+              <v-spacer></v-spacer>
+              <v-btn @click="(dialog = true), (dialog1 = false)" color="warning" icon small class="mt-2"> <v-icon>mdi-pencil</v-icon> </v-btn>
             </v-card-title>
             <v-divider color="success"></v-divider>
             <v-card-text>
@@ -103,10 +105,12 @@
               </v-container>
             </v-card-text>
 
-            <v-card-actions>
-              <v-btn color="green darken-1" dark block @click="dialog1 = false">
+            <v-card-actions class="mt-n6">
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" dark @click="dialog1 = false">
                 Exit
               </v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -129,9 +133,9 @@
       <v-icon small class="mr-2" @click="viewItem(item)" color="success">
         mdi-eye
       </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)" color="orange">
+      <!-- <v-icon small class="mr-2" @click="editItem(item)" color="orange">
         mdi-pencil
-      </v-icon>
+      </v-icon> -->
       <v-icon small @click="deleteItem(item)" color="red"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>

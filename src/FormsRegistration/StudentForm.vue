@@ -1,116 +1,42 @@
 <template>
   <div>
     <v-col>
-      <v-snackbar v-model="snackbar" :top="'top'" :color="alertColor">
-        {{ text }}
-
-        <template v-slot:action="{ attrs }">
-          <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
-            Close
-          </v-btn>
-        </template>
-      </v-snackbar>
-      <h4 class="text-center pa-2 green--text">Student Registration</h4>
+      <h4 class="text-center pa-2 green--text mb-12">Student Registration</h4>
       <v-row>
-        <v-col cols="12" md="3" lg="3">
-          <v-text-field
-            class="textbox"
-            v-model="last_name"
-            type="text"
-            label="Last Name"
-            required
-            color="green"
-            outlined
-            dense
-          />
+        <v-col cols="12" md="6" lg="6">
+          <v-text-field class="textbox mt-n6" autofocus v-model="last_name" type="text" label="Last Name" required color="green"
+            outlined dense />
         </v-col>
-        <v-col cols="12" md="4">
-          <v-text-field
-            class="textbox"
-            v-model="first_name"
-            type="text"
-            label="First Name"
-            required
-            color="green"
-            outlined
-            dense
-          />
+        <v-col cols="12" md="6">
+          <v-text-field class="textbox mt-n6" v-model="first_name" type="text" label="First Name" required color="green"
+            outlined dense />
         </v-col>
-        <v-col cols="12" md="2">
-          <v-text-field
-            class="textbox"
-            v-model="middle_initial"
-            type="text"
-            label="M.I."
-            required
-            color="green"
-            outlined
-            dense
-          />
+        <v-col cols="12" md="6">
+          <v-text-field class="textbox textbox mt-n6" v-model="middle_initial" type="text" label="M.I." required
+            color="green" outlined dense />
         </v-col>
 
-        <v-col cols="12" md="3">
-          <v-select
-            :items="suffix"
-            v-model="suffix"
-            label="Suffix"
-            outlined
-            dense
-            color="success"
-          >
+        <v-col cols="12" md="6">
+          <v-select :items="suffix" v-model="suffix" label="Suffix" outlined dense color="success" class="mt-n6">
           </v-select>
         </v-col>
       </v-row>
       <v-divider> </v-divider>
       <h5 class="green--text pa-2">Login Credentials</h5>
-      <v-text-field
-        class="textbox"
-        v-model="email"
-        type="email"
-        label="Email"
-        prepend-inner-icon="mdi mdi-account mdi-green"
-        required
-        color="green"
-        outlined
-        dense
-      />
+      <v-text-field class="textbox mb-6" v-model="email" type="email" label="Email"
+        prepend-inner-icon="mdi mdi-account mdi-green" required color="green" outlined dense />
       <v-row>
         <v-col cols="12" md="6" lg="6">
-          <v-text-field
-            class="textbox"
-            v-model="password"
-            :rules="pwdRules"
-            :type="passwordShow ? 'text' : 'password'"
-            label="Password"
-            prepend-inner-icon="mdi-key"
-            color="green"
-            outlined
-            dense
-          />
+          <v-text-field class="textbox mt-n6" v-model="password" :rules="pwdRules" :type="passwordShow ? 'text' : 'password'"
+            label="Password" prepend-inner-icon="mdi-key" color="green" outlined dense />
         </v-col>
         <v-col cols="12" md="6" lg="6">
-          <v-text-field
-            class="textbox"
-            v-model="pw2"
-            :rules="pwdConfirm"
-            :type="passwordShow ? 'text' : 'password'"
-            label="Confirm Password"
-            prepend-inner-icon="mdi-key"
-            color="green"
-            outlined
-            dense
-          />
+          <v-text-field class="textbox mt-n6" v-model="pw2" :rules="pwdConfirm" :type="passwordShow ? 'text' : 'password'"
+            label="Confirm Password" prepend-inner-icon="mdi-key" color="green" outlined dense />
         </v-col>
       </v-row>
       <v-col align="center" justify="space-around">
-        <v-btn
-          type="submit"
-          color="green"
-          class="text-center"
-          @click="studentregister"
-          dark
-          block
-        >
+        <v-btn type="submit" color="green" class="text-center" @click="studentregister" dark block>
           <v-icon left>mdi-account-check</v-icon>
           SIGN UP
         </v-btn>

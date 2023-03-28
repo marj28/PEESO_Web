@@ -55,20 +55,20 @@
     <v-app-bar color="#388E3C" dark app elevate-on-scroll>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase">
-        <v-btn text @click="$router.push({ name: 'AdminDashboard' })">
-          <span class="font-weight-bold"> CPEESO Admin </span>
+        <v-btn text @click="$router.push({ name: 'AdminDashboard' })" >
+          <span class="font-weight-bold ml-n9"> CPEESO Admin </span>
         </v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div>
+      <div id="search">
         <v-text-field hide-details append-icon="mdi-magnify" single-line outlined dense rounded></v-text-field>
         <!-- <v-icon class="button" dark>mdi-notif </v-icon> -->
       </div>
-      <div class="ml-4">
-        <v-icon class="button" dark>mdi-bell-badge-outline </v-icon>
+      <div class="ml-2">
+        <v-icon class="button" dark size="20">mdi-bell-badge-outline </v-icon>
       </div>
-      <div class="ml-4">
-        <v-icon class="button" dark>mdi-message-badge-outline </v-icon>
+      <div class="ml-2">
+        <v-icon class="button" dark size="20">mdi-message-badge-outline </v-icon>
       </div>
     </v-app-bar>
   </div>
@@ -170,3 +170,13 @@ export default {
   }),
 };
 </script>
+<style>
+@media screen and (max-width: 600px) {
+  span {
+    font-size: 7px;
+  }
+  div #search {
+    size: 5px;
+  }
+}
+</style>

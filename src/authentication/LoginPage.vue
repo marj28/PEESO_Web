@@ -40,7 +40,6 @@
                       <v-divider></v-divider>
                       <v-col align="center" justify="space-around" style="margin-bottom:  -90px">
                         New User?
-                        <br />
                         <v-text class="green--text"  type="button" xs
                           @click="$router.push({ name: 'RegisterPage' })">
                           REGISTER

@@ -26,32 +26,37 @@
                 <v-container fluid>
                   <v-row>
                     <v-col cols="12" sm="12" md="12">
+                      <v-select :items="jobpost" label="Choose Job Post" outlined dense color="green"
+                        v-model="editedItem.jobpost" :rules="rules"></v-select>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="12">
                       <v-text-field label="Appointment Title" required outlined dense color="green"
-                        v-model="editedItem.appointment_title">
+                        v-model="editedItem.appointment_title" class="mt-n6" :rules="rules">
                       </v-text-field>
                     </v-col>
                     <v-col cols="6" sm="6" md="6">
                       <v-text-field label="Date" type="date" required outlined dense color="green"
-                        v-model="editedItem.date" class="mt-n6">
+                        v-model="editedItem.date" class="mt-n6" :rules="rules">
                       </v-text-field>
                     </v-col>
                     <v-col cols="6" sm="6" md="6">
                       <v-text-field label="Time" type="time" required outlined dense color="green"
-                        v-model="editedItem.time" class="mt-n6">
+                        v-model="editedItem.time" class="mt-n6" :rules="rules">
                       </v-text-field>
                     </v-col>
                     <v-col cols="12" sm="12" md="12">
                       <v-text-field label="Location" type="text" required outlined dense color="green"
-                        v-model="editedItem.location" class="mt-n6">
+                        v-model="editedItem.location" class="mt-n6" :rules="rules">
                       </v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="12" md="12">
-                      <v-select :items="applicants" v-model="editedItem.applicants" class="mt-n6" label="Target Applicants" outlined small-chips multiple dense color="green">
+                    <!-- <v-col cols="12" sm="12" md="12">
+                      <v-select :items="applicants" v-model="editedItem.applicants" class="mt-n6"
+                        label="Target Applicants" outlined small-chips multiple dense color="green">
                       </v-select>
-                    </v-col>
+                    </v-col> -->
                     <v-col cols="12" sm="12" md="12">
                       <v-textarea label="Details" type="text" required outlined dense color="green"
-                        v-model="editedItem.details" class="mt-n6" auto-grow clearable>
+                        v-model="editedItem.details" class="mt-n6" auto-grow clearable :rules="rules">
                       </v-textarea>
                     </v-col>
                   </v-row>
@@ -102,20 +107,23 @@
               <v-container fluid>
                 <v-row>
                   <v-col cols="12" sm="12" md="12">
+                    <b class="green--text">Job Post:</b> {{ editedItem.jobpost }}
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
                     <b class="green--text">Appointment Title:</b> {{ editedItem.appointment_title }}
                   </v-col>
-                  <v-col cols="6" sm="6" md="6">
+                  <v-col cols="12" sm="12" md="12">
                     <b class="green--text">Date:</b> {{ editedItem.date }}
                   </v-col>
-                  <v-col cols="6" sm="6" md="6">
+                  <v-col cols="12" sm="12" md="12">
                     <b class="green--text">Time:</b> {{ editedItem.time }}
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <b class="green--text">Location:</b> {{ editedItem.location }}
                   </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <b class="green--text">Target Applicants:</b> {{ editedItem.applicants }}                    
-                  </v-col>
+                  <!-- <v-col cols="12" sm="12" md="12">
+                    <b class="green--text">Target Applicants:</b> {{ editedItem.applicants }}
+                  </v-col> -->
                   <v-col cols="12" sm="12" md="12">
                     <b class="green--text">Details:</b> {{ editedItem.details }}
                   </v-col>
@@ -123,6 +131,11 @@
               </v-container>
               <v-container class="mt-n6">
                 <v-btn @click="dialog1 = false" color="success" block> Exit </v-btn>
+                <v-btn @click="(dialog = true), (dialog1 = false)" color="warning" block small outlined class="mt-2"> Edit
+                </v-btn>
+                <!-- <v-icon small class="mr-2" @click="editItem(item)" color="warning">
+                  mdi-pencil
+                </v-icon> -->
               </v-container>
 
             </v-card-text>
@@ -143,13 +156,9 @@
       </v-card>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon small class="mr-2" @click="viewItem(item)" color="success">
+      <v-icon small class="mr-2" @click="goToAppointmentPost(item)" color="success">
         mdi-eye
       </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)" color="warning">
-        mdi-pencil
-      </v-icon>
-
       <v-icon small @click="deleteItem(item)" color="error"> mdi-delete </v-icon>
     </template>
     <template slot="item.switch1" slot-scope="{ item }">
@@ -169,6 +178,9 @@ export default {
     dialog: false,
     dialog1: false,
     dialogDelete: false,
+    rules: [
+      v => !!v || 'Required',
+    ],
     applicants: [
       'Honey Curay',
       'Rey Alcala',
@@ -177,9 +189,18 @@ export default {
       "Jograd Mahusay",
       "John Gerber Ungcad",
     ],
+    jobpost: [
+      'Data Programmer',
+      'Data Analyst',
+      'Data Controller',
+    ],
     headers: [
+      { text: "Job Posting", value: "jobpost", sortable: false, },
       { text: "Appointment Title", value: "appointment_title", sortable: false, },
-      { text: "Target Applicants", value: "applicants", sortable: false, },
+      { text: "Date", value: "date", sortable: false, },
+      { text: "Time", value: "time", sortable: false, },
+      { text: "Location", value: "location", sortable: false, },
+      { text: "Details", value: "details", sortable: false, },
       { text: "Actions", value: "actions", sortable: false, },
     ],
     desserts: [],
@@ -187,9 +208,39 @@ export default {
     editedItem: {
 
     },
-    defaultItem: {
-
-    },
+    defaultItem: [],
+    desserts: [
+        {
+          id:1,
+          appointment_title: "Applicant Training",
+          jobpost: "Data Analyst",
+          applicants: ['Rey Alcala', 'Honey Curay'],
+          details: "Need nata mag training ataya ka",
+          date: "2024-09-12",
+          time: "08:00",
+          location: "Tagum City"
+        },
+        {
+          id:2,
+          appointment_title: "Applicant Orientation",
+          jobpost: "Data Programmer",
+          applicants: 'Neil Roble',
+          details: "Orient kay wa kay hotdog hahhaha",
+          date: "2024-06-12",
+          time: "13:00",
+          location: "Tagum City"
+        },
+        {
+          id:3,
+          appointment_title: "Applicant Meeting",
+          jobpost: "Data Contoller",
+          applicants: 'Joemarie Rendon',
+          details: "Meeting na ta hhahhaa",
+          date: "2023-06-12",
+          time: "01:00",
+          location: "Tagum City"
+        },
+      ],
   }),
 
   computed: {
@@ -208,39 +259,10 @@ export default {
   },
 
   created() {
-    this.initialize();
+    
   },
 
   methods: {
-    initialize() {
-      this.desserts = [
-        {
-          appointment_title: "Applicant Training",
-          applicants: ['Rey Alcala' , 'Honey Curay'],
-          details: "ASASASA",
-          date: "2024-06-12",
-          time: "08:00",
-          location: "Tagum City"
-        },
-        {
-          appointment_title: "Applicant Orientation",
-          applicants: 'Neil Roble',
-          details: "ASASASA",
-          date: "2024-06-12",
-          time: "13:00",
-          location: "Tagum City"
-        },
-        {
-          appointment_title: "Applicant Meeting",
-          applicants: 'Joemarie Rendon',
-          details: "ASASASA",
-          date: "2024-06-12",
-          time: "01:00 AM",
-          location: "Tagum City"
-        },
-      ];
-    },
-
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -287,7 +309,11 @@ export default {
         this.desserts.push(this.editedItem);
       }
       this.close();
+      this.dialog = false
     },
+    goToAppointmentPost(item){
+      this.$router.push(`/AppointmentId/${item.id}`)
+    }
   },
 };
 </script>

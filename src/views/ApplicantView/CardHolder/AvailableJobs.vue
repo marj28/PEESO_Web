@@ -52,7 +52,8 @@
                   <v-btn color="orange darken-1" text @click="close">
                     Back
                   </v-btn>
-                  <v-btn color="green darken-1" dark @click.stop="dialog1 = true" value="save">
+                  <v-btn color="green darken-1" dark @click.stop="dialog1 = true" value="save" 
+                  v-if="editedItem.remark !== 'Applied'">
                     Apply
                   </v-btn>
                 </v-card-actions>
@@ -111,6 +112,7 @@ export default {
       // { text: "APPLICANT NEEDED", align: "center", value: "applicant_needed" },
       { text: "STATUS OF EMPLOYMENT", value: "statusofemployment", sortable: false, },
       // { text: "Action", align: "center", value: "actions", sortable: false },
+      { text: "REMARK", value: "remark", sortable: false, },
     ],
     desserts: [],
     selected: [],
@@ -145,6 +147,7 @@ export default {
           job_location: "Tagum City",
           applicant_needed: "85",
           statusofemployment: "Full-Time",
+          remark: "Applied",
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
         {
@@ -153,6 +156,7 @@ export default {
           job_location: "Tagum City",
           applicant_needed: "85",
           statusofemployment: "Full-Time",
+          remark: "",
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
         {
@@ -161,6 +165,7 @@ export default {
           job_location: "Tagum City",
           applicant_needed: "85",
           statusofemployment: "Full-Time",
+          remark: "",
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
         {
@@ -169,6 +174,7 @@ export default {
           job_location: "Tagum City",
           applicant_needed: "85",
           statusofemployment: "Full-Time",
+          remark: "Applied",
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
         {
@@ -177,6 +183,7 @@ export default {
           job_location: "Tagum City",
           applicant_needed: "85",
           statusofemployment: "Full-Time",
+          remark: "Applied",
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
         {
@@ -185,6 +192,7 @@ export default {
           job_location: "Tagum City",
           applicant_needed: "85",
           statusofemployment: "Full-Time",
+          remark: "",
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
       ];

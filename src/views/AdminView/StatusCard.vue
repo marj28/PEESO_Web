@@ -6,15 +6,16 @@
         style="background: linear-gradient(75.7deg, rgb(34, 126, 34) 3.8%, rgb(99, 162, 17) 87.1%);"
         @click="$router.push({path: 'AdminApplicant'})">
         
-        <h2 class="ma-1"> <v-icon
+        <h2 class="ma-1"> 
+          <v-icon
             dark
             right
-            size="40"
+            size="30"
           >
             mdi-account-supervisor-circle-outline
           </v-icon> 
           224 </h2>
-          <p class="ma-4"> Daily Applicants</p>
+          <p class="ma-4" style="font-size:vw;"> Daily Applicants</p>
         </v-card>
       </v-col>
       <v-col cols="6" md="3">
@@ -24,7 +25,7 @@
           <h2 class="ma-1"> <v-icon
             dark
             right
-            size="40"
+            size="30"
           >
             mdi-account-multiple-check-outline
           </v-icon> 
@@ -40,7 +41,7 @@
         <h2 class="ma-1"> <v-icon
             dark
             right
-            size="40"
+            size="30"
           >
             mdi-book-open
           </v-icon> 
@@ -55,7 +56,7 @@
           <h2 class="ma-1"> <v-icon
             dark
             right
-            size="40"
+            size="30"
           >
             mdi-library
           </v-icon> 
@@ -74,3 +75,18 @@ export default {
   },
 };
 </script>
+<style>
+/* .text p {
+  font-size: clamp(1.5rem, 0.875rem + 2vw, 2rem);
+  -webkit-background-clip: text;
+} */
+@media screen and (max-width: 600px) {
+  p.ma-4 {
+    font-size: 13px;
+  }
+  h2.ma-1{
+    font-size: 13px;
+  }
+}
+
+</style>

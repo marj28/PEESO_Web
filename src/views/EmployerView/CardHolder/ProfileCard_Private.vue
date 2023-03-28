@@ -3,375 +3,155 @@
     <v-col>
       <v-stepper v-model="e1">
         <v-stepper-header style="font-size: 14px">
-          <v-stepper-step
-            :complete="e1 > 1"
-            step="1"
-            style="height="
-            color="warning"
-          >
+          <v-stepper-step :complete="e1 > 1" step="1" style="height=" color="success">
             Establishment Details
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 2" step="2" color="warning">
+          <v-stepper-step :complete="e1 > 2" step="2" color="success">
             Establishment Contact Details
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 3" step="3" color="warning">
+          <v-stepper-step :complete="e1 > 3" step="3" color="success">
             Requirements
           </v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
-          <!-- First Stepper -->
-          <v-stepper-content step="1">
-            <v-card>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="8">
-                      <v-text-field
-                        label="Establishment Name"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="4">
-                      <v-text-field
-                        label="Acronym / Abbreviation"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Tax Identification Number"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-select
-                        :items="etype"
-                        label="Employer Type"
-                        required
-                        small-chips
-                        outlined
-                        dense
-                        color="green"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-select
-                        :items="totalworkforce"
-                        label="Total Work Force"
-                        outlined
-                        dense
-                        color="green"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-select
-                        :items="industry"
-                        label="Industry"
-                        outlined
-                        dense
-                        color="green"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Province"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Municipal/City"
-                        type="address"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label="Barangay"
-                        type="address"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field
-                        label=" Street/Village"
-                        type="address"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-              </v-card-text>
-            </v-card>
+          <v-form ref="formes" v-model="valid" lazy-validation>
 
-            <v-btn id="v-btn-c" color="success" @click="e1 = 2">
-              Continue
-            </v-btn>
+            <!-- First Stepper -->
+            <v-stepper-content step="1">
+              <v-card>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="8">
+                        <v-text-field label="Establishment Name" required outlined dense :rules=rules
+                          color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="4">
+                        <v-text-field label="Acronym / Abbreviation" required outlined dense :rules=rules
+                          color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-text-field label="Tax Identification Number" required outlined dense :rules=rules
+                          color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-select :items="etype" label="Employer Type" required small-chips outlined dense color="green">
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-select :items="totalworkforce" label="Total Work Force" outlined dense color="green">
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="3">
+                        <v-select :items="industry" label="Industry" outlined dense color="green">
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" md="3" sm="12">
+                        <v-text-field label="Province" readonly outlined dense color="success"
+                          value="Davao del Norte"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="2" sm="12">
+                        <v-text-field label="Municipality / City" readonly outlined dense color="success"
+                          value="Tagum City" :rules="rules"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="3" sm="12">
+                        <v-select label="Baranggay" required outlined dense color="success" :items="baranggay"
+                          :rules="rules"></v-select>
+                      </v-col>
+                      <v-col cols="12" md="4" sm="12">
+                        <v-text-field label="House No. / Street / Village" required outlined dense color="success"
+                          :rules="rules"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small>*indicates required field</small>
+                </v-card-text>
+              </v-card>
 
-            <v-btn id="v-btn-c" class="ma-4" @click="dialog = false" text color="warning">
-              Cancel
-            </v-btn>
-          </v-stepper-content>
+              <v-btn id="v-btn-c" color="success" @click="validate(e1)">
+                Continue
+              </v-btn>
+            </v-stepper-content>
+          </v-form>
+          <v-form ref="formes2" v-model="valid" lazy-validation>
+            <!-- Second Stepper -->
+            <v-stepper-content step="2">
+              <v-card>
+                <v-card-text>
+                  <v-container fluid>
+                    <v-row>
+                      <v-col cols="12" sm="2" md="2">
+                        <v-select :items="title" label="Title" outlined dense multiple small-chips :rules=rules
+                          color="green">
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" sm="10" md="10">
+                        <v-text-field label="Contact Person (Full Name)" required outlined dense :rules=rules
+                          color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="3" md="3">
+                        <v-text-field label="Position" required outlined dense color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="3" md="3">
+                        <v-text-field label="Telephone Number" required type="number" outlined dense
+                          color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="3" md="3">
+                        <v-text-field label="Mobile Number" required outlined dense type="number"
+                          color="green"></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="3" md="3">
+                        <v-text-field label="E-mail Address" required outlined dense type="email"
+                          color="green"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
 
-          <!-- Second Stepper -->
-          <v-stepper-content step="2">
-            <v-card>
-              <v-card-text>
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="12" sm="2" md="2">
-                      <v-select
-                        :items="title"
-                        label="Title"
-                        outlined
-                        dense
-                        multiple
-                        small-chips
-                        color="green"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="10" md="10">
-                      <v-text-field
-                        label="Contact Person (Full Name)"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="3" md="3">
-                      <v-text-field
-                        label="Position"
-                        required
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="3" md="3">
-                      <v-text-field
-                        label="Telephone Number"
-                        required
-                        type="number"
-                        outlined
-                        dense
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="3" md="3">
-                      <v-text-field
-                        label="Mobile Number"
-                        required
-                        outlined
-                        dense
-                        type="number"
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="3" md="3">
-                      <v-text-field
-                        label="E-mail Address"
-                        required
-                        outlined
-                        dense
-                        type="email"
-                        color="green"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
+              <v-btn id="v-btn-c" color="success" @click="validate(e1)">
+                Continue
+              </v-btn>
+              <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
+            </v-stepper-content>
+          </v-form>
+          <v-form ref="formes3" v-model="valid" lazy-validation>
+            <!-- Third Stepper -->
+            <v-stepper-content step="3">
+              <v-card>
+                <v-card-text>
+                  <v-container fluid>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-file-input v-model="files" color="green accent-4" counter label="Business License" multiple
+                          dense placeholder="Select your files" prepend-icon="mdi-paperclip" outlined :show-size="1000"
+                          :rules=rules>
+                        </v-file-input>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-file-input v-model="files_permit" color="green accent-4" counter label="Business Permit"
+                          multiple dense placeholder="Select your files" prepend-icon="mdi-paperclip" outlined
+                          :show-size="1000" :rules=rules>
+                        </v-file-input>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
 
-            <v-btn id="v-btn-c" color="success" @click="e1 = 3">
-              Continue
-            </v-btn>
-            <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
-          </v-stepper-content>
-
-          <!-- Third Stepper -->
-          <v-stepper-content step="3">
-            <v-card>
-              <v-card-text>
-                <v-container fluid>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="6">
-                      <v-file-input
-                        v-model="files"
-                        color="green accent-4"
-                        counter
-                        label="Business License"
-                        multiple
-                        dense
-                        placeholder="Select your files"
-                        prepend-icon="mdi-paperclip"
-                        outlined
-                        :show-size="1000"
-                      >
-                        <template v-slot:selection="{ index, text }">
-                          <v-chip
-                            v-if="index < 2"
-                            color="green accent-4"
-                            dark
-                            label
-                            small
-                          >
-                            {{ text }}
-                          </v-chip>
-
-                          <span
-                            v-else-if="index === 2"
-                            class="text-overline grey--text text--darken-3 mx-2"
-                          >
-                            +{{ files.length - 2 }} File(s)
-                          </span>
-                        </template>
-                      </v-file-input>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6">
-                      <v-file-input
-                        v-model="files"
-                        color="green accent-4"
-                        counter
-                        label="Business License"
-                        multiple
-                        dense
-                        placeholder="Select your files"
-                        prepend-icon="mdi-paperclip"
-                        outlined
-                        :show-size="1000"
-                      >
-                        <template v-slot:selection="{ index, text }">
-                          <v-chip
-                            v-if="index < 2"
-                            color="green accent-4"
-                            dark
-                            label
-                            small
-                          >
-                            {{ text }}
-                          </v-chip>
-
-                          <span
-                            v-else-if="index === 2"
-                            class="text-overline grey--text text--darken-3 mx-2"
-                          >
-                            +{{ files.length - 2 }} File(s)
-                          </span>
-                        </template>
-                      </v-file-input>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" sm="12" md="6">
-                      <v-file-input
-                        v-model="files"
-                        color="green accent-4"
-                        counter
-                        label="Business License"
-                        multiple
-                        dense
-                        placeholder="Select your files"
-                        prepend-icon="mdi-paperclip"
-                        outlined
-                        :show-size="1000"
-                      >
-                        <template v-slot:selection="{ index, text }">
-                          <v-chip
-                            v-if="index < 2"
-                            color="green accent-4"
-                            dark
-                            label
-                            small
-                          >
-                            {{ text }}
-                          </v-chip>
-
-                          <span
-                            v-else-if="index === 2"
-                            class="text-overline grey--text text--darken-3 mx-2"
-                          >
-                            +{{ files.length - 2 }} File(s)
-                          </span>
-                        </template>
-                      </v-file-input>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="6">
-                      <v-file-input
-                        v-model="files"
-                        color="green accent-4"
-                        counter
-                        label="Business License"
-                        multiple
-                        dense
-                        placeholder="Select your files"
-                        prepend-icon="mdi-paperclip"
-                        outlined
-                        :show-size="1000"
-                      >
-                        <template v-slot:selection="{ index, text }">
-                          <v-chip
-                            v-if="index < 2"
-                            color="green accent-4"
-                            dark
-                            label
-                            small
-                          >
-                            {{ text }}
-                          </v-chip>
-
-                          <span
-                            v-else-if="index === 2"
-                            class="text-overline grey--text text--darken-3 mx-2"
-                          >
-                            +{{ files.length - 2 }} File(s)
-                          </span>
-                        </template>
-                      </v-file-input>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
-
-            <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
-              Save
-            </v-btn>
-            <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
-          </v-stepper-content>
+              <v-btn id="v-btn-c" color="success" @click="validate(e1)">
+                Save
+              </v-btn>
+              <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
+            </v-stepper-content>
+          </v-form>
         </v-stepper-items>
       </v-stepper>
       <v-row>
@@ -391,12 +171,7 @@
                 Discard
               </v-btn>
 
-              <v-btn
-                color="green darken-1"
-                text
-                @click="dialog = false"
-                type="submit"
-              >
+              <v-btn color="green darken-1" text @click="dialog = false" type="submit">
                 Save
               </v-btn>
             </v-card-actions>
@@ -412,7 +187,35 @@ export default {
   data: () => ({
     e1: 1,
     dialog: false,
-
+    valid: true,
+    rules: [
+      v => !!v || 'Required',
+    ],
+    baranggay: [
+      "APOKON",
+      "BINCUNGAN",
+      "BUSAON",
+      "CANOCOTAN",
+      "CUAMBOGAN",
+      "LA FILIPINA",
+      "LIBOGANON",
+      "MADAUM",
+      "MAGDUM",
+      "MAGUGPO EAST",
+      "MAGUGPO NORTH",
+      "MAGUGPO POBLACION",
+      "MAGUGPO SOUTH",
+      "MAGUGPO WEST",
+      "MANKILAM",
+      "NEW BALAMBAN",
+      "NUEVA FUERZA",
+      "PAGSABANGAN",
+      "PANDAPAN",
+      "SAN AGUSTIN",
+      "SAN ISIDRO",
+      "SAN MIGUEL",
+      "VISAYAN VILLAGE",
+    ],
     title: [
       "Mr.",
       "Mrs."
@@ -432,22 +235,49 @@ export default {
       "Agriculture",
       "Automotive",
       "BPO/IT",
-      "Construction",      
-      "Education",      
+      "Construction",
+      "Education",
       "Electricity, Gas and Water Supply",
       "Financial Intermediation",
       "Fishing",
-      "Health and Social Work",      
-      "Hotels and Restaurants",      
-      "Manufacturing",      
+      "Health and Social Work",
+      "Hotels and Restaurants",
+      "Manufacturing",
       "Mining and Quarrying",
       "Other Community, Social and Personal Service Activities",
-      "Security and Defense",      
-      "Real Estate, Renting and Business Activities",      
+      "Security and Defense",
+      "Real Estate, Renting and Business Activities",
       "Transport, Storage and Communication",
       "Wholesale and Retail",
     ],
   }),
-};
+  methods: {
+    validate(step) {
+      // console.log(step)
+      if (step == 1) {
+        this.$refs.formes.validate()
+        let v = this.$refs.formes.validate()
+        if (v) {
+          this.e1 = this.e1 + 1
+        }
+      }
+      if (step == 2) {
+        this.$refs.formes2.validate()
+        let v = this.$refs.formes2.validate()
+        if (v) {
+          this.e1 = this.e1 + 1
+        }
+      }
+      if (step == 3) {
+        this.$refs.formes3.validate()
+        let v = this.$refs.formes3.validate()
+        if (v) {
+          this.dialog = true
+        }
+      }
+
+    },
+  }
+}
 </script>
   

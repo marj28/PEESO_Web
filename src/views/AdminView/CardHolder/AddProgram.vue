@@ -24,8 +24,8 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12" sm="12" md="12">
-                      <v-text-field v-model="editedItem.program_name" label="Program Name" color="success" outlined required
-                        dense></v-text-field>
+                      <v-text-field v-model="editedItem.program_name" label="Program Name" color="success" outlined
+                        required dense></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="12" md="12">
                       <v-text-field v-model="editedItem.offering_company" label="Offering Company" color="success"
@@ -64,11 +64,13 @@
           </v-dialog>
         </v-card-title>
 
-       
+
         <v-dialog v-model="dialog1" max-width="500px">
           <v-card>
             <v-card-title>
               <span class="text-h5">VIEW PROGRAM</span>
+              <v-spacer></v-spacer>
+              <v-btn @click="(dialog = true), (dialog1 = false)" color="warning" icon small class="mt-2"><v-icon>mdi-pencil</v-icon> </v-btn>
             </v-card-title>
             <v-divider color="success"></v-divider>
             <v-card-text>
@@ -96,10 +98,12 @@
               </v-container>
             </v-card-text>
 
-            <v-card-actions>
-              <v-btn color="green darken-1" block dark @click="dialog1 = false">
+            <v-card-actions class="mt-n6">
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" medium dark @click="dialog1 = false">
                 Exit
               </v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -122,9 +126,7 @@
       <v-icon small class="mr-2" @click="viewItem(item)" color="success">
         mdi-eye
       </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)" color="warning">
-        mdi-pencil
-      </v-icon>
+
       <v-icon small @click="deleteItem(item)" color="error"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>

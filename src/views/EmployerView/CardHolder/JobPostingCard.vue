@@ -2,7 +2,7 @@
   <v-data-table :headers="headers" :items="desserts" :search="search" class="">
     <template v-slot:top>
       <v-toolbar flat dark color="#1B5E20">
-        <v-toolbar-title>JOB POSTING </v-toolbar-title>
+        <v-toolbar-title>JOB POSTING || <span style="font-size: 15px;">{{ status }} </span></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
@@ -47,12 +47,13 @@
                     <v-card-text>
                       <v-row>
                         <v-col cols="12" sm="12" md="6">
-                          <v-select :items="purposeofvacancy" label="Purpose of Vacancy" outlined dense color="green" v-model="editedItem.purposeofvacancy" >
+                          <v-select :items="purposeofvacancy" label="Purpose of Vacancy" outlined dense color="green"
+                            v-model="editedItem.purposeofvacancy">
                           </v-select>
                         </v-col>
                         <v-col cols="12" sm="12" md="6">
-                          <v-select :items="classificationofvacancy" label="Classification of Vacancy" outlined dense v-model="editedItem.classificationofvacancy"
-                            color="green">
+                          <v-select :items="classificationofvacancy" label="Classification of Vacancy" outlined dense
+                            v-model="editedItem.classificationofvacancy" color="green">
                           </v-select>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
@@ -61,8 +62,8 @@
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-textarea label="Job Description" v-model="editedItem.job_description" required outlined dense auto-grow
-                            color="green">
+                          <v-textarea label="Job Description" v-model="editedItem.job_description" required outlined dense
+                            auto-grow color="green">
                           </v-textarea>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
@@ -110,7 +111,8 @@
                     <v-card-text>
                       <v-row>
                         <v-col cols="12" sm="12" md="12">
-                          <v-select :items="educational_level" label="Educational Level" outlined dense color="green" v-model="editedItem.educational_level">
+                          <v-select :items="educational_level" label="Educational Level" outlined dense color="green"
+                            v-model="editedItem.educational_level">
                           </v-select>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
@@ -132,7 +134,8 @@
                           </v-col>
                         </v-col>
                         <v-col cols="12" sm="12" md="12">
-                          <v-select :items="sex_preference" label="Sex Preference" outlined dense color="green" v-model="editedItem.sex_preference">
+                          <v-select :items="sex_preference" label="Sex Preference" outlined dense color="green"
+                            v-model="editedItem.sex_preference">
                           </v-select>
                         </v-col>
                       </v-row>
@@ -248,12 +251,6 @@
       <v-icon small class="mr-2" @click="goToJobposting(item)" color="success">
         mdi-eye
       </v-icon>
-
-      <v-icon small class="mr-2" @click="editItem(item)" color="warning">
-        mdi-pencil
-      </v-icon>
-
-
       <v-icon @click="deleteItem(item)" color="error" small> mdi-delete </v-icon>
     </template>
     <template slot="item.switch1" slot-scope="{ item }">
@@ -266,12 +263,14 @@
 /* eslint-disable */
 
 export default {
-  props:{
+  props: {
     admin: Boolean
   },
   components: {},
 
   data: () => ({
+    status: "Open Contract", 
+    // Excommunicado
     search: "",
     dialog: false,
     dialog1: false,
@@ -372,82 +371,82 @@ export default {
     },
     defaultItem: [],
     desserts: [
-            {
-                id: 1,
-                position_title: "Data Programmer",
-                placeofwork: "Tagum City",
-                vacancy_count: "21",
-                natureofwork: "Permanent",
-                vacancy_count: "57",
-                switch1: true,
-                purposeofvacancy: "Replacement",
-                classificationofvacancy: "Clerical",
-                job_description: "A database programmer specializes in developing and maintaining database programs, modifying them according to their clients' needs. They design and write codes for different programs, establish and implement test systems, troubleshoot problems, solve concerns or issues, and upgrade systems as necessary. They may also establish data security plans and implement protocols to protect company and client data. Moreover, a database programmer maintains an active communication line with co-workers, working together to ensure a smooth workflow and provide optimal services to clients.",
-                salary: "PHP 45,000",
-                valid_until: "2023-03-05",
-                educational_level: 'Elementary Level',
-                course_requirement: "IT",
-                pwd: "yes",
-                pwd_1: "Hearing" ,
-                sex_preference: "Female",
-                requirements: "optional",
-                work_experience: "12",
-                required_license: "None",
-                other_qualification: "None",
-                employability_skills: "Teamwork",
-                ofw: "yes",
-            },
-            {
-                id: 2,
-                position_title: "Data Controller",
-                placeofwork: "Tagum City",
-                vacancy_count: "21",
-                natureofwork: "Part-time",
-                vacancy_count: "57",
-                switch1: false,
-                purposeofvacancy: "Expansion",
-                classificationofvacancy: "Managerial",
-                job_description: "The data controller is the person or company that determines what purposes for which and how the data will be processed. Therefore, if your company decides ‘why’ and ‘how’ the data should be processed, it is the data controller.",
-                salary: "45",
-                valid_until: "2023-03-05",
-                educational_level: "College Level",
-                course_requirement: "IT",
-                pwd: "yes",
-                pwd_1: "Hearing",
-                sex_preference: "Female",
-                requirements: "optional",
-                work_experience: "8",
-                required_license: "None",
-                other_qualification: "None",
-                employability_skills: "Innovation",
-                ofw: "yes",
-            },
-            {
-                id: 3,
-                position_title: "Data Analyst",
-                placeofwork: "Tagum City",
-                vacancy_count: "21",
-                natureofwork: "Contractual",
-                vacancy_count: "57",
-                switch1: false,
-                purposeofvacancy: "Additional Manpower",
-                classificationofvacancy: "Technical",
-                job_description: "A data analyst collects and stores data on sales numbers, market research, logistics, linguistics, or other behaviors. They bring technical expertise to ensure the quality and accuracy of that data, then process, design, and present it in ways to help people, businesses, and organizations make better decisions.",
-                salary: "45",
-                valid_until: "2023-03-05",
-                educational_level: "Senior High School Level",
-                course_requirement: "IT",
-                pwd: "yes",
-                pwd_1: "Hearing",
-                sex_preference: "Female",
-                requirements: "optional",
-                work_experience: "2",
-                required_license: "None",
-                other_qualification: "None",
-                employability_skills: "Multi-tasking",
-                ofw: "yes",
-            },
-        ],
+      {
+        id: 1,
+        position_title: "Data Programmer",
+        placeofwork: "Tagum City",
+        vacancy_count: "21",
+        natureofwork: "Permanent",
+        vacancy_count: "57",
+        switch1: true,
+        purposeofvacancy: "Replacement",
+        classificationofvacancy: "Clerical",
+        job_description: "A database programmer specializes in developing and maintaining database programs, modifying them according to their clients' needs. They design and write codes for different programs, establish and implement test systems, troubleshoot problems, solve concerns or issues, and upgrade systems as necessary. They may also establish data security plans and implement protocols to protect company and client data. Moreover, a database programmer maintains an active communication line with co-workers, working together to ensure a smooth workflow and provide optimal services to clients.",
+        salary: "PHP 45,000",
+        valid_until: "2023-03-05",
+        educational_level: 'Elementary Level',
+        course_requirement: "IT",
+        pwd: "yes",
+        pwd_1: "Hearing",
+        sex_preference: "Female",
+        requirements: "optional",
+        work_experience: "12",
+        required_license: "None",
+        other_qualification: "None",
+        employability_skills: "Teamwork",
+        ofw: "yes",
+      },
+      {
+        id: 2,
+        position_title: "Data Controller",
+        placeofwork: "Tagum City",
+        vacancy_count: "21",
+        natureofwork: "Part-time",
+        vacancy_count: "57",
+        switch1: false,
+        purposeofvacancy: "Expansion",
+        classificationofvacancy: "Managerial",
+        job_description: "The data controller is the person or company that determines what purposes for which and how the data will be processed. Therefore, if your company decides ‘why’ and ‘how’ the data should be processed, it is the data controller.",
+        salary: "45",
+        valid_until: "2023-03-05",
+        educational_level: "College Level",
+        course_requirement: "IT",
+        pwd: "yes",
+        pwd_1: "Hearing",
+        sex_preference: "Female",
+        requirements: "optional",
+        work_experience: "8",
+        required_license: "None",
+        other_qualification: "None",
+        employability_skills: "Innovation",
+        ofw: "yes",
+      },
+      {
+        id: 3,
+        position_title: "Data Analyst",
+        placeofwork: "Tagum City",
+        vacancy_count: "21",
+        natureofwork: "Contractual",
+        vacancy_count: "57",
+        switch1: false,
+        purposeofvacancy: "Additional Manpower",
+        classificationofvacancy: "Technical",
+        job_description: "A data analyst collects and stores data on sales numbers, market research, logistics, linguistics, or other behaviors. They bring technical expertise to ensure the quality and accuracy of that data, then process, design, and present it in ways to help people, businesses, and organizations make better decisions.",
+        salary: "45",
+        valid_until: "2023-03-05",
+        educational_level: "Senior High School Level",
+        course_requirement: "IT",
+        pwd: "yes",
+        pwd_1: "Hearing",
+        sex_preference: "Female",
+        requirements: "optional",
+        work_experience: "2",
+        required_license: "None",
+        other_qualification: "None",
+        employability_skills: "Multi-tasking",
+        ofw: "yes",
+      },
+    ],
   }),
 
   computed: {
@@ -471,12 +470,12 @@ export default {
     console.log(this.employer);
   },
   methods: {
-    goToJobposting(item) {      
+    goToJobposting(item) {
       this.$router.push(`/JobPostingId/${item.id}/${this.admin}`);
     },
 
-    
-    editItem(item) {      
+
+    editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;

@@ -46,14 +46,33 @@
                       <v-btn color="orange darken-1" text @click="close">
                         Back
                       </v-btn>
-                      <v-btn color="green darken-1" dark @click="hiredApplicants(editedItem)">
+                      <v-btn color="green darken-1" dark @click="hiredApplicants(editedItem)"
+                        v-if="editedItem.remark !== 'Canceled'">
                         Hire
+                      </v-btn>
+                      <v-btn color="green darken-1" dark @click="deleteItem(editedItem)"
+                        v-if="editedItem.remark == 'Canceled'">
+                        Remove
                       </v-btn>
                       <!-- <template slot="item.actions" slot-scope="props">
                         <v-btn color="green" dark @click="() => sinagmembro(props.item)">
                           Hire
                         </v-btn>
                       </template> -->
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                  <v-card>
+                    <v-card-title class="">Removing the Application of {{ editedItem.firstname }}
+                      {{ editedItem.lastname }}?</v-card-title>
+                    <v-divider color="success"></v-divider>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn color="orange darken-1" text @click="closeDelete">Cancel</v-btn>
+                      <v-btn color="green darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                      <v-spacer></v-spacer>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -80,12 +99,19 @@
             <v-spacer></v-spacer>
             <v-spacer></v-spacer>
             <v-spacer></v-spacer>
-            <v-text-field v-model="hiredsearch" append-icon="mdi-magnify" label="Search" single-line hide-details outlined dark
-              rounded dense></v-text-field>
+            <v-text-field v-model="hiredsearch" append-icon="mdi-magnify" label="Search" single-line hide-details outlined
+              dark rounded dense></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table :headers="hireheaders" :items="hired"  :items-per-page="20"
-              :search="hiredsearch" class="btn-hover elevation-1 pa-4">
+            <v-data-table :headers="hireheaders" :items="hired" :items-per-page="20" :search="hiredsearch"
+              class="btn-hover elevation-1 pa-4">
+              <template slot="item.remove" slot-scope="remove">
+                <v-btn text color="red" dark @click="() => removeHired(remove.item)">
+                  <v-icon>
+                    mdi-close-circle-outline
+                  </v-icon>
+                </v-btn>
+              </template>
             </v-data-table>
           </v-card-text>
 
@@ -103,10 +129,12 @@ export default {
   },
   data() {
     return {
+      editedIndex: 0,
       dialog_for_input_hours: false,
       applicantlist: false,
       dialog: false,
       dialog1: false,
+      dialogDelete: false,
       dialog_sample: false,
       selected: [],
       hireheaders: [
@@ -128,9 +156,14 @@ export default {
           sortable: false,
           value: 'contact_number',
         },
+        {
+          text: 'Action',
+          align: 'center',
+          sortable: false,
+          value: 'remove',
+        },
       ],
       hired: [],
-
       editedItem: [],
       applicants: [],
       selected: [],
@@ -161,6 +194,12 @@ export default {
           sortable: false,
           value: 'contact_number',
         },
+        {
+          text: 'Remarks',
+          align: 'left',
+          sortable: false,
+          value: 'remark',
+        },
       ],
 
       desserts: [
@@ -169,6 +208,7 @@ export default {
           lastname: "Rendon",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          remark: "Canceled",
           details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
         {
@@ -176,6 +216,7 @@ export default {
           lastname: "Alcala",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          remark: "",
           details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
         {
@@ -183,6 +224,7 @@ export default {
           lastname: "Curay",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          remark: "",
           details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
 
@@ -191,6 +233,7 @@ export default {
           lastname: "Roble",
           jobpostingapplied: "Computer Programmer",
           contact_number: "09123456789",
+          remark: "Canceled",
           details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
         },
       ],
@@ -207,15 +250,19 @@ export default {
 
     // },
     hiredApplicants(item) {
-      this.hired.push({ firstname: item.firstname, lastname: item.lastname, contact_number: item.contact_number })
+      this.hired.push({ firstname: item.firstname, lastname: item.lastname, contact_number: item.contact_number, jobpostingapplied: item.jobpostingapplied, remark: item.remark })
       this.desserts = this.desserts.filter((nem) => nem.firstname !== item.firstname);
       this.dialog = false;
       console.log(item.firstname);// eslint-disable-line no-console
       console.log(this.selected);// eslint-disable-line no-console
       console.log("Na Hire Nani bai");// eslint-disable-line no-console
     },
+    removeHired(item) {
+      this.desserts.push({ firstname: item.firstname, lastname: item.lastname, contact_number: item.contact_number, jobpostingapplied: item.jobpostingapplied, remark: item.remark, hired: item.hired })
+      this.hired = this.hired.filter((nem) => nem.firstname !== item.firstname);
+    },
     editItem(item) {
-      this.editedIndex = this.applicants.indexOf(item)
+      this.editedIndex = this.desserts.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
       console.log(this.editedItem)// eslint-disable-line no-console
@@ -236,22 +283,27 @@ export default {
       }
       this.close()
     },
-  },
-  deleteItem(item) {
-    this.editedIndex = this.desserts.indexOf(item)
-    this.editedItem = Object.assign({}, item)
-    this.dialogDelete = true
-  },
-  deleteItemConfirm() {
-    this.desserts.splice(this.editedIndex, 1)
-    this.closeDelete()
-  },
-  closeDelete() {
-    this.dialogDelete = false
-    this.$nextTick(() => {
-      this.editedItem = Object.assign({}, this.defaultItem)
-      this.editedIndex = -1
-    })
+    deleteItem(item) {
+      console.log(item.firstname);
+      this.editedIndex = this.desserts.indexOf(item);
+      console.log(this.editedIndex);
+      this.editedItem = Object.assign({}, item);
+      this.dialogDelete = true;
+      this.dialog = false;
+    },
+
+    deleteItemConfirm() {
+      // this.desserts;
+      this.desserts = this.desserts.filter((e) => e.firstname !== this.editedItem.firstname)
+      this.closeDelete();
+    },
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
   },
 }
 </script>
