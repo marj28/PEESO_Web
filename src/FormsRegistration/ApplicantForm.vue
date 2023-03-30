@@ -4,8 +4,8 @@
       <h4 class="text-center pa-2 green--text mb-12">Job Applicant Registration</h4>
       <v-row>
         <v-col cols="12" md="6" lg="6">
-          <v-text-field class="textbox mt-n6 " autofocus v-model="last_name" type="text" label="Last Name" required color="green"
-            outlined dense />
+          <v-text-field class="textbox mt-n6 " autofocus v-model="last_name" type="text" label="Last Name" required
+            color="green" outlined dense />
         </v-col>
         <v-col cols="12" md="6" lg="6">
           <v-text-field class="textbox mt-n6" v-model="first_name" type="text" label="First Name" required color="green"
@@ -36,12 +36,21 @@
             label="Confirm Password" prepend-inner-icon="mdi-key" color="green" outlined dense />
         </v-col>
       </v-row>
+      <v-snackbar v-model="snackbar" :top="'top'" :color="alertColor">
+        {{ text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="error" text v-bind="attrs" @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
       <v-col align="center" justify="space-around">
         <v-btn type="submit" color="green" class="text-center" @click="applicantregister" dark block>
           <v-icon left>mdi-account-check</v-icon>
           SIGN UP
         </v-btn>
-      
+
       </v-col>
     </v-col>
   </div>
@@ -73,6 +82,12 @@ export default {
   methods: {
     ...mapActions("users", ["Registration"]),
     userReg() {
+      if (this.last_name == "" || this.first_name == "" || this.middle_initial == "" || this.email == "" || this.password == "") {
+        this.alertColor = 'success'
+        this.snackbar = true
+        this.text = "Please enter the required information"
+        return
+      }
       this.$createUserWithEmailAndPassword(
         this.$FBAUTH,
         this.email,
@@ -96,12 +111,13 @@ export default {
             // alert("Pretty error message!")
             this.alertColor = "warning";
             this.snackbar = true;
-            this.text = "Please input fields!";
+            this.text = "Please enter the required information!";
           }
         });
     },
     applicantregister() {
       this.userReg();
+
       return;
       this.loading = true;
       let data = new FormData();

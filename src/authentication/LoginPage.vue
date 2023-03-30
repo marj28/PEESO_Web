@@ -40,10 +40,9 @@
                       <v-divider></v-divider>
                       <v-col align="center" justify="space-around" style="margin-bottom:  -90px">
                         New User?
-                        <v-text class="green--text"  type="button" xs
-                          @click="$router.push({ name: 'RegisterPage' })">
+                        <v-text class="green--text" type="button" xs @click="$router.push({ name: 'RegisterPage' })">
                           REGISTER
-                      </v-text>
+                        </v-text>
                       </v-col>
                     </v-col>
                   </v-row>
@@ -86,11 +85,11 @@ export default {
       }
     },
     userSignin() {
-      if(this.email == "" || this.password==""){
+      if (this.email == "" || this.password == "") {
         this.alertColor = 'success'
-            this.snackbar = true
-            this.text = "Please input fields."
-            return
+        this.snackbar = true
+        this.text = "Please enter an email and password!"
+        return
       }
       this.$signInWithEmailAndPassword(this.$FBAUTH, this.email, this.password)
         .then((userCredentials) => {

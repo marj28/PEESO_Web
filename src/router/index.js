@@ -68,32 +68,65 @@ import AdminApplicant from "../views/AdminView/AdminApplicant.vue"
 
 import DataTable from "../views/DataTable.vue"
 
+import Adminpage from '../views/AdminView/AdminPage.vue'
+import AdminViewDashboard from '../views/AdminView/AdminViewDashboard.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
 
   {
+    path: '/AdminPage',
+    component: Adminpage,
+    children: [
+      {
+
+        path: '',
+        name: 'AdminViewDashboard',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: AdminViewDashboard,
+      },
+      {
+        path: '/AdminPage/AdminDashboard',
+        name: 'AdminDashboard',
+        component: AdminDashboard
+      },
+      {
+        path: '/AdminPage/ApprovalList',
+        name: 'ApprovalList',
+        component: ApprovalList
+      },
+      {
+        path: '/AdminPage/RecommendationList',
+        name: 'RecommendationList',
+        component: RecommendationList
+      },
+    ],
+  },
+  {
     path: '/DataTable',
     name: 'DataTable',
     component: DataTable
   },
-    //authentication
+  //authentication
   {
     path: '/',
     name: 'LoginPage',
     component: LoginPage
-  }, 
+  },
   {
     path: '/register',
     name: 'RegisterPage',
     component: RegisterPage
   },
   //dashboard 
-  {
-    path: '/admindashboard',
-    name: 'AdminDashboard',
-    component: AdminDashboard
-  },
+  // {
+  //   path: '/admindashboard',
+  //   name: 'AdminDashboard',
+  //   component: AdminDashboard
+  // },
   {
     path: '/studentdashboard',
     name: 'StudentDashboard',
@@ -179,7 +212,7 @@ const routes = [
     component: AppointmentId
   },
 
-  
+
   //applicant_view
   {
     path: '/ApplicantProfile',
@@ -226,7 +259,7 @@ const routes = [
     name: 'UpdateForm_Page',
     component: UpdateForm_Page
   },
-  
+
   //admin_view
   {
     path: '/AdminApplicant',
@@ -283,16 +316,16 @@ const routes = [
     name: 'EmployerList',
     component: EmployerList
   },
-  {
-    path: '/ApprovalList',
-    name: 'ApprovalList',
-    component: ApprovalList
-  },
-  {
-    path: '/RecommendationList',
-    name: 'RecommendationList',
-    component: RecommendationList
-  },
+  // {
+  //   path: '/ApprovalList',
+  //   name: 'ApprovalList',
+  //   component: ApprovalList
+  // },
+  // {
+  //   path: '/RecommendationList',
+  //   name: 'RecommendationList',
+  //   component: RecommendationList
+  // },
   {
     path: '/ProcessingList',
     name: 'ProcessingList',
@@ -339,7 +372,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode :"history"
+  mode: "history"
 })
 
 // router.beforeEach((to, from, next) => {

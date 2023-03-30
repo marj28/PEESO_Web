@@ -1,21 +1,22 @@
 <template>
     <v-app>
-      <AdminNavbar />
-      <v-main>
+      
+      
         <student-card />
-        <!-- <applicant-card /> -->
+         <applicant-card /> 
         <employer-card />
-      </v-main>
+      
     </v-app>
+    
   </template>
   
   <script>
-  import AdminNavbar from "@/views/Navigation/AdminNavbar.vue";
+  // import AdminNavbar from "@/views/Navigation/AdminNavbar.vue";
   import { mapActions, mapGetters } from "vuex";
   
   export default {
     components: {
-      AdminNavbar,
+      
     },
     data: () => ({
       loading: false,

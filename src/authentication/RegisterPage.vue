@@ -101,11 +101,11 @@
                     I Disagree
                   </v-btn> -->
 
-                  <v-checkbox label="I agree" color="success" dense></v-checkbox>
+                  <v-checkbox label="I agree" color="success" @click="agree = !agree" dense></v-checkbox>
 
                   <v-spacer></v-spacer>
 
-                  <v-btn color="success" text @click="dialog = false">
+                  <v-btn color="success" text @click="dialog = false"  :disabled="!agree" >
                     Continue
                   </v-btn>
                 </v-card-actions>
@@ -136,6 +136,7 @@ export default {
       applicant: false,
       title: true,
       returnbtn: false,
+      agree: false,
 
 
       text: `Please input fields`,

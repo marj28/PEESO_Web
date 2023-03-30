@@ -83,7 +83,7 @@
                     Invite
                 </v-btn>
             </v-col> -->
-            <v-btn color="green darken-1" dark @click="invitedApplicants()">
+            <v-btn color="green darken-1" dark @click="invitedApplicants()" floating align-center>
                 Invite
             </v-btn>
 
@@ -248,13 +248,19 @@ export default {
             // this.desserts = this.desserts.filter((nem) => nem.id !== item.id);
             // this.dialog = false;
             // this.hired.push(this.selected)
+            console.log(this.desserts)
             console.log(this.selected)
             for (let i = 0; i < this.selected.length; i++) {
-           this.hired.push(this.selected[i])
-           this.desserts = this.desserts.filter((nem) => nem.id !== this.selected[i].id)
-           
-       }
-            this.selected=[]
+                this.hired.push(this.selected[i])
+                this.desserts = this.desserts.filter((nem) => nem.id !== this.selected[i].id)
+                
+            }
+            for (let i = 0; i < this.hired.length; i++) {
+                
+                this.selected = this.selected.filter((nem) => nem.id !== this.hired[i].id)
+                
+            }
+
         },
         removeInvited(item) {
             this.desserts.push({ firstname: item.firstname, lastname: item.lastname, contact_number: item.contact_number, jobpostingapplied: item.jobpostingapplied, remark: item.remark, hired: item.hired })

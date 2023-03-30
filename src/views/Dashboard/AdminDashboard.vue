@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
-    <AdminNavbar />
-    <v-main>
+    
+    
       <StatusCard />
       <v-divider class="test"></v-divider>
 
@@ -27,8 +27,8 @@
           <ApplicantChart />
         </v-col>
       </v-row>
-    </v-main>
-    <router-view> </router-view>
+    
+    
   </v-app>
 </template>
   
