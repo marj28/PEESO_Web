@@ -14,19 +14,19 @@
 
       <v-stepper v-model="e1">
         <v-stepper-header style="font-size: 16px">
-          <v-stepper-step :complete="e1 > 1" step="1" color="warning">
+          <v-stepper-step :complete="e1 > 1" step="1" color="success">
             Personal Information
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 2" step="2" color="warning">
+          <v-stepper-step :complete="e1 > 2" step="2" color="success">
             Student's Educational Attainment
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 3" step="3" color="warning">
+          <v-stepper-step :complete="e1 > 3" step="3" color="success">
             Other Information
           </v-stepper-step>
         </v-stepper-header>
@@ -262,7 +262,7 @@
                 Discard
               </v-btn>
 
-              <v-btn color="green darken-1" text @click="dialog = false" type="submit">
+              <v-btn color="green darken-1" text @click="$router.push({ name: 'StudentDashboard' })" type="submit">
                 Save
               </v-btn>
             </v-card-actions>

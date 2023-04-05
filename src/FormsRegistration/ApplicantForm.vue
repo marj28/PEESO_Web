@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-col>
-      <h4 class="text-center pa-2 green--text mb-12">Job Applicant Registration</h4>
-      <v-row>
+      <!-- <h4 class="text-center pa-2 green--text mb-12">Job Applicant Registration</h4> -->
+      <v-row class="mt-12">
         <v-col cols="12" md="6" lg="6">
           <v-text-field class="textbox mt-n6 " autofocus v-model="last_name" type="text" label="Last Name" required
             color="green" outlined dense />
@@ -12,7 +12,7 @@
             outlined dense />
         </v-col>
         <v-col cols="12" md="6">
-          <v-text-field class="textbox mt-n6" v-model="middle_initial" type="text" label="M.I." required color="green"
+          <v-text-field class="textbox mt-n6" maxlength=1 v-model="middle_initial" type="text" label="M.I." required color="green"
             outlined dense />
         </v-col>
 
@@ -40,8 +40,8 @@
         {{ text }}
 
         <template v-slot:action="{ attrs }">
-          <v-btn color="error" text v-bind="attrs" @click="snackbar = false">
-            Close
+          <v-btn color="white" icon v-bind="attrs" @click="snackbar = false">
+            <v-icon>mdi-close</v-icon>
           </v-btn>
         </template>
       </v-snackbar>

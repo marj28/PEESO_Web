@@ -157,12 +157,14 @@
       <v-row>
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
-            <v-card-title class="text-h5"> UNSAVED CHANGES </v-card-title>
+            <p class="pa-6"> You have made changes in your profile. Do you want to save or
+              discard it? </p>
             <v-divider color="success"></v-divider>
-            <v-card-text class="mt-2">
+            <!-- <v-divider color="success"></v-divider>
+            <v-card-text class="mt-6">
               You have made changes in your profile. Do you want to save or
               discard it?
-            </v-card-text>
+            </v-card-text> -->
 
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -171,7 +173,7 @@
                 Discard
               </v-btn>
 
-              <v-btn color="green darken-1" text @click="dialog = false" type="submit">
+              <v-btn color="green darken-1" text @click="$router.push({ name: 'EmployerDashboard' })" type="submit">
                 Save
               </v-btn>
             </v-card-actions>

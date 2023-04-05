@@ -83,12 +83,12 @@
                     Invite
                 </v-btn>
             </v-col> -->
-            <v-btn color="green darken-1" dark @click="invitedApplicants()" floating align-center>
+            <v-btn color="green darken-1" dark @click="invitedApplicants()" floating align-right>
                 Invite
             </v-btn>
 
             <!-- invited -->
-            <v-col md="6" cols="12">
+            <v-col md="5" cols="12">
                 <v-card class="wrapper" color="#1B5E20">
                     <v-card-title class="subtitle-2">
                         INVITED APPLICANTS
@@ -153,6 +153,12 @@ export default {
                     value: 'contact_number',
                 },
                 {
+                    text: 'Note',
+                    align: 'center',
+                    sortable: false,
+                    value: 'note',
+                },
+                {
                     text: 'Action',
                     align: 'center',
                     sortable: false,
@@ -205,6 +211,7 @@ export default {
                     jobpostingapplied: "Data Controller",
                     contact_number: "09123456789",
                     remark: "Canceled",
+                    note: "",
                     details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
                 },
                 {
@@ -214,6 +221,7 @@ export default {
                     jobpostingapplied: "Computer Programmer",
                     contact_number: "09123456789",
                     remark: "",
+                    note: "Confirmed",
                     details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
                 },
                 {
@@ -223,6 +231,7 @@ export default {
                     jobpostingapplied: "Computer Programmer",
                     contact_number: "09123456789",
                     remark: "",
+                    note: "Reschedule",
                     details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
                 },
 
@@ -233,6 +242,7 @@ export default {
                     jobpostingapplied: "Computer Programmer",
                     contact_number: "09123456789",
                     remark: "Canceled",
+                    note: "",
                     details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue."
                 },
             ],

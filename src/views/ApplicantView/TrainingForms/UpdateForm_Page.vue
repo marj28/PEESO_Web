@@ -14,6 +14,8 @@
             "
             color="success"
           >
+          <v-btn icon @click="$router.push({ name: 'AvailableTraining' })" class="ml-auto">
+              <v-icon class="white--text">mdi-arrow-left</v-icon></v-btn>
             <v-avatar size="100">
               <img src="@/assets/form2.png" />
             </v-avatar>

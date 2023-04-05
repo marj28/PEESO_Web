@@ -83,59 +83,63 @@
               <v-card id="step1">
                 <v-card-text>
                   <v-row>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field label="Surname" v-model="surname" outlined dense color="success" required
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="Surname" v-model="value.surname" outlined dense color="success" required
                         :rules="[rules.required]" autofocus></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field label="First Name" v-model="firstname" outlined dense color="success" required
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="First Name" v-model="value.firstname" outlined dense color="success" required
                         :rules="[rules.required]"></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-text-field label="Middle Name" v-model="middlename" :rules="[rules.required]" outlined dense
-                        color="success"></v-text-field>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="Middle Name" v-model="value.middlename" :rules="[rules.required]" outlined
+                        dense color="success"></v-text-field>
                     </v-col>
-                    <v-col cols="12" sm="12" md="3">
-                      <v-select :items="suffix" :rules="[rules.required]" label="Suffix" required outlined dense
-                        color="success">
+                    <v-col cols="12" sm="6" md="3">
+                      <v-select :items="suffix" :rules="[rules.required]" label="Suffix" v-model="value.suffix" required
+                        outlined dense color="success">
                       </v-select>
                     </v-col>
 
                     <v-col cols="12" sm="6" md="3">
-                      <v-text-field v-model="birthDate" @input="calculateAge(birthDate)" label="Date of Birth" outlined
-                        type="date" dense color="success" :rules="[rules.required]"></v-text-field>
+                      <v-text-field v-model="value.birthDate" @input="calculateAge(birthDate)" label="Date of Birth"
+                        outlined type="date" dense color="success" :rules="[rules.required]"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="3">
                       <v-text-field label="Age" dense outlined color="success" readonly :value="years"
-                        :rules="[rules.required]">
+                        :rules="[rules.required]" v-model="value.age">
                       </v-text-field>
 
                     </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-select :items="civilstatus" label="Civil Status" required outlined dense color="success"
+                    <v-col cols="12" md="3" sm="6">
+                      <v-select :items="civilstatus" v-model="value.civilstatus" label="Civil Status" required outlined
+                        dense color="success" :rules="[rules.required]">
+                      </v-select>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="6">
+                      <v-select :items="sex" label="Sex" v-model="value.sex" required outlined dense color="success"
                         :rules="[rules.required]">
                       </v-select>
                     </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-select :items="gender" label="Gender" required outlined dense color="success"
-                        :rules="[rules.required]">
+                    <v-col cols="12" md="3" sm="6">
+                      <v-select :items="religion" label="Religion" v-model="value.religion" required outlined dense
+                        color="success">
                       </v-select>
                     </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-select :items="religion" label="Religion" required outlined dense color="success">
+                    <v-col cols="12" md="3" sm="6">
+                      <v-select :items="disabilities" label="Disability" v-model="value.disability" required outlined
+                        dense color="success">
                       </v-select>
                     </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-select :items="disabilities" label="Disability" required outlined dense color="success">
+                    <v-col cols=" 12" md="3" sm="6">
+                      <v-select :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined dense
+                        color="success">
                       </v-select>
                     </v-col>
-                    <v-col cols=" 12" md="3" sm="12">
-                      <v-select :items="ethnicity" label="Ethnic Group" required outlined dense color="success">
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="3">
+                    <v-col cols="12" sm="6" md="3">
                       <v-file-input label="Attached ID here" accept="image/x-png,image/gif,image/jpeg" outlined
-                        append-icon="mdi-camera" dense color="success" :rules="[rules.required]"></v-file-input>
+                        v-model="value.id" append-icon="mdi-camera" dense color="success"
+                        :rules="[rules.required]"></v-file-input>
                     </v-col>
                     <v-col cols="12" md="12" sm="12">
                       <p class="font-weight-bold" style="margin-top: -35px">
@@ -143,40 +147,47 @@
                       </p>
                     </v-col>
                     <v-col cols="12" md="2" sm="12">
-                      <v-text-field label="Region" readonly outlined dense color="success"
-                        value="Region XI"></v-text-field>
+                      <v-select v-model="region" :items="address" item-text="region_name" outlined dense color="success"
+                        label="Region" @change="formattype('REGION')" return-object single-line>
+                      </v-select>
+
                     </v-col>
                     <v-col cols="12" md="2" sm="12">
-                      <v-text-field label="Province" readonly outlined dense color="success"
-                        value="Davao del Norte"></v-text-field>
+                      <v-select v-model="province" :items="provincename" :disabled="region == '' ? true : false" outlined
+                        dense color="success" label="Province" @change="formattype('PROVINCE')" return-object single-line>
+
+                      </v-select>
                     </v-col>
                     <v-col cols="12" md="2" sm="12">
-                      <v-text-field label="Municipality / City" readonly outlined dense color="success" value="Tagum City"
-                        :rules="rules"></v-text-field>
+                      <v-select v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined dense
+                        label="Municipality / City" @change="formattype('CITY')" return-object color="success"
+                        single-line>
+
+                      </v-select>
                     </v-col>
                     <v-col cols="12" md="2" sm="12">
-                      <v-select label="Baranggay" required outlined dense color="success" :items="baranggay"
-                        :rules="[rules.required]"></v-select>
+                      <v-select label="Baranggay" :disabled="city == '' ? true : false" outlined dense color="success"
+                        :items="brgyname" :rules="[rules.required]"></v-select>
                     </v-col>
                     <v-col cols="12" md="4" sm="12">
                       <v-text-field label="House No. / Street / Village" required outlined dense color="success"
-                        :rules="[rules.required]"></v-text-field>
+                        :rules="[rules.required]"  v-model="value.house"></v-text-field>
                     </v-col>
 
                     <v-col cols="12" md="3" sm="12">
                       <v-text-field label="Contact Number" required outlined dense color="success" type="number"
                         hide-spin-buttons maxlength="11" oninput="this.value=this.value.slice(0,this.maxLength)"
-                        :rules="[rules.required, rules.counter]" v-model="number"></v-text-field>
+                        :rules="[rules.required, rules.counter]" v-model="value.number"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
                       <v-text-field label="E-mail" required outlined dense color="success" type="email"
-                        :rules="[rules.required, rules.email]" v-model="email"></v-text-field>
+                        :rules="[rules.required, rules.email]" v-model="value.email"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3" sm="6">
-                      <v-text-field label="SSS" required outlined dense color="success"></v-text-field>
+                      <v-text-field label="SSS" required outlined dense color="success" v-model="value.sss"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3" sm="6">
-                      <v-text-field label="TIN" required outlined dense color="success"></v-text-field>
+                      <v-text-field label="TIN" required outlined dense color="success" v-model="value.tin"></v-text-field>
                     </v-col>
                   </v-row>
                   <!-- </v-form> -->
@@ -363,10 +374,8 @@
                         <v-radio-group row>
                           <v-radio label="Yes" value="yes" @click="highest_education = false" color="success"></v-radio>
                           <v-radio label="No" value="no" @click="highest_education = true" color="success"></v-radio>
-                          <v-container v-show="highest_education">
-                            <v-text-field outlined label="Please specify Highest Educational Attainment"
-                              style="margin-top: 5px" dense color="success"></v-text-field>
-                          </v-container>
+                          <v-text-field outlined label="Specify Highest Educational Attainment" style="margin-top: 10px"
+                            v-show="highest_education" dense color="success"></v-text-field>
                         </v-radio-group>
                       </v-col>
                       <p></p>
@@ -390,7 +399,7 @@
                       </v-col>
                       <!-- Elementary -->
                       <v-col cols="12" sm="12" md="6" lg="6" v-show="elementarylvl">
-                        <p class="font-weight-bold" style="margin-top: -20px">
+                        <p class="font-weight-bold" style="margin-top: 0px">
                           ELEMENTARY
                         </p>
 
@@ -409,19 +418,24 @@
                               <v-col cols="12" md="12" sm="12" lg="12">
                                 <v-text-field outlined label="Year Graduated" dense color="success"
                                   type="number"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success"
+                                  type="text"></v-text-field>
                               </v-col>
                             </v-row>
                           </v-container>
                           <v-container v-show="undergraduate">
                             <v-row>
                               <v-col cols="12" md="6" sm="6" lg="6">
-                                <v-text-field outlined label="Level Reached" dense color="success">
-                                </v-text-field>
+                                <v-select :items="levelreachedElem" label="Level reached" required outlined dense
+                                  color="success">
+                                </v-select>
                               </v-col>
                               <v-col cols="12" md="6" sm="6" lg="6">
                                 <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
                                 </v-text-field>
                               </v-col>
+                              <v-text-field outlined label="School Graduated" dense color="success"
+                                type="text"></v-text-field>
                             </v-row>
                           </v-container>
                         </v-radio-group>
@@ -450,12 +464,16 @@
                               <div v-show="non_K">
                                 <v-text-field outlined label="Year Graduated" dense color="success"
                                   type="number"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success"
+                                  type="text"></v-text-field>
                               </div>
                               <div v-show="K">
                                 <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
                                 </v-select>
                                 <v-text-field outlined label="Year Graduated" dense color="success" type="number">
                                 </v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success"
+                                  type="text"></v-text-field>
                               </div>
                             </v-radio-group>
 
@@ -482,6 +500,8 @@
                             </v-select>
                             <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
                             </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -506,6 +526,8 @@
                             </v-select>
                             <v-text-field outlined label="Year Graduated" dense color="success" type="number">
                             </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
                           </v-container>
                           <v-container v-show="ter_undergraduate">
                             <v-select :items="levelreachedTer" label="Level Reached" required outlined dense
@@ -513,6 +535,8 @@
                             </v-select>
                             <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
                             </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -540,6 +564,8 @@
                             </v-select>
                             <v-text-field outlined label="Year Graduated" dense color="success"
                               type="number"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
                           </v-container>
                           <v-container v-show="post_undergraduate">
                             <v-select :items="courseGraduateStudies" label="Course" required outlined dense
@@ -547,6 +573,8 @@
                             </v-select>
                             <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
                             </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -616,7 +644,7 @@
                   <v-form ref="formsTech" v-model="valid" lazy-validation>
 
 
-                    <div v-for="(item, index) in form" :key="item">
+                    <div v-for="(item, index) in form" :key="item" v-if="item != null">
                       <v-row>
                         <v-col cols="12" md="2">
                           <v-text-field outlined label="Training / Vocational Course" dense color="success"
@@ -644,14 +672,14 @@
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" md="2">
-                          <v-btn color="error" icon @click="VocationalTrainingRemoveRow(index)">
+                          <v-btn color="error" icon @click="validaterow(index)">
                             <v-icon>mdi-delete</v-icon>
                           </v-btn>
                         </v-col>
                       </v-row>
                     </div>
                   </v-form>
-                  <v-btn color="warning" @click="VocationalTrainingAddRow">
+                  <v-btn color="warning" @click="validaterow">
                     <v-icon>mdi-plus</v-icon> Add
                   </v-btn>
                   <!-- <v-btn padding-top="3px"  @click="saveItem" color="success">
@@ -673,52 +701,62 @@
               <v-card class="mb-6">
                 <v-col cols="12" md="12" sm="12">
                   <h4 class="green--text">Eligibility</h4>
-                  <div v-for="(item, index) in forms" :key="item">
-                    <v-row>
-                      <v-col cols="12" md="6">
-                        <v-select :items="eligibilitylist" label="Eligibility Name" required outlined dense
-                          color="success" autofocus>
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" md="5">
-                        <v-text-field outlined label="Date Taken" type="date" dense color="success"
-                          v-model="item.Elgbtdate_taken">
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="1">
-                        <v-btn color="error" icon @click="ElgbtRemoveRow(index)">
-                          <v-icon>mdi-delete</v-icon>
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <v-btn color="warning" @click="ElgbtAddRow"> <v-icon>mdi-plus</v-icon>Add </v-btn>
+                  <v-form ref="formsEligibility" v-model="valid" lazy-validation>
+                    <div v-for="(item, index) in forms" :key="item">
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <v-select :items="eligibilitylist" label="Eligibility Name" required outlined dense
+                            color="success" autofocus :rules="[rules.required]">
+                          </v-select>
+                        </v-col>
+                        <v-col cols="12" md="3">
+                          <v-file-input label="Attach Picture" accept="image/x-png,image/gif,image/jpeg" outlined
+                            prepend-icon="mdi-camera" dense color="success" :rules="[rules.required]"></v-file-input>
+                        </v-col>
+                        <v-col cols="12" md="2">
+                          <v-text-field outlined label="Date Taken" type="date" dense color="success"
+                            v-model="item.Elgbtdate_taken" :rules="[rules.required]">
+                          </v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="1">
+                          <v-btn color="error" icon @click="ElgbtRemoveRow(index)">
+                            <v-icon>mdi-delete</v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </v-form>
+                  <v-btn color="warning" @click="validateroweligibility"> <v-icon>mdi-plus</v-icon>Add </v-btn>
                 </v-col>
                 <v-col cols="12" md="12" sm="12">
                   <h4 class="green--text">Professional License</h4>
-                  <div v-for="(item, index) in forms2" :key="item">
-                    <v-row>
-                      <v-col cols="12" md="6">
-                        <v-select :items="licenselist" label="License Name" required outlined dense color="success">
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field outlined label="License Number" type="" dense color="success">
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="2">
-                        <v-text-field outlined label="Valid Until" type="date" dense color="success"
-                          v-model="item.PLdate_taken">
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="1">
-                        <v-btn icon color="error" @click="PLRemoveRow(index)">
-                          <v-icon>mdi-delete</v-icon>
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <v-btn color="warning" @click="PLAddRow"> <v-icon>mdi-plus</v-icon> Add
+                  <v-form ref="formsProfessional" v-model="valid" lazy-validation>
+                    <div v-for="(item, index) in forms2" :key="item">
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <v-select :items="licenselist" :rules="[rules.required]" label="License Name" required outlined
+                            dense color="success">
+                          </v-select>
+                        </v-col>
+                        <v-col cols="12" md="3">
+                          <v-text-field outlined label="License Number" type="" :rules="[rules.required]" dense
+                            color="success">
+                          </v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="2">
+                          <v-text-field outlined label="Valid Until" :rules="[rules.required]" type="date" dense
+                            color="success" v-model="item.PLdate_taken">
+                          </v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="1">
+                          <v-btn icon color="error" @click="PLRemoveRow(index)">
+                            <v-icon>mdi-delete</v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </v-form>
+                  <v-btn color="warning" @click="validaterowprofessional"> <v-icon>mdi-plus</v-icon> Add
                   </v-btn>
                 </v-col>
               </v-card>
@@ -733,11 +771,12 @@
               <v-card>
                 <v-card-text>
                   <v-container fluid>
+                    <p class="font-weight-bold">
+                      Other Skills Acquired without Certificate
+                    </p>
                     <v-row>
-                      <p class="font-weight-bold">
-                        Other Skills Acquired without Certificate
-                      </p>
-                      <v-col cols="12" sm="12" md="3" class="ma-2">
+
+                      <v-col cols="12" sm="4" md="4">
 
                         <v-checkbox label="Auto Mechanic" color="success"></v-checkbox>
                         <v-checkbox label="Beautician" style="margin-top: -10px" color="success"></v-checkbox>
@@ -747,7 +786,7 @@
                         <v-checkbox label="Driver" style="margin-top: -10px" color="success"></v-checkbox>
 
                       </v-col>
-                      <v-col cols="12" sm="12" md="3" class="ma-2">
+                      <v-col cols="12" sm="4" md="4">
 
                         <v-checkbox label="Electrician" color="success"></v-checkbox>
                         <v-checkbox label="Embroidery" style="margin-top: -10px" color="success"></v-checkbox>
@@ -757,7 +796,7 @@
                         <v-checkbox label="Painting Jobs" style="margin-top: -10px" color="success"></v-checkbox>
 
                       </v-col>
-                      <v-col cols="12" sm="12" md="3" class="ma-2">
+                      <v-col cols="12" sm="4" md="4">
 
                         <v-checkbox label="Photography" color="success"></v-checkbox>
                         <v-checkbox label="Plumbing" style="margin-top: -10px" color="success"></v-checkbox>
@@ -797,8 +836,8 @@
                 <v-card-text>
                   <v-container fluid>
                     <v-row>
-                      <v-col cols="12" sm="12" md="6">
-                        <v-file-input v-model="files" color="green accent-4" counter label="Resume" dense
+                      <v-col cols="12" sm="6" md="6">
+                        <v-file-input v-model="value.resume" color="green accent-4" counter label="Resume" dense
                           prepend-icon="mdi-paperclip" outlined accept=".pdf, .docx" :show-size="1000" autofocus>
                           <!-- <template v-slot:selection="{ index, text }">
                             <v-chip v-if="index < 2" color="green accent-4" dark label small>
@@ -811,8 +850,8 @@
                           </template> -->
                         </v-file-input>
                       </v-col>
-                      <v-col cols="12" sm="12" md="6">
-                        <v-file-input v-model="files" color="green accent-4" counter label="Application Letter" dense
+                      <v-col cols="12" sm="6" md="6">
+                        <v-file-input v-model="value.applicationletter" color="green accent-4" counter label="Application Letter" dense
                           prepend-icon="mdi-paperclip" outlined accept=".pdf, .docx" :show-size="1000">
                           <!-- <template v-slot:selection="{ index, text }">
                             <v-chip v-if="index < 2" color="green accent-4" dark label small>
@@ -824,7 +863,21 @@
                             </span>
                           </template> -->
                         </v-file-input>
+
+
                       </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="4">
+                        <v-file-input v-model="value.certificate" color="green accent-4" counter label="Certificate" dense
+                          prepend-icon="mdi-paperclip" outlined :show-size="1000" autofocus>
+                        </v-file-input>
+                      </v-col>
+                      <!-- <v-col cols="12" sm="12" md="4">
+                        <v-file-input v-model="files" color="green accent-4" counter label="Application Letter" dense
+                          prepend-icon="mdi-paperclip" outlined accept=".pdf, .docx" :show-size="1000">
+                        </v-file-input>
+                      </v-col> -->
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -843,13 +896,9 @@
       <v-row>
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
-            <v-card-title class="text-h5"> UNSAVED CHANGES </v-card-title>
-
-            <v-card-text>
-              You have made changes in your profile. Do you want to save or
-              discard it?
-            </v-card-text>
-
+            <p class="pa-6"> You have made changes in your profile. Do you want to save or
+              discard it? </p>
+            <v-divider color="success"></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
 
@@ -857,8 +906,7 @@
                 Discard
               </v-btn>
 
-              <v-btn color="green darken-1 white--text" @click="$router.push({ name: 'ApplicantDashboard' })"
-                type="submit">
+              <v-btn color="green darken-1" text @click="$router.push({ name: 'ApplicantDashboard' })" type="submit">
                 Save
               </v-btn>
             </v-card-actions>
@@ -870,6 +918,7 @@
 </template>
 <script>
 import { reactive } from "vue";
+import { mapGetters, mapActions } from "vuex";
 // import {ref} from "vue";
 export default {
   components: {
@@ -887,6 +936,7 @@ export default {
       },
     ]);
     const VocationalTrainingAddRow = () => {
+
       form.push({
         training_course: "",
         hours_training: "",
@@ -894,6 +944,9 @@ export default {
         skills_acquired: "",
         certificate_acquired: "",
       });
+
+
+
     };
     const VocationalTrainingRemoveRow = (index) => {
       if (form.length > 1) {
@@ -934,10 +987,39 @@ export default {
 
 
   data: () => ({
-
+    disable: '',
+    provincename: {},
+    cityname: {},
+    brgyname: {},
+    region: '',
+    province: '',
+    city: '',
+    brgy: '',
     valid: true,
     number: '',
     email: '',
+    value: {
+      surname: '',
+      firstname: '',
+      middlename: '',
+      suffix: '',
+      birthDate: '',
+      age: '',
+      civilstatus: '',
+      sex: '',
+      religion: '',
+      disability: '',
+      ethnicity: '',
+      id: '',
+      house:'',
+      number:'',
+      email:'',
+      sss:'',
+      tin:'',
+      resume: '',
+      applicationletter: '',
+      certificate: '',
+    },
     rules: {
       required: v => !!v || 'Required',
       email: v => {
@@ -946,7 +1028,7 @@ export default {
       },
       counter: v => v.length <= 11 || 'Max 11 digits',
     },
-    e1: 5,
+    e1: 1,
     altLabels: true,
     pesla: false,
     employed: false,
@@ -983,31 +1065,7 @@ export default {
     enabled: false,
     samewithaddress: true,
 
-    baranggay: [
-      "APOKON",
-      "BINCUNGAN",
-      "BUSAON",
-      "CANOCOTAN",
-      "CUAMBOGAN",
-      "LA FILIPINA",
-      "LIBOGANON",
-      "MADAUM",
-      "MAGDUM",
-      "MAGUGPO EAST",
-      "MAGUGPO NORTH",
-      "MAGUGPO POBLACION",
-      "MAGUGPO SOUTH",
-      "MAGUGPO WEST",
-      "MANKILAM",
-      "NEW BALAMBAN",
-      "NUEVA FUERZA",
-      "PAGSABANGAN",
-      "PANDAPAN",
-      "SAN AGUSTIN",
-      "SAN ISIDRO",
-      "SAN MIGUEL",
-      "VISAYAN VILLAGE",
-    ],
+
     eligibilitylist: [
       " Bar/Board Eligibility (RA 1080)",
       " Barangay Health Worker Eligibility (RA 7883)",
@@ -1027,7 +1085,7 @@ export default {
       "Others"
     ],
     suffix: [
-      'Jr.', 'Sr.', 'III', 'N/A'
+      'N/A', 'Jr.', 'Sr.', 'III'
     ],
     levelreachedSec: [
       "Grade 7",
@@ -1041,11 +1099,21 @@ export default {
       "3rd Year",
       "4th Year",
     ],
+    levelreachedElem: [
+      "Grade 1",
+      "Grade 2",
+      "Grade 3",
+      "Grade 4",
+      "Grade 5",
+      "Grade 6",
+    ],
     levelreachedTer: [
       "1st Year College",
       "2nd Year College",
       "3rd Year College",
       "4th Year College",
+      "4th Year College",
+      "5th Year College",
     ],
     course: [
       " Bachelor of Arts in History (AB History)",
@@ -1299,8 +1367,8 @@ export default {
       "Aeta",
       "Others (Please Specify)",
     ],
-    civilstatus: ["Single", "Married", "Widowed"],
-    gender: ["Female", "Male", "LGBTQ"],
+    civilstatus: ["Single", "Married", "Widowed", "Separated"],
+    sex: ["Female", "Male"],
     religion: [
       "Roman Catholic",
       "Islam",
@@ -1331,7 +1399,44 @@ export default {
     months: null,
     days: null
   }),
+  created() {
+    this.fetchaddress();
+
+    // setTimeout(function() { console.log("address=>", this.address) }, 3000),
+    //   setTimeout(() => this.isHidden = false, 500),
+
+
+
+
+    // this.address=this.getaddress;
+    // console.log("address=>", this.address)
+  },
+  computed: {
+    ...mapGetters('users', { address: 'getadd' })
+  },
   methods: {
+    formattype(type) {
+      if (type == "REGION") {
+        let res = this.region
+
+        this.provincename = Object.keys(res.province_list)
+      }
+      if (type == "PROVINCE") {
+
+
+        let res = this.region.province_list[this.province]
+
+        this.cityname = Object.keys(res.municipality_list)
+      }
+      if (type == "CITY") {
+        let res = this.region.province_list[this.province].municipality_list[this.city]
+        // console.log("province=>",res.barangay_list)
+        this.brgyname = Object.values(res.barangay_list)
+      }
+
+
+    },
+    ...mapActions('users', ['fetchaddress']),
     calculateAge(birthDate) {
       if (!birthDate) return;
       const currentDate = new Date();
@@ -1349,12 +1454,48 @@ export default {
       this.days = Math.floor((totalDays % 365.25) % 30.4375);
     },
     validate() {
+      // this.region=this.address\\
+      console.log("address=>", this.address)
+      console.log("region=>", this.region)
+
+
       this.$refs.formes.validate();
 
       let v = this.$refs.formes.validate();
 
       if (v) {
         this.e1 = this.e1 + 1
+      }
+    },
+    validaterow() {
+      this.$refs.formsTech.validate();
+      let v = this.$refs.formsTech.validate();
+      if (v) {
+        this.form.push({
+          training_course: "",
+          hours_training: "",
+          training_institution: "",
+          skills_acquired: "",
+          certificate_acquired: "",
+        });
+      }
+    },
+    validateroweligibility() {
+      this.$refs.formsEligibility.validate();
+      let v = this.$refs.formsEligibility.validate();
+      if (v) {
+        this.forms.push({
+          eligibility: "", date_taken: ""
+        });
+      }
+    },
+    validaterowprofessional() {
+      this.$refs.formsProfessional.validate();
+      let v = this.$refs.formsProfessional.validate();
+      if (v) {
+        this.forms2.push({
+          professional: "", PLdate_taken: ""
+        });
       }
     },
     // validated(){

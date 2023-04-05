@@ -2,15 +2,16 @@
   <v-col md="12" class="pa-4">
     <v-card color="#1B5E20" >
       <v-card-title class="subtitle-2">
-        JOB POSTING
+        JOB POSTING 
+        <v-divider inset vertical color="white" class="ml-2 mr-2"></v-divider>
+      
         <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details outlined rounded
           dark dense></v-text-field>
       </v-card-title>
       <v-card-text>
-        <v-data-table :headers="headers" :items="desserts" :search="search" class="btn-hover elevation-1 pa-4"  @click:row="editItem">
-         
+        <v-data-table :headers="headers" :items="desserts" :search="search" class="btn-hover elevation-1 pa-4"  @click:row="editItem">         
           <template v-slot:top>
             <v-dialog v-model="dialog" max-width="700px" tile>
               <v-card>
@@ -84,7 +85,7 @@
               Cancel
             </v-btn>
 
-            <v-btn color="green darken-1" dark small @click="dialog1 = false, dialog = false" type="submit">
+            <v-btn color="green darken-1" dark small @click="continueApply"  type="submit">
               Continue
             </v-btn>
           </v-card-actions>
@@ -100,6 +101,7 @@ export default {
     search: "",
     dialog: false,
     dialog1: false,
+   
     headers: [
       {
         text: "COMPANY NAME",
@@ -123,6 +125,7 @@ export default {
       job_location: "",
       applicant_needed: "",
       statusofemployment: "",
+      remark: "",
     },
   }),
   // computed: {
@@ -196,6 +199,18 @@ export default {
           job_details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut eu sem integer vitae justo eget magna fermentum. Eu feugiat pretium nibh ipsum consequat. Commodo sed egestas egestas fringilla. Aliquet bibendum enim facilisis gravida neque convallis. Sem integer vitae justo eget magna fermentum. Orci ac auctor augue mauris. Erat nam at lectus urna duis. Imperdiet massa tincidunt nunc pulvinar sapien. Sed sed risus pretium quam vulputate dignissim suspendisse in. Lectus arcu bibendum at varius vel. Cursus sit amet dictum sit. Sagittis purus sit amet volutpat consequat mauris nunc congue.",
         },
       ];
+    },
+    continueApply(){
+      this.dialog1 = false;
+      this.dialog = false;
+      let tempdesserts = this.desserts
+     for(let i=0;i<tempdesserts.length;i++){
+      if(tempdesserts[i].company_name == this.editedItem.company_name)
+        tempdesserts[i].remark="Applied"
+     } 
+     this.desserts=tempdesserts
+
+      // this.editedItem.remark = "Applied";
     },
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);

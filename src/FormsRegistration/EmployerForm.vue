@@ -1,20 +1,20 @@
 <template>
   <div>
     <v-col>
-      <h4 class="text-center pa-2 green--text">Employer Registration</h4>
-      <h5 class="mb-2 green--text" style="margin-top: -10px">Contact Person</h5>
+      <!-- <h4 class="text-center pa-2 green--text">Employer Registration</h4> -->
+      <h5 class="mb-8 green--text" style="margin-top: 20px">Contact Person</h5>
       <v-row>
         <v-col cols="12" md="6">
-          <v-text-field class="textbox" autofocus v-model="last_name" type="text" label="Last Name" required color="green" outlined
-            dense />
-        </v-col>
-        <v-col cols="12" md="6">
-          <v-text-field class="textbox" v-model="first_name" type="text" label="First Name" required color="green"
+          <v-text-field class="textbox mt-n6" autofocus v-model="last_name" type="text" label="Last Name" required color="green"
             outlined dense />
         </v-col>
         <v-col cols="12" md="6">
-          <v-text-field class="textbox mt-n6" v-model="middle_initial" type="text" label="M.I." required color="green" outlined
-            dense />
+          <v-text-field class="textbox mt-n6" v-model="first_name" type="text" label="First Name" required color="green"
+            outlined dense />
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-text-field class="textbox mt-n6" maxlength=1 v-model="middle_initial" type="text" label="M.I." required color="green"
+            outlined dense />
         </v-col>
         <v-col cols="12" md="6">
           <v-select :items="suffix" color="success" label="Suffix" outlined dense class="mt-n6">
@@ -27,21 +27,31 @@
         label="Email" color="green" outlined dense />
       <v-row>
         <v-col cols="12" md="6" lg="6">
-          <v-text-field class="textbox mt-n6" v-model="password" :rules="pwdRules" :type="passwordShow ? 'text' : 'password'"
-            label="Password" prepend-inner-icon="mdi-key" color="green" outlined dense />
+          <v-text-field class="textbox mt-n6" v-model="password" :rules="pwdRules"
+            :type="passwordShow ? 'text' : 'password'" label="Password" prepend-inner-icon="mdi-key" color="green"
+            outlined dense />
         </v-col>
         <v-col cols="12" md="6" lg="6">
           <v-text-field class="textbox mt-n6" v-model="pw2" :rules="pwdConfirm" :type="passwordShow ? 'text' : 'password'"
             label="Confirm Password" prepend-inner-icon="mdi-key" color="green" outlined dense />
         </v-col>
       </v-row>
+      <v-snackbar v-model="snackbar" :top="'top'" :color="alertColor">
+        {{ text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="white" icon v-bind="attrs" @click="snackbar = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </template>
+      </v-snackbar>
       <v-col align="center" justify="space-around">
         <v-btn type="submit" color="green" class="text-center" @click="employerregister" dark block>
           <v-icon left>mdi-account-check</v-icon>
           SIGN UP
         </v-btn>
       </v-col>
-      
+
     </v-col>
   </div>
 </template>
@@ -72,6 +82,12 @@ export default {
   methods: {
     ...mapActions("users", ["Registration"]),
     userReg() {
+      if (this.last_name == "" || this.first_name == "" || this.middle_initial == "" || this.email == "" || this.password == "") {
+        this.alertColor = 'success'
+        this.snackbar = true
+        this.text = "Please enter the required information"
+        return
+      }
       this.$createUserWithEmailAndPassword(
         this.$FBAUTH,
         this.email,

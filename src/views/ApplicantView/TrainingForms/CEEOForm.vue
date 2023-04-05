@@ -2,7 +2,7 @@
   <v-card id="Employer">
     <v-stepper v-model="e1">
       <v-stepper-header style="font-size: 14px">
-        <v-stepper-step :complete="e1 > 1" step="1" color="warning">
+        <v-stepper-step :complete="e1 > 1" step="1" color="success">
           Personal
           <v-spacer></v-spacer>
           Information
@@ -10,7 +10,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 2" step="2" color="warning">
+        <v-stepper-step :complete="e1 > 2" step="2" color="success">
           Client's
           <v-spacer></v-spacer>
           Classification
@@ -18,7 +18,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 3" step="3" color="warning">
+        <v-stepper-step :complete="e1 > 3" step="3" color="success">
           Educational
           <v-spacer></v-spacer>
           Background
@@ -26,7 +26,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 4" step="4" color="warning">
+        <v-stepper-step :complete="e1 > 4" step="4" color="success">
           Family
           <v-spacer></v-spacer>
           Information
@@ -34,7 +34,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 5" step="5" color="warning">
+        <v-stepper-step :complete="e1 > 5" step="5" color="success">
           Family
           <v-spacer></v-spacer>
           Income
@@ -42,7 +42,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 5" step="6" color="warning">
+        <v-stepper-step :complete="e1 > 5" step="6" color="success">
           Emergency
           <v-spacer></v-spacer>
           Contacts
@@ -124,7 +124,7 @@
             </v-card-text>
           </v-card>
 
-          <v-btn id="v-btn-c" color="warning" @click="e1 = 2"> Continue </v-btn>
+          <v-btn id="v-btn-c" color="success" @click="e1 = 2"> Continue </v-btn>
 
           <v-btn id="v-btn-c" class="ma-4" @click="$router.push({ path: 'AvailableTraining' })" color="success" outlined>
             Cancel
@@ -157,7 +157,7 @@
             </v-card-text>
           </v-card>
 
-          <v-btn id="v-btn-c" color="warning" @click="e1 = 3"> Continue </v-btn>
+          <v-btn id="v-btn-c" color="success" @click="e1 = 3"> Continue </v-btn>
           <v-btn @click="e1 = 1" class="ma-2" outlined color="success">
             Back
           </v-btn>
@@ -233,7 +233,7 @@
             </v-card-text>
           </v-card>
 
-          <v-btn id="v-btn-c" color="warning" @click="e1 = 4"> Continue </v-btn>
+          <v-btn id="v-btn-c" color="success" @click="e1 = 4"> Continue </v-btn>
           <v-btn @click="e1 = 2" class="ma-2" outlined color="success">
             Back
           </v-btn>
@@ -324,7 +324,7 @@
                     <v-btn color="error" outlined @click="FMRemoveRow(index)">
                       Remove
                     </v-btn>
-                    <v-btn color="warning" @click="FMAddRow"> Add </v-btn>
+                    <v-btn color="success" @click="FMAddRow"> Add </v-btn>
                   </v-col>
                 </v-row>
               </div>
@@ -334,7 +334,7 @@
             </v-col>
           </v-card>
 
-          <v-btn id="v-btn-c" color="warning" @click="e1 = 5"> Continue </v-btn>
+          <v-btn id="v-btn-c" color="success" @click="e1 = 5"> Continue </v-btn>
           <v-btn @click="e1 = 3" class="ma-2" outlined color="success">
             Back
           </v-btn>
@@ -390,7 +390,7 @@
                     <v-btn color="error" outlined @click="EarnerRemoveRow(index)">
                       Remove
                     </v-btn>
-                    <v-btn color="warning" @click="EarnerAddRow"> Add </v-btn>
+                    <v-btn color="success" @click="EarnerAddRow"> Add </v-btn>
                   </v-col>
                 </v-row>
               </div>
@@ -405,7 +405,7 @@
             </v-col>
           </v-card>
 
-          <v-btn id="v-btn-c" color="warning" @click="e1 = 6"> Continue </v-btn>
+          <v-btn id="v-btn-c" color="success" @click="e1 = 6"> Continue </v-btn>
           <v-btn @click="e1 = 4" class="ma-2" outlined color="success">
             Back
           </v-btn>
@@ -445,7 +445,7 @@
             </v-col>
           </v-card>
 
-          <v-btn id="v-btn-c" color="warning" @click="dialogSave = true">
+          <v-btn id="v-btn-c" color="success" @click="dialogSave = true">
             SAVE
           </v-btn>
           <v-btn @click="e1 = 5" class="ma-2" outlined color="success">

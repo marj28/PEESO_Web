@@ -8,6 +8,10 @@
 </template>
 <script>
 export default {
+  data: () => ({
+    
+  }),
+  
   components: {
   },
 };

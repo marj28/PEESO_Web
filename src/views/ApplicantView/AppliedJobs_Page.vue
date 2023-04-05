@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <applicant-navbar />
+      <applicant-navbar  />
       <v-main>
       <applied-jobs />
       </v-main>
@@ -8,6 +8,14 @@
   </template>
   <script>
   export default {
+    data: ()=>({
+      
+    }),
+    methods:{
+    passstatus(stat){
+      
+    }
+  },
     components: {
     },
   };

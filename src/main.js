@@ -18,6 +18,8 @@ import './views/AdminView/CardHolder'
 
 Vue.config.productionTip = false
 
+Vue.prototype.$status='Searching'
+
 new Vue({ 
   firebase,                                                                            
   vuetify,

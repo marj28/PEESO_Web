@@ -50,9 +50,20 @@
                           <v-select label="Appointment Remarks" color="green" dense outlined :items="remark"
                             v-model="Remarks"></v-select>
                         </v-col>
+                        <v-col cols="12" sm="12" lg="12" md=12>
+                          <v-text-field outlined dense color="green" class="mt-n6" counter maxlength=50
+                            v-if="Remarks == 'Others'" label="Reason"></v-text-field>
+                        </v-col>
                         <v-col cols="12" sm="12" md="12" class="mt-n2" v-show="cancel">
                           <v-select label="Reason for Cancellation of Application" color="green" dense outlined
                             :items="withdraw" v-model="Withdraw"></v-select>
+                        </v-col>
+                        <v-col cols="12" sm="12" lg="12" md=12>
+                          <v-dialog v-model="status">
+                            "Do you want to change your Status ang Withdraw all Job Applications?
+                            <v-btn label="Yes" @click="changestatus('YES')"></v-btn>
+                            <v-btn label="No" @click=""></v-btn>
+                          </v-dialog>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -86,13 +97,22 @@
 </template>
       
 <script>
+import Vue from 'vue'
+import { mapActions } from 'vuex';
 export default {
   data: () => ({
     search: "",
+    status: false,
+    Withdraw: false,
+    Remarks: false,
     dialog: false,
     remarks: false,
     cancel: false,
     // dialog1: false,
+    withdrawItem: [
+      "Yes",
+      "No"
+    ],
     headers: [
       {
         text: "COMPANY NAME",
@@ -126,9 +146,10 @@ export default {
       statusofemployment: "",
     },
     remark: [
-      "Interested",
-      "Interested but not Available",
+      "Interested / Confirm",
+      "Interested but not Available / Request for Reschedule",
       "Not Interested",
+      "Others"
     ],
     withdraw: [
       "Not Interested Anymore",
@@ -209,6 +230,7 @@ export default {
       ];
 
     },
+    ...mapActions('users', ['fetchUsers']),
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -222,15 +244,27 @@ export default {
         this.editedIndex = -1;
       });
     },
+    changestatus(status){
+      console.log(Vue.prototype.$status)
+      if(status == 'YES')
+      this.fetchUsers()
+      
+      this.status=false
+      this.dialog=false
+    },
     save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.desserts.push(this.editedItem);
-      }
-      this.close();
+      if(this.Withdraw == 'Landed a Job')
+        this.status=true
+      // if (this.editedIndex > -1) {
+      //   Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      // } else {
+      //   this.desserts.push(this.editedItem);
+      // }
+      // this.close();
+
     },
   },
+ 
 };
 </script>
     

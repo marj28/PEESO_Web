@@ -2,8 +2,12 @@ import axios from 'axios';
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const state = () => ({
-  users: [],
+  users: {
+    status: 'Searching'
+  },
   auth: {},
+  address: {},
+  
 
 });
 
@@ -16,6 +20,10 @@ const getters = {
   getAuth(state) {
 
     return state.auth;
+  },
+  getadd(state) {
+    console.log("getaddress=>", state.address)
+    return state.address;
   }
 
 }
@@ -23,23 +31,30 @@ const getters = {
 const mutations = {
   setUsers(state, payload) {
 
-    state.users = payload;
-    
+    state.users.status = payload;
+    console.log("state=>", state.users.status)
   },
 
   setAuth(state, payload) {
 
     state.auth = payload;
 
-  }
+  },
+  setaddress(state, payload) {
+
+    state.address = payload;
+
+  },
+
 }
 
 const actions = {
   async fetchUsers({ commit }) {
-
-    let res = await axios.get(`${process.env.VUE_APP_API_URL}/usersall.php`);
-    commit('setUsers', res.data.Users);
-
+    console.log("commit=>before", this.state.users.status)
+    // let res = await axios.get(`${process.env.VUE_APP_API_URL}/usersall.php`);
+    commit('setUsers', 'HIRED');
+    // this.users.status='HIRED'
+    console.log("commit=>", this.state.users.status)
 
   },
   async Registration({ commit }, payload) {
@@ -70,8 +85,8 @@ const actions = {
   },
   async Deleteuser({ commit }, payload) {
     let res = await axios.post(`${process.env.VUE_APP_API_URL}/deleteuser.php`, payload);
-    console.log("delete=>",res.data['deleted'] );
-    console.log("res.data.users",res.data.Users);
+    console.log("delete=>", res.data['deleted']);
+    console.log("res.data.users", res.data.Users);
     if (res.data['deleted'] == 'success') {
       commit('setUsers', res.data.Users);
       return 1;
@@ -89,6 +104,20 @@ const actions = {
     else
       return 0;
   },
+
+  async fetchaddress({ commit }) {
+    {
+      let res = await axios.get(`https://raw.githubusercontent.com/flores-jacob/philippine-regions-provinces-cities-municipalities-barangays/master/philippine_provinces_cities_municipalities_and_barangays_2019v2.json`)
+      
+      // let res2 ={}
+      // for(let i=0;i<16;i++){
+      //   res2.push(res.data[`0${i}`])
+      // }
+      console.log("fetchaddress=>",Object.values(res.data))
+      commit('setaddress', Object.values(res.data));
+    }
+  }
+
 }
 
 export default {

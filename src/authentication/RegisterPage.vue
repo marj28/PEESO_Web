@@ -1,44 +1,41 @@
 <template>
-  <div>
+  <div class="mt-12">
     <v-app id="inspire" class="background">
       <v-main class="d-flex justify-center align-center">
         <v-col cols="10" md="4" class="mx-auto">
           <v-form @submit.prevent="submitHandler" ref="form">
             <v-container>
               <v-layout row wrap>
-                <v-card class="mx-auto" width="400">
-                  <!-- <div class="text-center pa-4" v-show="peeso">
-                    <h2>PEESO</h2>
-                  </div> -->
-                  <v-row class="text-center pa-4" v-show="title">
-                    <v-col cols="12" sm="12" md="12">
-                      <v-btn class="mt-6"  type="submit" color="green" dark small outlined @click="
-                        (student = false),
-                        (applicant = false),
-                        (employer = true),                        
-                        (title = false),
-                        (returnbtn = true)
-                      ">I am an Employer</v-btn>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="12">
-                      <v-btn  type="submit" color="success" outlined small @click="
-                        (student = true),
-                        (employer = false),
-                        (applicant = false),                       
-                        (title = false),
-                        (returnbtn = true)
-                      ">I am a Student</v-btn>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="12">
-                      <v-btn  type="submit" color="success" small outlined @click="
-                        (student = false),
-                        (employer = false),
-                        (applicant = true),                        
-                        (title = false),
-                        (returnbtn = true)
-                      ">I am an Applicant</v-btn>
-                    </v-col>
-                  </v-row>
+                <v-card class="mx-auto" width="600">
+                  <div class=" mt-n6 mb-n6 text-center pa-4">
+                    <h4 class="green--text">CREATE AN ACCOUNT</h4>
+                  </div>
+                  <v-container class="mb-n6">
+
+
+                    <v-row class="text-center pa-4 mt-n10" v-show="title">
+                      <v-col cols="12" sm="12" md="12">
+                        <v-btn type="submit" class="mr-1" color="green" block outlined dark @click="
+                          employer = false, applicant = true">
+                          <v-icon left>
+                            mdi-account
+                          </v-icon>
+                          BE A MEMBER</v-btn>
+                      </v-col>
+                      <v-col cols="12">
+                        <h6 class="text-center green--text mb-n12 mt-n4">OR</h6>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-btn type="submit" class="mr-1 mt-n4" color="green" block outlined @click="
+                          employer = true, applicant = false
+                        ">
+                          <v-icon left>
+                            mdi-account-multiple
+                          </v-icon>BE AN EMPLOYER</v-btn>
+                      </v-col>
+
+                    </v-row>
+                  </v-container>
                   <v-divider></v-divider>
                   <v-row class="text-form pa-4">
                     <v-col>
@@ -46,39 +43,31 @@
                         <employer-form />
                       </v-col>
                       <!-- student -->
-
+                      <!-- 
                       <v-col cols="12" sm="12" md="12" v-show="student" style="margin-top: -50px">
                         <student-form />
-                      </v-col>
+                      </v-col> -->
                       <!-- end student -->
                       <!-- start applicant -->
                       <v-col cols="12" sm="12" md="12" v-show="applicant" style="margin-top: -50px">
                         <applicant-form />
                       </v-col>
                       <!-- end applicant -->
-                      <div class="text-center pa-9 mt-n5">
-                        <v-btn class="green--text mt-n12 " outlined v-show="returnbtn" small block @click="
-                          (employer = false),
-                          (applicant = false),
-                          (student = false),
-                          (returnbtn = false),
-                          (title = true)">
-                          <v-icon left>mdi-arrow-left</v-icon>Return </v-btn>
-                      </div>
-                      <v-col align="center" justify="space-around" class="mb-n10 mt-n12">
-                        <p>Already a Member?</p>
-                        <v-btn color="success" class="text-center mb-6" small dark
-                          @click="$router.push({ name: 'LoginPage' })">
-                          Log In
-                        </v-btn>
+                      <v-col align="center" justify="space-around" class=" mt-n8">
+                        Already a Member?
+                        <v-text class="green--text" type="button" xs @click="$router.push({ name: 'LoginPage' })">
+                          LOG IN
+                        </v-text>
+
                       </v-col>
                     </v-col>
                   </v-row>
                 </v-card>
               </v-layout>
             </v-container>
+
           </v-form>
-          <div class="text-center">
+          <!-- <div class="text-center">
             <v-dialog v-model="dialog" width="300" persistent>
 
               <v-card>
@@ -96,22 +85,18 @@
                 <v-divider></v-divider>
 
                 <v-card-actions>
-                  <!-- <v-spacer></v-spacer> -->
-                  <!-- <v-btn color="success" text @click="$router.push({ name: 'LoginPage' }) ">
-                    I Disagree
-                  </v-btn> -->
 
                   <v-checkbox label="I agree" color="success" @click="agree = !agree" dense></v-checkbox>
 
                   <v-spacer></v-spacer>
 
-                  <v-btn color="success" text @click="dialog = false"  :disabled="!agree" >
+                  <v-btn color="success" text @click="dialog = false" :disabled="!agree">
                     Continue
                   </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </div>
+          </div> -->
         </v-col>
       </v-main>
     </v-app>
@@ -133,7 +118,7 @@ export default {
       snackbar: false,
       student: false,
       employer: false,
-      applicant: false,
+      applicant: true,
       title: true,
       returnbtn: false,
       agree: false,

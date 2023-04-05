@@ -8,6 +8,7 @@
               <img src="@/assets/download.png" alt="" />
             </v-avatar>
             <p class="white--text subheading mt-1 text-center">Applicant</p>
+            <h5 class="yellow--text mt-n4 ml-4">{{ JobStatus }}</h5>
           </v-flex>
           <v-flex class="mt-3">
             <h3 class="white--text subheading mt-1 text-center">Rolse Royce</h3>
@@ -75,9 +76,13 @@
     
     
 <script>
+import { mapGetters } from 'vuex';
 export default {
+  
   data: () => ({
+    
     drawer: null,
+    JobStatus:'',
     items: [
       { icon: "mdi-home", text: "Dashboard", route: "/ApplicantDashboard" },
       { icon: "mdi-crosshairs-gps", text: "Job Hunt", route: "/AvailableJobs" },
@@ -106,6 +111,23 @@ export default {
       },
     ],
   }),
+  computed: {
+            ...mapGetters('users', { users: 'getUsers' }),
+            changeStatus(){
+              console.log("jobstatus=>",this.JobStatus)
+              this.JobStatus=this.users.status
+
+            }
+          
+        },
+  created(){
+    this.JobStatus=this.users.status
+
+    console.log("users=>",this.users.status)
+  },
+ 
 };
 </script>
+
+
 <style></style>
