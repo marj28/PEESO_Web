@@ -705,9 +705,9 @@
                     <div v-for="(item, index) in forms" :key="item">
                       <v-row>
                         <v-col cols="12" md="6">
-                          <v-select :items="eligibilitylist" label="Eligibility Name" required outlined dense
+                          <v-combobox :items="eligibilitylist" label="Eligibility Name" required outlined dense
                             color="success" autofocus :rules="[rules.required]">
-                          </v-select>
+                          </v-combobox>
                         </v-col>
                         <v-col cols="12" md="3">
                           <v-file-input label="Attach Picture" accept="image/x-png,image/gif,image/jpeg" outlined
@@ -729,14 +729,14 @@
                   <v-btn color="warning" @click="validateroweligibility"> <v-icon>mdi-plus</v-icon>Add </v-btn>
                 </v-col>
                 <v-col cols="12" md="12" sm="12">
-                  <h4 class="green--text">Professional License</h4>
+                  <h4 class="green--text">License</h4>
                   <v-form ref="formsProfessional" v-model="valid" lazy-validation>
                     <div v-for="(item, index) in forms2" :key="item">
                       <v-row>
                         <v-col cols="12" md="6">
-                          <v-select :items="licenselist" :rules="[rules.required]" label="License Name" required outlined
+                          <v-combobox :items="licenselist" :rules="[rules.required]" label="License Name" required outlined
                             dense color="success">
-                          </v-select>
+                          </v-combobox>
                         </v-col>
                         <v-col cols="12" md="3">
                           <v-text-field outlined label="License Number" type="" :rules="[rules.required]" dense
@@ -1367,13 +1367,22 @@ export default {
       "Aeta",
       "Others (Please Specify)",
     ],
-    civilstatus: ["Single", "Married", "Widowed", "Separated"],
+    civilstatus: ["Single", "Married","Live-in", "Widowed", "Separated"],
     sex: ["Female", "Male"],
     religion: [
       "Roman Catholic",
       "Islam",
       "Iglesia ni Cristo",
       "Seventh-day Adventist",
+      "Evangelicals",
+      "Protestants",
+      "Aglipayan",
+      "Bible Baptist Church",
+      "Baptist",
+      "United Church of Christ in the Philippines",
+      "Jehovah's Witnesses",
+      "Others",
+
     ],
     selfemployed: [
       "Fisherman/Fisherfolk",
