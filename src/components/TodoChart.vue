@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <v-card class="pa-2" elevation="20">
-      <apexcharts height="300" type="bar" :options="chartOptions" :series="series"></apexcharts>
+  <div id="chart" class="d-flex">
+    <v-card class="" elevation="20" >
+      <apexcharts id="" class="todochart"  height="450" width="700" type="" :options="chartOptions" :series="series" ></apexcharts>
     </v-card>
 
   </div>
@@ -40,7 +40,10 @@ export default {
             options: {
               plotOptions: {
                 bar: {
-                  horizontal: false,
+                  horizontal: true,
+                  dataLabels: {
+                    position: "top",
+                  },
                 },
               },
               legend: {
@@ -70,11 +73,27 @@ export default {
     };
   },
 };
+
+
 </script>
 <style scoped>
-/* #chart {
+#chart {
   max-width: 650px;
   margin: 35px auto;
+}
+/* .pa-2 {
+  min-width: 90%;
 } */
+@media screen and (max-width: 400px)  {
+  /* p.ma-4 {
+    font-size: 13px;
+  }
+  h2.ma-1{
+    font-size: 13px;
+  } */
+  .todochart {
+    width: 400px;
+  }
+}
 </style>
     

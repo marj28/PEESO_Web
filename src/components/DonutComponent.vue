@@ -1,6 +1,8 @@
 <template>
-  <div>
-      <apexcharts class="pa-2" elevation="20" height="300" type="pie" :options="options" :series="series"></apexcharts>
+  <div id="chart" >
+    <v-card  class="" elevation="20" >
+      <apexcharts  height="450" width="700" type="pie" :options="options" :series="series"></apexcharts>
+    </v-card>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {
         },
         responsive: [
           {
-            breakpoint: 600,
+            breakpoint: 700,
             options: {
               chart: {},
               legend: {
@@ -48,5 +50,8 @@ export default {
 #chart {
   max-width: 650px;
   margin: 35px auto;
+}
+.pa-2 {
+  min-width: 90%;
 }
 </style>

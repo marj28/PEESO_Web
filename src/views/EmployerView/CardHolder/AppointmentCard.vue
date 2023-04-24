@@ -156,6 +156,9 @@
       </v-card>
     </template>
     <template v-slot:item.actions="{ item }">
+      <v-icon small class="mr-2" @click="gotoAppointmentSetting(item)" color="warning">
+        mdi-note
+      </v-icon>
       <v-icon small class="mr-2" @click="goToAppointmentPost(item)" color="success">
         mdi-eye
       </v-icon>
@@ -313,6 +316,9 @@ export default {
     },
     goToAppointmentPost(item){
       this.$router.push(`/AppointmentId/${item.id}`)
+    },
+    gotoAppointmentSetting(item){
+      this.$router.push(`/AppointmentSetting/${item.id}`)
     }
   },
 };

@@ -1,7 +1,6 @@
 <template>
     <v-app>
-      <AdminNavbar />
-      <v-main>
+      
         <v-container width="500px">
           <v-simple-table fixed-header>
             <template v-slot:default>
@@ -74,17 +73,14 @@
             </template>
           </v-simple-table>
         </v-container>
-      </v-main>
     </v-app>
   </template>
   
   <script>
-  import AdminNavbar from "@/views/Navigation/AdminNavbar.vue";
   import { mapActions, mapGetters } from "vuex";
   
   export default {
     components: {
-      AdminNavbar,
     },
     data: () => ({
       loading: false,

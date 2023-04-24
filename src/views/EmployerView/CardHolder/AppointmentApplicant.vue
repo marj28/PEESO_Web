@@ -124,7 +124,6 @@ export default {
     },
     data() {
         return {
-            dialog_for_input_hours: false,
             applicantlist: false,
             dialog: false,
             dialog1: false,

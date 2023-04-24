@@ -54,16 +54,27 @@
                           <v-text-field outlined dense color="green" class="mt-n6" counter maxlength=50
                             v-if="Remarks == 'Others'" label="Reason"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="12" md="12" class="mt-n2" v-show="cancel">
+                        <v-col cols="12" sm="12" md="12" class="mt-n2" v-show="cancel"
+                          v-if="editedItem.status == 'Pending'">
                           <v-select label="Reason for Cancellation of Application" color="green" dense outlined
                             :items="withdraw" v-model="Withdraw"></v-select>
                         </v-col>
-                        <v-col cols="12" sm="12" lg="12" md=12>
-                          <v-dialog v-model="status">
-                            "Do you want to change your Status ang Withdraw all Job Applications?
-                            <v-btn label="Yes" @click="changestatus('YES')"></v-btn>
-                            <v-btn label="No" @click=""></v-btn>
-                          </v-dialog>
+                        <v-col cols="6" sm="6" lg="6" md="6">
+                          <div class="text-center">
+                            <v-dialog v-model="statusWithdraw" width="400" persistent>
+                              <v-card>
+                                <v-card-title class=" green darken-2 white--text">
+                                  Do you want to change your Status / Withdraw all Job Applications?
+                                </v-card-title>
+                                <v-divider></v-divider>
+                                <v-card-actions class="align-right">
+                                  <v-spacer></v-spacer>
+                                  <v-btn color="green" text @click="changestatus('YES')">Yes</v-btn>
+                                  <v-btn color="warning" text @click="statusWithdraw = false, dialog = false">No</v-btn>
+                                </v-card-actions>
+                              </v-card>
+                            </v-dialog>
+                          </div>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -102,7 +113,7 @@ import { mapActions } from 'vuex';
 export default {
   data: () => ({
     search: "",
-    status: false,
+    statusWithdraw: false,
     Withdraw: false,
     Remarks: false,
     dialog: false,
@@ -244,17 +255,23 @@ export default {
         this.editedIndex = -1;
       });
     },
-    changestatus(status){
+    changestatus(status) {
       console.log(Vue.prototype.$status)
-      if(status == 'YES')
-      this.fetchUsers()
-      
-      this.status=false
-      this.dialog=false
+      if (status == 'YES')
+        this.fetchUsers()
+
+      this.statusWithdraw = false
+      this.dialog = false
     },
     save() {
-      if(this.Withdraw == 'Landed a Job')
-        this.status=true
+      if (this.Withdraw == 'Landed a Job' ) {
+        this.statusWithdraw = true
+        this.cancel=false
+        this.Withdraw=''
+      }
+       
+      
+
       // if (this.editedIndex > -1) {
       //   Object.assign(this.desserts[this.editedIndex], this.editedItem);
       // } else {
@@ -262,9 +279,20 @@ export default {
       // }
       // this.close();
 
+      else if (this.status == 'Appointment') {
+        
+        this.statusWithdraw = false
+        this.cancel=false
+      }
+      else
+      {
+      this.statusWithdraw=false
+      this.dialog=false
+      this.cancel=false
+    }
     },
   },
- 
+
 };
 </script>
     

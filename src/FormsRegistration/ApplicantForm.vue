@@ -2,7 +2,8 @@
   <div>
     <v-col>
       <!-- <h4 class="text-center pa-2 green--text mb-12">Job Applicant Registration</h4> -->
-      <v-row class="mt-12">
+      <h5 class="mb-8 green--text" style="margin-top: 20px">Member's Information</h5>
+      <v-row>
         <v-col cols="12" md="6" lg="6">
           <v-text-field class="textbox mt-n6 " autofocus v-model="last_name" type="text" label="Last Name" required
             color="green" outlined dense />
@@ -102,7 +103,7 @@ export default {
           this.alertColor = "success";
           this.snackbar = true;
           this.text = "Registration Successful!";
-          this.$router.push("ApplicantProfile");
+          this.$router.push("MemberPage/ApplicantDashboard");
           ///redirect somewhere
         })
         .catch((error) => {

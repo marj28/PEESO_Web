@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <applicant-navbar />
-    <v-main>
       <applicant-profile />
-    </v-main>
     
     <!-- Once lang ni ipakita , if bago lang -->
     <!-- <div class="text-center">

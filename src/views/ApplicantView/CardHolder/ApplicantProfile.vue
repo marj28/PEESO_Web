@@ -12,7 +12,7 @@
         </v-card-text>
       </v-card>
 
-      <v-stepper v-model="e1">
+      <v-stepper v-model="e1" v-show="member_normal">
 
         <v-stepper-header style="font-size: 14px">
           <v-stepper-step :complete="e1 > 1" step="1" style="height=" color="success">
@@ -24,22 +24,22 @@
           <v-divider></v-divider>
 
           <v-stepper-step :complete="e1 > 2" step="2" style="height=" color="success">
-            Employment
+            Employment / Educational
             <v-spacer></v-spacer>
             Information
           </v-stepper-step>
 
-          <v-divider></v-divider>
+          <!-- <v-divider></v-divider>
 
           <v-stepper-step :complete="e1 > 3" step="3" color="success">
             Educational
             <v-spacer></v-spacer>
             Background
-          </v-stepper-step>
+          </v-stepper-step> -->
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 4" step="4" color="success">
+          <v-stepper-step :complete="e1 > 3" step="3" color="success">
             Client's
             <v-spacer></v-spacer>
             Classification
@@ -47,7 +47,7 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 5" step="5" color="success">
+          <v-stepper-step :complete="e1 > 4" step="4" color="success">
             Technical/Vocational
             <v-spacer></v-spacer>
             and Other Training
@@ -55,7 +55,7 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 6" step="6" color="success">
+          <v-stepper-step :complete="e1 > 5" step="5" color="success">
             Eligibility/
             <v-spacer></v-spacer>
             Professional License
@@ -63,13 +63,13 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 7" step="7" color="success">
+          <v-stepper-step :complete="e1 > 6" step="6" color="success">
             Other Skills
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 8" step="8" color="success">
+          <v-stepper-step :complete="e1 > 7" step="7" color="success">
             Requirements
           </v-stepper-step>
         </v-stepper-header>
@@ -96,18 +96,18 @@
                         dense color="success"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="3">
-                      <v-select :items="suffix" :rules="[rules.required]" label="Suffix" v-model="value.suffix" required
-                        outlined dense color="success">
+                      <v-select :items="suffix" :rules="[rules.required]" label="Suffix" v-model="defaultSelected"
+                        required outlined dense color="success">
                       </v-select>
                     </v-col>
 
                     <v-col cols="12" sm="6" md="3">
-                      <v-text-field v-model="value.birthDate" @input="calculateAge(birthDate)" label="Date of Birth"
-                        outlined type="date" dense color="success" :rules="[rules.required]"></v-text-field>
+                      <v-text-field v-model="birthDate" @input="calculateAge(birthDate)" label="Date of Birth" outlined
+                        type="date" dense color="success" :rules="[rules.required]"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="3">
-                      <v-text-field label="Age" dense outlined color="success" readonly :value="years"
-                        :rules="[rules.required]" v-model="value.age">
+                      <v-text-field label="Age" dense outlined color="success" readonly :rules="[rules.required]"
+                        v-model="years">
                       </v-text-field>
 
                     </v-col>
@@ -121,23 +121,28 @@
                         :rules="[rules.required]">
                       </v-select>
                     </v-col>
-                    <v-col cols="12" md="3" sm="6">
-                      <v-select :items="religion" label="Religion" v-model="value.religion" required outlined dense
+                    <v-col cols="12" md="2" sm="6">
+                      <v-combobox :items="religion" label="Religion" v-model="value.religion" required outlined dense
                         color="success">
-                      </v-select>
+                      </v-combobox>
                     </v-col>
-                    <v-col cols="12" md="3" sm="6">
-                      <v-select :items="disabilities" label="Disability" v-model="value.disability" required outlined
+                    <v-col cols="12" md="2" sm="6">
+                      <v-combobox :items="disabilities" label="Disability" v-model="value.disability" required outlined
                         dense color="success">
-                      </v-select>
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols=" 12" md="2" sm="6">
+                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined dense
+                        color="success">
+                      </v-combobox>
                     </v-col>
                     <v-col cols=" 12" md="3" sm="6">
-                      <v-select :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined dense
+                      <v-combobox :items="idtype" label="Type of ID" required v-model="value.idtype" outlined dense
                         color="success">
-                      </v-select>
+                      </v-combobox>
                     </v-col>
                     <v-col cols="12" sm="6" md="3">
-                      <v-file-input label="Attached ID here" accept="image/x-png,image/gif,image/jpeg" outlined
+                      <v-file-input label="Attach ID here" accept="image/x-png,image/gif,image/jpeg" outlined
                         v-model="value.id" append-icon="mdi-camera" dense color="success"
                         :rules="[rules.required]"></v-file-input>
                     </v-col>
@@ -146,32 +151,33 @@
                         Home Address
                       </p>
                     </v-col>
-                    <v-col cols="12" md="2" sm="12">
-                      <v-select v-model="region" :items="address" item-text="region_name" outlined dense color="success"
-                        label="Region" @change="formattype('REGION')" return-object single-line>
-                      </v-select>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="region" :items="address" item-text="region_name" outlined dense color="success"
+                        label="Region" @change="formattype('REGION')" return-object single-line :rules="[rules.required]">
+                      </v-combobox>
 
                     </v-col>
-                    <v-col cols="12" md="2" sm="12">
-                      <v-select v-model="province" :items="provincename" :disabled="region == '' ? true : false" outlined
-                        dense color="success" label="Province" @change="formattype('PROVINCE')" return-object single-line>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false" outlined
+                        dense color="success" label="Province" @change="formattype('PROVINCE')" return-object single-line
+                        :rules="[rules.required]">
 
-                      </v-select>
+                      </v-combobox>
                     </v-col>
-                    <v-col cols="12" md="2" sm="12">
-                      <v-select v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined dense
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined dense
                         label="Municipality / City" @change="formattype('CITY')" return-object color="success"
-                        single-line>
+                        :rules="[rules.required]" single-line>
 
-                      </v-select>
+                      </v-combobox>
                     </v-col>
-                    <v-col cols="12" md="2" sm="12">
-                      <v-select label="Baranggay" :disabled="city == '' ? true : false" outlined dense color="success"
-                        :items="brgyname" :rules="[rules.required]"></v-select>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox label="Baranggay" :disabled="city == '' ? true : false" outlined dense color="success"
+                        :items="brgyname" :rules="[rules.required]"></v-combobox>
                     </v-col>
-                    <v-col cols="12" md="4" sm="12">
+                    <v-col cols="12" md="12" sm="12">
                       <v-text-field label="House No. / Street / Village" required outlined dense color="success"
-                        :rules="[rules.required]"  v-model="value.house"></v-text-field>
+                        :rules="[rules.required]" v-model="value.house"></v-text-field>
                     </v-col>
 
                     <v-col cols="12" md="3" sm="12">
@@ -184,10 +190,12 @@
                         :rules="[rules.required, rules.email]" v-model="value.email"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3" sm="6">
-                      <v-text-field label="SSS" required outlined dense color="success" v-model="value.sss"></v-text-field>
+                      <v-text-field label="SSS" required outlined dense color="success"
+                        v-model="value.sss"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3" sm="6">
-                      <v-text-field label="TIN" required outlined dense color="success" v-model="value.tin"></v-text-field>
+                      <v-text-field label="TIN" required outlined dense color="success"
+                        v-model="value.tin"></v-text-field>
                     </v-col>
                   </v-row>
                   <!-- </v-form> -->
@@ -208,6 +216,218 @@
                 <v-card-text>
                   <v-container fluid>
                     <v-row>
+                      <v-radio-group row>
+                        <p class="mr-6 mb-n1 font-weight-bold green--text">Currently in School?</p>
+                        <v-radio label="Yes" value="yes"
+                          @click="highest_education = false, employment_status = false, education_status = true"
+                          color="success"></v-radio>
+                        <v-radio label="No" value="no"
+                          @click="highest_education = true, employment_status = true, education_status = false"
+                          color="success"></v-radio>
+
+                      </v-radio-group>
+                    </v-row>
+                    <v-col cols="12" md="4">
+                      <v-text-field outlined label="Specify Highest Educational Attainment" v-show="highest_education"
+                        dense color="success"></v-text-field>
+                    </v-col>
+
+                    <v-row v-show="education_status">
+                      <v-col cols="12" sm="12" md="6">
+                        <h3>Literacy Indicators:</h3>
+
+                        <v-checkbox label="Can Read?" color="success"></v-checkbox>
+                        <v-checkbox label="Can Write?" color="success"></v-checkbox>
+
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-checkbox label="Can Perform Mathematical Operation?" color="success"
+                          @click="mathematical_operation = true"></v-checkbox>
+                        <v-container v-show="mathematical_operation" style="margin-top: -35px">
+                          <v-checkbox label="Addition" value="a" color="success" style="margin-top: -10px"></v-checkbox>
+                          <v-checkbox label="Multiplication" value="m" color="success"
+                            style="margin-top: -10px"></v-checkbox>
+                          <v-checkbox label="Subtraction" value="s" color="success"
+                            style="margin-top: -10px"></v-checkbox>
+                        </v-container>
+                      </v-col>
+                      <!-- Elementary -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="elementarylvl">
+                        <p class="font-weight-bold" style="margin-top: 0px">
+                          ELEMENTARY
+                        </p>
+
+                        <v-spacer></v-spacer>
+                        <v-radio-group row>
+                          <v-radio label="Graduate"
+                            @click="(graduate = true), (undergraduate = false), (secondarylvl = true), (tertiarylvl = true), (graduatelvl = true)"
+                            color="success" value="graduate">
+                          </v-radio>
+                          <v-radio label="Undergraduate"
+                            @click="(graduate = false), (undergraduate = true), (secondarylvl = false), (tertiarylvl = false), (graduatelvl = false)"
+                            color="success" value="undergraduate">
+                          </v-radio>
+                          <v-container v-show="graduate">
+                            <v-row>
+                              <v-col cols="12" md="12" sm="12" lg="12">
+                                <v-text-field outlined label="Year Graduated" dense color="success"
+                                  type="number"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success"
+                                  type="text"></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <v-container v-show="undergraduate">
+                            <v-select :items="levelreachedElem" label="Level reached" required outlined dense
+                              color="success">
+                            </v-select>
+                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+
+                      <!-- Secondary -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="secondarylvl">
+                        <p class="font-weight-bold" id="move">SECONDARY</p>
+
+                        <v-spacer></v-spacer>
+                        <v-radio-group row>
+                          <v-radio label="Graduate" color="success" @click="
+                            (sec_graduate = true), (sec_undergraduate = false), (elementarylvl = true), (tertiarylvl = true), (graduatelvl = true)
+                          " value="sec_graduate">
+                          </v-radio>
+                          <v-radio label="Undergraduate" color="success" @click="
+                            (sec_graduate = false), (sec_undergraduate = true), (elementarylvl = true), (tertiarylvl = false), (graduatelvl = false)
+                          " value="sec_ungraduate">
+                          </v-radio>
+                          <v-container v-show="sec_graduate">
+                            <v-radio-group>
+                              <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
+                                @click="(non_K = true), (K = false)"></v-radio>
+                              <v-radio label="Secondary (K12)" value="K" color="success"
+                                @click="(non_K = false), (K = true)"></v-radio>
+                              <div v-show="non_K">
+                                <v-text-field outlined label="Year Graduated" dense color="success"
+                                  type="number"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success"
+                                  type="text"></v-text-field>
+                              </div>
+                              <div v-show="K">
+                                <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
+                                </v-select>
+                                <v-text-field outlined label="Year Graduated" dense color="success" type="number">
+                                </v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success"
+                                  type="text"></v-text-field>
+                              </div>
+                            </v-radio-group>
+
+                          </v-container>
+                          <v-container v-show="sec_undergraduate">
+                            <!-- <v-radio-group>
+                            <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
+                              @click="(non_K = true), (K = false)"></v-radio>
+                            <v-radio label="Secondary (K12)" value="K" color="success"
+                              @click="(non_K = false), (K = true)"></v-radio>
+                            <div v-show="non_K">
+                              <v-text-field outlined label="Year Graduated" dense color="success"
+                                type="number"></v-text-field>
+                            </div>
+                            <div v-show="K">
+                              <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
+                              </v-select>
+                              <v-text-field outlined label="Year Graduated" dense color="success" type="number">
+                              </v-text-field>
+                            </div>
+                          </v-radio-group> -->
+                            <v-select :items="levelreachedSec" label="Level Reached" required outlined dense
+                              color="success">
+                            </v-select>
+                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+
+                      <!-- Tertiary -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="tertiarylvl">
+                        <p class="font-weight-bold">TERTIARY</p>
+
+                        <v-spacer></v-spacer>
+
+                        <v-radio-group row>
+                          <v-radio label="Graduate" color="success" @click="
+                            (ter_graduate = true), (ter_undergraduate = false), (secondarylvl = true), (elementarylvl = true), (graduatelvl = true)
+                          " value="ter_graduate">
+                          </v-radio>
+                          <v-radio label="Undergraduate" color="success" @click="
+                            (ter_graduate = false), (ter_undergraduate = true), (secondarylvl = true), (elementarylvl = true), (graduatelvl = false)
+                          " value="ter_undergraduate">
+                          </v-radio>
+                          <v-container v-show="ter_graduate">
+                            <v-combobox :items="course" label="Course" required outlined dense color="success">
+                            </v-combobox>
+                            <v-text-field outlined label="Year Graduated" dense color="success" type="number">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
+                          </v-container>
+                          <v-container v-show="ter_undergraduate">
+                            <v-select :items="levelreachedTer" label="Level Reached" required outlined dense
+                              color="success">
+                            </v-select>
+                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+
+                      <!-- Post-Graduate -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="graduatelvl">
+                        <p class="font-weight-bold">
+                          GRADUATE STUDIES/POST-GRADUATE
+                        </p>
+                        <v-spacer></v-spacer>
+                        <v-radio-group row>
+                          <v-radio label="Graduate" color="success" @click="
+                            (post_graduates = true),
+                            (post_undergraduate = false), (elementarylvl = true), (tertiarylvl = true), (secondarylvl = true)
+                          " value="post_graduates">
+                          </v-radio>
+                          <v-radio label="Undergraduate" color="success" @click="
+                            (post_graduates = false),
+                            (post_undergraduate = true), (elementarylvl = true), (tertiarylvl = true), (secondarylvl = true)
+                          " value="post_graduate">
+                          </v-radio>
+                          <v-container v-show="post_graduates">
+                            <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
+                              color="success">
+                            </v-combobox>
+                            <v-text-field outlined label="Year Graduated" dense color="success"
+                              type="number"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
+                          </v-container>
+                          <v-container v-show="post_undergraduate">
+                            <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
+                              color="success">
+                            </v-combobox>
+                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success"
+                              type="text"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+                    </v-row>
+                    <v-row v-show="employment_status">
                       <v-col cols="12" sm="12" md="12">
                         <p class="font-weight-bold">Employment Status:</p>
                       </v-col>
@@ -302,7 +522,7 @@
                       <v-col cols="12" sm="12" md="3">
                         <v-row>
                           <v-col>
-                            <p class="font-weight-bold">Are you an OFW?</p>
+                            <!-- <p class="font-weight-bold">Are you an OFW?</p>
                             <v-radio-group row>
                               <v-radio label="Yes" value="yes" @click="specify_country = true" class="ma-2 pa-2"
                                 color="success"></v-radio>
@@ -311,7 +531,7 @@
                               <v-container v-show="specify_country">
                                 <v-text-field label="Specify Country: " outlined color="success" dense></v-text-field>
                               </v-container>
-                            </v-radio-group>
+                            </v-radio-group> -->
                             <p style="" class="font-weight-bold">
                               Are you a former OFW?
                             </p>
@@ -362,235 +582,10 @@
               <v-btn @click="e1 = 1" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Third
-             Stepper -->
+
+
+            <!-- 3rd Stepper -->
             <v-stepper-content step="3">
-              <v-card>
-                <v-card-text>
-                  <v-container fluid>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="3">
-                        <h3>Currently in School?</h3>
-                        <v-radio-group row>
-                          <v-radio label="Yes" value="yes" @click="highest_education = false" color="success"></v-radio>
-                          <v-radio label="No" value="no" @click="highest_education = true" color="success"></v-radio>
-                          <v-text-field outlined label="Specify Highest Educational Attainment" style="margin-top: 10px"
-                            v-show="highest_education" dense color="success"></v-text-field>
-                        </v-radio-group>
-                      </v-col>
-                      <p></p>
-                      <v-col cols="12" sm="6" md="3">
-                        <h3>Literacy Indicators:</h3>
-
-                        <v-checkbox label="Can Read?" color="success"></v-checkbox>
-                        <v-checkbox label="Can Write?" color="success"></v-checkbox>
-
-                      </v-col>
-                      <v-col cols="12" sm="12" md="4">
-                        <v-checkbox label="Can Perform Mathematical Operation?" color="success"
-                          @click="mathematical_operation = true"></v-checkbox>
-                        <v-container v-show="mathematical_operation" style="margin-top: -35px">
-                          <v-checkbox label="Addition" value="a" color="success" style="margin-top: -10px"></v-checkbox>
-                          <v-checkbox label="Multiplication" value="m" color="success"
-                            style="margin-top: -10px"></v-checkbox>
-                          <v-checkbox label="Subtraction" value="s" color="success"
-                            style="margin-top: -10px"></v-checkbox>
-                        </v-container>
-                      </v-col>
-                      <!-- Elementary -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="elementarylvl">
-                        <p class="font-weight-bold" style="margin-top: 0px">
-                          ELEMENTARY
-                        </p>
-
-                        <v-spacer></v-spacer>
-                        <v-radio-group row>
-                          <v-radio label="Graduate"
-                            @click="(graduate = true), (undergraduate = false), (secondarylvl = true), (tertiarylvl = true), (graduatelvl = true)"
-                            color="success" value="graduate">
-                          </v-radio>
-                          <v-radio label="Undergraduate"
-                            @click="(graduate = false), (undergraduate = true), (secondarylvl = false), (tertiarylvl = false), (graduatelvl = false)"
-                            color="success" value="undergraduate">
-                          </v-radio>
-                          <v-container v-show="graduate">
-                            <v-row>
-                              <v-col cols="12" md="12" sm="12" lg="12">
-                                <v-text-field outlined label="Year Graduated" dense color="success"
-                                  type="number"></v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success"
-                                  type="text"></v-text-field>
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                          <v-container v-show="undergraduate">
-                            <v-row>
-                              <v-col cols="12" md="6" sm="6" lg="6">
-                                <v-select :items="levelreachedElem" label="Level reached" required outlined dense
-                                  color="success">
-                                </v-select>
-                              </v-col>
-                              <v-col cols="12" md="6" sm="6" lg="6">
-                                <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
-                                </v-text-field>
-                              </v-col>
-                              <v-text-field outlined label="School Graduated" dense color="success"
-                                type="text"></v-text-field>
-                            </v-row>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-
-                      <!-- Secondary -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="secondarylvl">
-                        <p class="font-weight-bold" id="move">SECONDARY</p>
-
-                        <v-spacer></v-spacer>
-                        <v-radio-group row>
-                          <v-radio label="Graduate" color="success" @click="
-                            (sec_graduate = true), (sec_undergraduate = false), (elementarylvl = true), (tertiarylvl = true), (graduatelvl = true)
-                          " value="sec_graduate">
-                          </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="
-                            (sec_graduate = false), (sec_undergraduate = true), (elementarylvl = true), (tertiarylvl = false), (graduatelvl = false)
-                          " value="sec_ungraduate">
-                          </v-radio>
-                          <v-container v-show="sec_graduate">
-                            <v-radio-group>
-                              <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
-                                @click="(non_K = true), (K = false)"></v-radio>
-                              <v-radio label="Secondary (K12)" value="K" color="success"
-                                @click="(non_K = false), (K = true)"></v-radio>
-                              <div v-show="non_K">
-                                <v-text-field outlined label="Year Graduated" dense color="success"
-                                  type="number"></v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success"
-                                  type="text"></v-text-field>
-                              </div>
-                              <div v-show="K">
-                                <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
-                                </v-select>
-                                <v-text-field outlined label="Year Graduated" dense color="success" type="number">
-                                </v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success"
-                                  type="text"></v-text-field>
-                              </div>
-                            </v-radio-group>
-
-                          </v-container>
-                          <v-container v-show="sec_undergraduate">
-                            <!-- <v-radio-group>
-                            <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
-                              @click="(non_K = true), (K = false)"></v-radio>
-                            <v-radio label="Secondary (K12)" value="K" color="success"
-                              @click="(non_K = false), (K = true)"></v-radio>
-                            <div v-show="non_K">
-                              <v-text-field outlined label="Year Graduated" dense color="success"
-                                type="number"></v-text-field>
-                            </div>
-                            <div v-show="K">
-                              <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
-                              </v-select>
-                              <v-text-field outlined label="Year Graduated" dense color="success" type="number">
-                              </v-text-field>
-                            </div>
-                          </v-radio-group> -->
-                            <v-select :items="levelreachedSec" label="Level Reached" required outlined dense
-                              color="success">
-                            </v-select>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-
-                      <!-- Tertiary -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="tertiarylvl">
-                        <p class="font-weight-bold">TERTIARY</p>
-
-                        <v-spacer></v-spacer>
-
-                        <v-radio-group row>
-                          <v-radio label="Graduate" color="success" @click="
-                            (ter_graduate = true), (ter_undergraduate = false), (secondarylvl = true), (elementarylvl = true), (graduatelvl = true)
-                          " value="ter_graduate">
-                          </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="
-                            (ter_graduate = false), (ter_undergraduate = true), (secondarylvl = true), (elementarylvl = true), (graduatelvl = false)
-                          " value="ter_undergraduate">
-                          </v-radio>
-                          <v-container v-show="ter_graduate">
-                            <v-select :items="course" label="Course" required outlined dense color="success">
-                            </v-select>
-                            <v-text-field outlined label="Year Graduated" dense color="success" type="number">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
-                          </v-container>
-                          <v-container v-show="ter_undergraduate">
-                            <v-select :items="levelreachedTer" label="Level Reached" required outlined dense
-                              color="success">
-                            </v-select>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-
-                      <!-- Post-Graduate -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="graduatelvl">
-                        <p class="font-weight-bold">
-                          GRADUATE STUDIES/POST-GRADUATE
-                        </p>
-                        <v-spacer></v-spacer>
-                        <v-radio-group row>
-                          <v-radio label="Graduate" color="success" @click="
-                            (post_graduates = true),
-                            (post_undergraduate = false), (elementarylvl = true), (tertiarylvl = true), (secondarylvl = true)
-                          " value="post_graduates">
-                          </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="
-                            (post_graduates = false),
-                            (post_undergraduate = true), (elementarylvl = true), (tertiarylvl = true), (secondarylvl = true)
-                          " value="post_graduate">
-                          </v-radio>
-                          <v-container v-show="post_graduates">
-                            <v-select :items="courseGraduateStudies" label="Course" required outlined dense
-                              color="success">
-                            </v-select>
-                            <v-text-field outlined label="Year Graduated" dense color="success"
-                              type="number"></v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
-                          </v-container>
-                          <v-container v-show="post_undergraduate">
-                            <v-select :items="courseGraduateStudies" label="Course" required outlined dense
-                              color="success">
-                            </v-select>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-              </v-card>
-
-              <v-btn id="v-btn-c" color="success" @click="e1 = 4">
-                Continue
-              </v-btn>
-              <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
-            </v-stepper-content>
-
-            <!-- Fourth Stepper -->
-            <v-stepper-content step="4">
               <v-card>
                 <v-card-text>
                   <v-container fluid>
@@ -628,14 +623,14 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 5">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 4">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 3" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Fifth Stepper -->
-            <v-stepper-content step="5">
+            <!-- Fourth Stepper -->
+            <v-stepper-content step="4">
               <v-card class="mb-6">
                 <v-col cols="12" md="12" sm="12">
                   <h4 class="green--text">
@@ -688,16 +683,16 @@
                 </v-col>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 6">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 5">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 4" class="ma-2" outlined color="success">
+              <v-btn @click="e1 = 3" class="ma-2" outlined color="success">
                 Back
               </v-btn>
             </v-stepper-content>
 
-            <!-- Sixth Stepper -->
-            <v-stepper-content step="6">
+            <!-- Fifth Stepper -->
+            <v-stepper-content step="5">
               <v-card class="mb-6">
                 <v-col cols="12" md="12" sm="12">
                   <h4 class="green--text">Eligibility</h4>
@@ -733,19 +728,23 @@
                   <v-form ref="formsProfessional" v-model="valid" lazy-validation>
                     <div v-for="(item, index) in forms2" :key="item">
                       <v-row>
-                        <v-col cols="12" md="6">
-                          <v-combobox :items="licenselist" :rules="[rules.required]" label="License Name" required outlined
-                            dense color="success">
+                        <v-col cols="12" md="4">
+                          <v-combobox :items="licenselist" :rules="[rules.required]" label="License Name" required
+                            outlined dense color="success">
                           </v-combobox>
                         </v-col>
                         <v-col cols="12" md="3">
+                          <v-file-input label="Attach Picture" accept="image/x-png,image/gif,image/jpeg" outlined
+                            prepend-icon="mdi-camera" dense color="success" :rules="[rules.required]"></v-file-input>
+                        </v-col>
+                        <v-col cols="12" md="2">
                           <v-text-field outlined label="License Number" type="" :rules="[rules.required]" dense
                             color="success">
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" md="2">
                           <v-text-field outlined label="Valid Until" :rules="[rules.required]" type="date" dense
-                            color="success" v-model="item.PLdate_taken">
+                            color="success" v-model="item.PLdate_taken" preppend-icon>
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" md="1">
@@ -760,14 +759,14 @@
                   </v-btn>
                 </v-col>
               </v-card>
-              <v-btn id="v-btn-c" color="success" @click="e1 = 7">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 6">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 5" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 4" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Seventh Stepper -->
-            <v-stepper-content step="7">
+            <!-- Sixth Stepper -->
+            <v-stepper-content step="6">
               <v-card>
                 <v-card-text>
                   <v-container fluid>
@@ -784,6 +783,7 @@
                         <v-checkbox label="Computer Literate" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-checkbox label="Domestic Chores" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-checkbox label="Driver" style="margin-top: -10px" color="success"></v-checkbox>
+                        <v-checkbox label="Welder" style="margin-top: -10px" color="success"></v-checkbox>
 
                       </v-col>
                       <v-col cols="12" sm="4" md="4">
@@ -794,7 +794,7 @@
                         <v-checkbox label="Masonry" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-checkbox label="Painter/Artist" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-checkbox label="Painting Jobs" style="margin-top: -10px" color="success"></v-checkbox>
-
+                        <v-checkbox label="Massage Therapist" style="margin-top: -10px" color="success"></v-checkbox>
                       </v-col>
                       <v-col cols="12" sm="4" md="4">
 
@@ -803,6 +803,7 @@
                         <v-checkbox label="Sewing Dresses" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-checkbox label="Stenography" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-checkbox label="Tailoring" style="margin-top: -10px" color="success"></v-checkbox>
+                        <v-checkbox label="Nail Technician" style="margin-top: -10px" color="success"></v-checkbox>
                         <v-text-field label="Others" outlined dense color="success"></v-text-field>
                       </v-col>
                     </v-row>
@@ -824,14 +825,14 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 8">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 7">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 6" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 5" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Eighth Stepper -->
-            <v-stepper-content step="8">
+            <!-- Seventh Stepper -->
+            <v-stepper-content step="7">
               <v-card>
                 <v-card-text>
                   <v-container fluid>
@@ -851,8 +852,9 @@
                         </v-file-input>
                       </v-col>
                       <v-col cols="12" sm="6" md="6">
-                        <v-file-input v-model="value.applicationletter" color="green accent-4" counter label="Application Letter" dense
-                          prepend-icon="mdi-paperclip" outlined accept=".pdf, .docx" :show-size="1000">
+                        <v-file-input v-model="value.applicationletter" color="green accent-4" counter
+                          label="Application Letter" dense prepend-icon="mdi-paperclip" outlined accept=".pdf, .docx"
+                          :show-size="1000">
                           <!-- <template v-slot:selection="{ index, text }">
                             <v-chip v-if="index < 2" color="green accent-4" dark label small>
                               {{ text }}
@@ -886,7 +888,7 @@
               <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
                 Save
               </v-btn>
-              <v-btn @click="e1 = 7" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 6" class="ma-2"> Back </v-btn>
             </v-stepper-content>
           </v-form>
         </v-stepper-items>
@@ -913,6 +915,204 @@
           </v-card>
         </v-dialog>
       </v-row>
+      <div class="text-center">
+        <v-dialog v-model="dialog2" width="400" persistent>
+
+          <v-card>
+            <v-card-title class="text-h6 green darken-2 white--text">
+              Are you an OFW?
+            </v-card-title>
+            <v-divider></v-divider>
+
+            <v-card-actions class="align-right">
+              <v-spacer></v-spacer>
+              <v-btn color="success" text @click="dialog2 = false, ofw_details = true, member_normal = false">
+                YES
+              </v-btn>
+              <v-btn color="warning" text @click="dialog2 = false, ofw_details = false, member_normal = true">
+                No
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
+
+      <!-- OFW Information -->
+      <v-stepper v-model="e2" v-show="ofw_details">
+
+        <v-stepper-header style="font-size: 14px">
+          <v-stepper-step :complete="e1 > 1" step="1" style="height=" color="success">
+            Personal
+            Information
+          </v-stepper-step>
+
+          <v-divider></v-divider>
+
+          <v-stepper-step :complete="e1 > 2" step="2" style="height=" color="success">
+            Employment
+            Information
+          </v-stepper-step>
+        </v-stepper-header>
+        <v-stepper-items>
+          <!-- First Stepper -->
+          <v-form ref="formes2" v-model="valid" lazy-validation>
+            <v-stepper-content step="1">
+              <v-card id="step1">
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="Surname" v-model="value.surname" outlined dense color="success" required
+                        :rules="[rules.required]" autofocus></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="First Name" v-model="value.firstname" outlined dense color="success" required
+                        :rules="[rules.required]"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="Middle Name" v-model="value.middlename" :rules="[rules.required]" outlined
+                        dense color="success"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-select :items="suffix" :rules="[rules.required]" label="Suffix" v-model="defaultSelected"
+                        required outlined dense color="success">
+                      </v-select>
+                    </v-col>
+
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field v-model="birthDate" @input="calculateAge(birthDate)" label="Date of Birth" outlined
+                        type="date" dense color="success" :rules="[rules.required]"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-text-field label="Age" dense outlined color="success" readonly :rules="[rules.required]"
+                        v-model="years">
+                      </v-text-field>
+
+                    </v-col>
+                    <v-col cols="12" md="3" sm="6">
+                      <v-select :items="civilstatus" v-model="value.civilstatus" label="Civil Status" required outlined
+                        dense color="success" :rules="[rules.required]">
+                      </v-select>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="6">
+                      <v-select :items="sex" label="Sex" v-model="value.sex" required outlined dense color="success"
+                        :rules="[rules.required]">
+                      </v-select>
+                    </v-col>
+                    <v-col cols="12" md="2" sm="6">
+                      <v-combobox :items="religion" label="Religion" v-model="value.religion" required outlined dense
+                        color="success">
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="2" sm="6">
+                      <v-combobox :items="disabilities" label="Disability" v-model="value.disability" required outlined
+                        dense color="success">
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols=" 12" md="2" sm="6">
+                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined dense
+                        color="success">
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols=" 12" md="3" sm="6">
+                      <v-combobox :items="idtype" label="Type of ID" required v-model="value.idtype" outlined dense
+                        color="success">
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="3">
+                      <v-file-input label="Attach ID here" accept="image/x-png,image/gif,image/jpeg" outlined
+                        v-model="value.id" append-icon="mdi-camera" dense color="success"
+                        :rules="[rules.required]"></v-file-input>
+                    </v-col>
+                    <v-col cols="12" md="12" sm="12">
+                      <p class="font-weight-bold" style="margin-top: -35px">
+                        Home Address
+                      </p>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="region" :items="address" item-text="region_name" outlined dense color="success"
+                        label="Region" @change="formattype('REGION')" return-object single-line :rules="[rules.required]">
+                      </v-combobox>
+
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false" outlined
+                        dense color="success" label="Province" @change="formattype('PROVINCE')" return-object single-line :rules="[rules.required]">
+
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined dense
+                        label="Municipality / City" @change="formattype('CITY')" return-object color="success" :rules="[rules.required]"
+                        single-line>
+
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox label="Baranggay" :disabled="city == '' ? true : false" outlined dense color="success"
+                        :items="brgyname" :rules="[rules.required]"></v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="12" sm="12">
+                      <v-text-field label="House No. / Street / Village" required outlined dense color="success"
+                        :rules="[rules.required]" v-model="value.house"></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" md="3" sm="12">
+                      <v-text-field label="Contact Number" required outlined dense color="success" type="number"
+                        hide-spin-buttons maxlength="11" oninput="this.value=this.value.slice(0,this.maxLength)"
+                        :rules="[rules.required, rules.counter]" v-model="value.number"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-text-field label="E-mail" required outlined dense color="success" type="email"
+                        :rules="[rules.required, rules.email]" v-model="value.email"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="6">
+                      <v-text-field label="SSS" required outlined dense color="success"
+                        v-model="value.sss"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="6">
+                      <v-text-field label="TIN" required outlined dense color="success"
+                        v-model="value.tin"></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <!-- </v-form> -->
+                  <small>*indicates required field</small>
+                </v-card-text>
+              </v-card>
+
+
+              <v-btn id="v-btn-c" color="success" @click="validate()" class="mt-2">
+                Continue
+              </v-btn>
+            </v-stepper-content>
+
+          </v-form>
+          <v-stepper-content step="2">
+            <v-card id="step2">
+              <v-card-text>
+                <v-container fluid>
+                  <v-row>
+                    <v-col>
+                      <p class="font-weight-bold">Fill up the following:</p>
+                      <v-row>
+                        <v-col cols="12" md="6" lg="6">
+                          <v-combobox :items="countries" item-text="country"  label="Specify Country: " outlined color="success" dense></v-combobox>
+                        </v-col>
+                        <v-col cols="12" md="6" lg="6">
+                          <v-text-field label="Occupation: " outlined color="success" dense></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+            </v-card>
+            <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
+                Save
+              </v-btn>
+              <v-btn @click="e2 = 1" class="ma-2"> Back </v-btn>
+          </v-stepper-content>
+        </v-stepper-items>
+      </v-stepper>
     </v-col>
   </div>
 </template>
@@ -991,6 +1191,7 @@ export default {
     provincename: {},
     cityname: {},
     brgyname: {},
+    countries2:{},
     region: '',
     province: '',
     city: '',
@@ -1011,11 +1212,11 @@ export default {
       disability: '',
       ethnicity: '',
       id: '',
-      house:'',
-      number:'',
-      email:'',
-      sss:'',
-      tin:'',
+      house: '',
+      number: '',
+      email: '',
+      sss: '',
+      tin: '',
       resume: '',
       applicationletter: '',
       certificate: '',
@@ -1029,6 +1230,9 @@ export default {
       counter: v => v.length <= 11 || 'Max 11 digits',
     },
     e1: 1,
+    e2: 1,
+    employment_status: false,
+    education_status: false,
     altLabels: true,
     pesla: false,
     employed: false,
@@ -1058,6 +1262,9 @@ export default {
     graduatelvl: true,
 
     dialog: false,
+    dialog2: true,
+    ofw_details: false,
+    member_normal: true,
     activePicker: null,
     date: null,
     menu: false,
@@ -1078,12 +1285,21 @@ export default {
       " Scientific and Technological Specialist Eligibility (PD 997)",
       " Skills Eligibility - Category II (CSC MC 11, s. 1996, as Amended)",
       " Veteran Preference Rating (EO 132/790)",
+      "Career Service Professional (CSC-Prof)",
+      "Career Service Subprofessional (CSC-Subprof)",
+      "Career Service Executive",
+      "Meat Inspector",
+      "Penology Officer",
+      "Penology Employee",
     ],
     licenselist: [
       "Driver's License",
       "PRC License",
       "Others"
     ],
+    defaultSelected:
+      "N/A"
+    ,
     suffix: [
       'N/A', 'Jr.', 'Sr.', 'III'
     ],
@@ -1231,106 +1447,152 @@ export default {
 
     ],
     courseGraduateStudies: [
-      " Anthropology (MA, PhD)",
-      " Applied Mathematics (MS, PhD)",
-      " Applied Mathematics/Actuarial Science (PM)",
-      " Araling Pilipino (MA)",
-      " Archaeology (Dip, MA, MS, PhD)",
-      " Architecture (M)",
-      " Archives and Records Management (M)",
-      " Art History, Art Theory and Criticism, Curatorial Studies (MA)",
-      " Artificial Intelligence (MEng, PhD)",
-      " Asian Studies (M, MA)",
-      " Biology (Dip, MS, PhD)",
-      " Business Administration (MBA, DBA)",
-      " Chemical Engineering (MS, PhD)",
-      " Chemistry (Dip, MS, PhD)",
-      " Chemical Education (MS, PhD)",
-      " Civil Engineering (MS, PhD)",
-      " Communication (MA, PhD)",
-      " Community Development (Dip, M)",
-      " Comparative Literature (MA, PhD)",
-      " Computer Science (MS, PhD)",
-      " Creative and Musical Performing Arts (Dip)",
-      " Creative Writing (MA, PhD)",
-      " Data Science (PhD)",
-      " Demography (MA)",
-      " Development Economics (M)",
-      " Early Childhood Development (Dip)",
-      " Economics (MA, PhD)",
-      " Education (MA, PhD)",
-      " Electrical Engineering (M, MS, PhD)",
-      " English Studies: Anglo-American Literature (MA, PhD)",
-      " English Studies: Language (MA, PhD)",
-      " Environmental Engineering (MS, PhD)",
-      " Environmental Science (MS, PhD)",
-      " European Languages (MA French, German, Spanish)",
-      " Exercise and Sport Science (Dip)",
-      " Family Life and Child Development (MA)",
-      " Filipino: Pagsasalin, Wika (MA, PhD)",
-      " Finance (MS)",
-      " Fine Arts (M)",
-      " Food Science (MS, PhD),/p",
-      " Geomatics Engineering (MS: Remote Sensing and Photogrammetry, Applied Geodesy, Geoinformatics)",
-      " Geography (MS)",
-      " Hispanic Literature (PhD)",
-      " History (MA, PhD)",
-      " Home Economics (MA, PhD)",
-      " Hotel, Restaurant and Institution Management (M)",
-      " Human Movement Science (MS)",
-      " Industrial Engineering (Dip, MS)",
-      " Industrial Relations (Dip, M)",
-      " Interior Design (MA)",
-      " International Studies (MA)",
-      " Islamic Studies (MA)",
-      " Journalism (MA)",
-      " Librarianship (Dip)",
-      " Library and Information Science (M, MS)",
-      " Linguistics (MA, PhD)",
-      " Malikhaing Pagsulat (MA, PhD)",
-      " Management (M)",
-      " Marine Science (MS, PhD)",
-      " Materials Science and Engineering (MS, PhD)",
-      " Mathematics (MS, PhD)",
-      " Media Studies (MA, PhD)",
-      " Mechanical Engineering (MS, PhD)",
-      " Metallurgical Engineering (MS)",
-      " Meteorology (MS, PhD)",
-      " Microbiology (MS)",
-      " Molecular Biology and Biotechnology (MS, PhD)",
-      " Music (MA, PhD)",
-      " Nutrition (MA)",
-      " Pagsasalin (MA)",
-      " Panitikan (MA)",
-      " Panitikan ng Pilipinas (MA)",
-      " Performance Studies (PhD)",
-      " Philippine Studies (MA, PhD)",
-      " Philosophy (MA, PhD)",
-      " Physics (MA, MS, PhD)",
-      " Political Science (MA, PhD)",
-      " Population Studies (M)",
-      " Psychology (MA, PhD)",
-      " Public Administration (MPA, DPA)",
-      " Public Management (Dip)",
-      " Regional Development Planning (MS)",
-      " Social Development (DSD)",
-      " Social Work (Dip, MA)",
-      " Sociology (MA, PhD)",
-      " Speech Communication (MA)",
-      " Statistics (M, MS, PhD)",
-      " Technology Management (M)",
-      " Theatre Arts (MA)",
-      " Tourism Development and Management (Dip, MS)",
-      " Tropical Landscape Architecture (M)",
-      " Urban and Regional Planning (Dip, MA, PhD)",
-      " Voluntary Sector Management (Dip)",
-      " Women and Development (Dip, MA)",
-      " Wika (MA, PhD)",
-      " M = Graduate Program (Master)",
-      " MA = Graduate Program (Master of Arts)",
-      " MS = Graduate Program (Master of Science)",
-      " Dip = Post-Baccalaureate Program (Diploma)",
-      " PhD = Postgraduate Program (Doctor of Philosophy)",
+      "Master in Educational Management",
+      "Master in Physical Education and Sports",
+      "Master of Architecture",
+      "Master of Tropical Landscape Architecture",
+      "Master of Arts (Art Studies)",
+      "Master in Philippine Studies",
+      "Master in Asian Studies",
+      "Master of Arts in Asian Studies",
+      "Master of Arts in Philippine Studies2",
+      "Master of Arts (Comparative Literature)",
+      "Master of Arts (Creative Writing)",
+      "Master of Arts (English Studies)",
+      "Master of Arts (Speech Communication)",
+      "Master of Arts (Theatre Arts)",
+      "Master of Business Administration",
+      "Master of Science in Finance",
+      "Master of Science in Management",
+      "Master of Arts (French Language)",
+      "Master of Arts (German)",
+      "Master of Arts (Spanish)",
+      "Master of Arts (Araling Pilipino)",
+      "Master of Arts (Filipino)",
+      "Master in Development Economics",
+      "Master of Arts (Economics)",
+      "Master of Arts in Education",
+      "Master of Science in Civil Engineering",
+      "Master of Science in Chemical Engineering",
+      "Master of Engineering in Electrical Engineering",
+      "Master of Science in Electrical Engineering",
+      "Master of Science in Computer Science",
+      "Master of Science in Geomatics Engineering",
+      "Master of Science in Industrial Engineering",
+      "Master of Architecture",
+      "Master of Tropical Landscape Architecture",
+      "Master of Science in Mechanical Engineering",
+      "Master of Science (Materials Science &amp; Engineering)",
+      "Master of Science in Metallurgical Engineering",
+      "Master of Science in Energy Engineering",
+      "Master of Science in Environmental Engineering",
+      "Master of Interior Design",
+      "Master of Fine Arts",
+      "Master of Family Life &amp; Child Development",
+      "Master of Food Service Administration",
+      "Master of Science (Food Science)",
+      "Master of Science (Nutrition)",
+      "Master of Home Economics",
+      "Master of Science in Human Movement Science",
+      "Master of Arts (Islamic Studies)",
+      "Master of Industrial Relations",
+      "Master of Library &amp; Information Science",
+      "Master of Arts (Communication: Communication Research)",
+      "Master of Arts in Media Studies (Broadcasting)",
+      "Master of Arts in Media Studies (Film)",
+      "Master of Arts in Media Studies (Journalism)",
+      "Master of Music",
+      "Master of Public Administration",
+      "Master of Science (Biology)",
+      "Master of Science (Chemical Education)",
+      "Master of Science (Chemistry)",
+      "Master of Science (Environmental Science)",
+      "Master of Science (Meteorology)",
+      "Master of Arts (Mathematics)",
+      "Master of Science (Applied Mathematics)",
+      "Master of Science (Mathematics)",
+      "Professional Master’s in Applied Mathematics",
+      "Master of Science (Microbiology)",
+      "Master of Science (Molecular Biology &amp; Biotechnology)",
+      "Master of Science (Marine Science)",
+      "Master of Science (Geology)",
+      "Master of Arts (Physics)",
+      "Master of Science (Physics)",
+      "Master of Science (Materials Science &amp; Engineering)",
+      "Master of Arts (Anthropology)",
+      "Master of Science (Geography)",
+      "Master of Arts (History)",
+      "Master of Arts (Linguistics)",
+      "Master of Science in Bioethics",
+      "Master of Arts (Philosophy)",
+      "Master of Arts Honors (Political Science)",
+      "Master in International Studies",
+      "Master of Arts (Political Science)",
+      "Master of Arts (Psychology)",
+      "Master of Arts (Sociology)",
+      "Master in Population Studies",
+      "Master of Arts (Demography)",
+      "Master of Community Development",
+      "Master of Social Work",
+      "Master of Arts (Women &amp; Development)",
+      "Master of Statistics",
+      "Master of Science (Statistics)",
+      "Master of Arts (Urban &amp; Regional Planning)",
+      "Master of Science in Regional Development Planning",
+      "Master of Management",
+      "Master of Arts (Archaeology)",
+      "Master of Science (Archaeology)",
+      "Master of Technology Management",
+      "Master of Arts in English Language Teaching",
+      "Doctor in Educational Management",
+      "Doctor of Philosophy (Biology)",
+      "Doctor of Philosophy (Chemistry)",
+      "Doctor of Philosophy (Environmental Science)",
+      "Doctor of Philosophy (Meteorology)",
+      "Doctor of Philosophy (Mathematics)",
+      "Doctor of Philosophy (Molecular Biology &amp; Biotechnology)",
+      "Doctor of Philosophy (Marine Science)",
+      "Doctor of Philosophy (Geology)",
+      "Doctor of Philosophy (Materials Science &amp; Engineering)",
+      "Doctor of Philosophy (Physics)",
+      "Doctor of Philosophy (Anthropology)",
+      "Doctor of Philosophy (History)",
+      "Doctor of Philosophy (Linguistics)",
+      "Doctor of Philosophy in Philosophy",
+      "Doctor of Philosophy (Political Science)",
+      "Doctor of Philosophy (Psychology)",
+      "Doctor of Philosophy (Sociology)",
+      "Doctor in Social Development",
+      "Doctor of Philosophy (Statistics)",
+      "Doctor of Philosophy in Urban &amp; Regional Planning",
+      "Doctor of Philosophy in Archaeology",
+      "Doctor of Philosophy (Philippine Studies)",
+      "Doctor of Philosophy (Comparative Literature)",
+      "Doctor of Philosophy (Creative Writing)",
+      "Doctor of Philosophy (English Studies)",
+      "Doctor of Philosophy (Business Administration)",
+      "Doctor of Philosophy (Filipino)",
+      "Doctor of Philosophy (Hispanic Literature)",
+      "Doctor of Philosophy (Economics)",
+      "Doctor of Philosophy in Education",
+      "Doctor of Philosophy (Civil Engineering)",
+      "Doctor of Engineering (Chemical Engineering)",
+      "Doctor of Philosophy (Chemical Engineering)",
+      "Doctor of Engineering (Electrical &amp; Electronics Engineering)",
+      "Doctor of Philosophy (Electrical &amp; Electronics",
+      "Doctor of Philosophy (Materials Science &amp; Engineering)",
+      "Doctor of Philosophy (Energy Engineering)",
+      "Doctor of Philosophy (Environmental Engineering)",
+      "Doctor of Philosophy (Food Science)",
+      "Doctor of Philosophy (Nutrition)",
+      "Doctor of Philosophy (Communication)",
+      "Doctor of Public Administration",
+      "Juris Doctor",
+      "Doctor of Medicine",
+      "Doctor of Optometry",
+      "Doctor of Dental Medicine",
+      "Doctor of Veterinary Medicine",
+
     ],
     employability_skills: [
       "Planning and Organizing",
@@ -1367,8 +1629,16 @@ export default {
       "Aeta",
       "Others (Please Specify)",
     ],
-    civilstatus: ["Single", "Married","Live-in", "Widowed", "Separated"],
+    civilstatus: ["Single", "Married", "Live-in", "Widowed", "Separated"],
     sex: ["Female", "Male"],
+    idtype: [
+      "School ID",
+      "National ID",
+      "Driver's License",
+      "Company ID",
+      "PRC License",
+      "UMID",
+    ],
     religion: [
       "Roman Catholic",
       "Islam",
@@ -1409,19 +1679,15 @@ export default {
     days: null
   }),
   created() {
-    this.fetchaddress();
+    this.fetchaddress(),
 
-    // setTimeout(function() { console.log("address=>", this.address) }, 3000),
-    //   setTimeout(() => this.isHidden = false, 500),
-
-
-
-
-    // this.address=this.getaddress;
-    // console.log("address=>", this.address)
+    this.fetchcountry();
+    
+  },
+  mounted() {    
   },
   computed: {
-    ...mapGetters('users', { address: 'getadd' })
+    ...mapGetters('users', { address: 'getadd',countries:'getcountry' } ),
   },
   methods: {
     formattype(type) {
@@ -1442,12 +1708,10 @@ export default {
         // console.log("province=>",res.barangay_list)
         this.brgyname = Object.values(res.barangay_list)
       }
-
-
     },
-    ...mapActions('users', ['fetchaddress']),
+    ...mapActions('users', ['fetchaddress','fetchcountry']),
+    
     calculateAge(birthDate) {
-      if (!birthDate) return;
       const currentDate = new Date();
       if (new Date(birthDate) > currentDate) {
         this.birthDate = null
@@ -1469,11 +1733,16 @@ export default {
 
 
       this.$refs.formes.validate();
+      this.$refs.formes2.validate();
 
       let v = this.$refs.formes.validate();
+      let x = this.$refs.formes2.validate();
 
       if (v) {
         this.e1 = this.e1 + 1
+      }
+      if (x) {
+        this.e2 = this.e2 + 1
       }
     },
     validaterow() {

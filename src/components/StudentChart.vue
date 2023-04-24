@@ -1,9 +1,8 @@
 <template>
-    <div>
+    <div id="chart" class="d-flex">
         <v-card class="pa-2">
-            <apexcharts height="300" :options="chartOptions" :series="series" label="Student Applicant"></apexcharts>
+            <apexcharts class="pa-2" height="300" :options="chartOptions" :series="series"></apexcharts>
         </v-card>
-
     </div>
 </template>
     
@@ -69,13 +68,13 @@ export default {
                 },
                 colors: ["#388E3C"],
                 xaxis: {
-                    categories: ["Boy", "Girl"],
+                    categories: ["Boy", "Girl", ""],
                 },
             },
             series: [
                 {
                     name: "series-1",
-                    data: [40, 45],
+                    data: [40, 45, ],
                 },
             ],
         };

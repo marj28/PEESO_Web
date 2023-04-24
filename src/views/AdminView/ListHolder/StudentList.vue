@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <admin-navbar />
-    <v-main >
       <student-card />
-    </v-main>
   </v-app>      
   </template>
   

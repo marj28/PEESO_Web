@@ -1,14 +1,11 @@
 <template>
   <v-app>
-    <admin-navbar />
-    <v-main>
         <v-col md="12" class="pa-4">
           <v-card outlined color="#1B5E20">
           <v-spacer></v-spacer>
           <add-training />
           </v-card>
         </v-col>
-    </v-main>
   </v-app>
 </template>
   

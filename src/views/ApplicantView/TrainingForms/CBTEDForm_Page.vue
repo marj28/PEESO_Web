@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <applicant-navbar />
-    <v-main>
       <v-col>
         <v-card outlined color="#1B5E20">
           <v-card-title class="
@@ -45,7 +43,6 @@
           <cbted-form />
         </v-card>
       </v-col>
-    </v-main>
   </v-app>
 </template>
 <script>

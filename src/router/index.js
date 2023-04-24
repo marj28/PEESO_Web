@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 // dashboard
 import AdminDashboard from '../views/Dashboard/AdminDashboard.vue'
-import StudentDashboard from '../views/Dashboard/StudentDashboard.vue'
 import EmployerDashboard from '../views/Dashboard/EmployerDashboard.vue'
 import ApplicantDashboard from '../views/Dashboard/ApplicantDashboard.vue'
 
@@ -15,8 +14,7 @@ import RegisterPage from '@/authentication/RegisterPage.vue'
 import ScholarAppForm_Student from '../views/StudentView/CardHolder/ScholarAppForm_Student.vue'
 import SkillsSurveyForm_Student from '../views/StudentView/CardHolder/SkillsSurveyForm_Student.vue'
 import StudentProfile from '../views/StudentView/StudentProfile.vue'
-import ScholarshipApplied_Page from '../views/StudentView/ScholarshipApplied_Page.vue'
-import ScholarshipAvail_Page from '../views/StudentView/ScholarshipAvail_Page.vue'
+
 import StudentAnnouncement_Page from '../views/StudentView/StudentAnnouncement_Page.vue'
 
 
@@ -28,17 +26,8 @@ import EmployerApplicant from '../views/EmployerView/EmpApplicant.vue'
 import EmployerHiredApplicant from '../views/EmployerView/EmpHiredApplicant.vue'
 import JobPostingId from '../views/EmployerView/CardHolder/JobPostingId.vue'
 import AppointmentId from '../views/EmployerView/CardHolder/AppointmentId.vue'
+import AppointmentSetting from '../views/EmployerView/CardHolder/AppointmentSetting.vue'
 
-//Applicant View
-import ApplicantProfile from '../views/ApplicantView/ApplicantProfile.vue'
-import AvailableTraining_Page from '../views/ApplicantView/AvailableTraining_Page.vue'
-import AppliedTraining_Page from '../views/ApplicantView/AppliedTraining_Page.vue'
-import AppliedJobs_Page from '../views/ApplicantView/AppliedJobs_Page.vue'
-import AvailableJobs_Page from '../views/ApplicantView/AvailableJobs_Page.vue'
-import ApplicantAnnouncement_Page from '../views/ApplicantView/ApplicantAnnouncement_Page.vue'
-import CBTEDForm_Page from '../views/ApplicantView/TrainingForms/CBTEDForm_Page.vue'
-import CEEOForm_Page from '../views/ApplicantView/TrainingForms/CEEOForm_Page.vue'
-import UpdateForm_Page from '../views/ApplicantView/TrainingForms/UpdateForm_Page.vue'
 
 //Admin View
 import AdminProfile from '../views/AdminView/AdminProfile.vue'
@@ -51,6 +40,7 @@ import EntrepreneurialProgram from '../views/AdminView/CardHolder/Entrepreneuria
 import StudentList from '../views/AdminView/ListHolder/StudentList.vue'
 import ApplicantList from '../views/AdminView/ListHolder/ApplicantList.vue'
 import EmployerList from '../views/AdminView/ListHolder/EmployerList.vue'
+import OFWList from '../views/AdminView/ListHolder/OFWList.vue'
 import ApprovalList from '../views/AdminView/ListHolder/ApprovalList.vue'
 import RecommendationList from '../views/AdminView/ListHolder/RecommendationList.vue'
 import ProcessingList from '../views/AdminView/ListHolder/ProcessingList.vue'
@@ -71,38 +61,68 @@ import DataTable from "../views/DataTable.vue"
 import Adminpage from '../views/AdminView/AdminPage.vue'
 import AdminViewDashboard from '../views/AdminView/AdminViewDashboard.vue'
 
+//Applicant View
+import ApplicantProfile from '../views/ApplicantView/CardHolder/ApplicantProfile.vue'
+import AvailableTraining from '../views/ApplicantView/CardHolder/AvailableTraining.vue'
+import AppliedTraining from '../views/ApplicantView/CardHolder/AppliedTraining.vue'
+import AppliedJobs from '../views/ApplicantView/CardHolder/AppliedJobs.vue'
+import AvailableJobs from '../views/ApplicantView/CardHolder/AvailableJobs.vue'
+import ScholarshipApplied from '../views/StudentView/CardHolder/ScholarshipApplied.vue'
+import ScholarshipAvail from '../views/StudentView/CardHolder/ScholarshipAvail.vue'
+import ApplicantAnnouncement from '../views/ApplicantView/CardHolder/ApplicantAnnouncement.vue'
+import CBTEDForm_Page from '../views/ApplicantView/TrainingForms/CBTEDForm_Page.vue'
+import CEEOForm_Page from '../views/ApplicantView/TrainingForms/CEEOForm_Page.vue'
+import UpdateForm_Page from '../views/ApplicantView/TrainingForms/UpdateForm_Page.vue'
+import PrintLayout from '../views/ApplicantView/PrintLayout.vue'
+
+import MemberPage from '../views/ApplicantView/MemberPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
 
+  //MemberPage
   {
-    path: '/AdminPage',
-    component: Adminpage,
+    path: '/MemberPage', name: 'MemberPage', component: MemberPage,
     children: [
-      {
+      { path: '/MemberPage/ApplicantDashboard', name: 'ApplicantDashboard', component: ApplicantDashboard },
+      { path: '/MemberPage/AvailableJobs', name: 'AvailableJobs', component: AvailableJobs },
+      { path: '/MemberPage/AppliedJobs', name: 'AppliedJobs', component: AppliedJobs },
+      { path: '/MemberPage/AvailableTraining', name: 'AvailableTraining', component: AvailableTraining },
+      { path: '/MemberPage/AppliedTraining', name: 'AppliedTraining', component: AppliedTraining },
+      
+      { path: '/MemberPage/ScholarshipAvail', name: 'ScholarshipAvail', component: ScholarshipAvail },
+      { path: '/MemberPage/ScholarshipApplied', name: 'ScholarshipApplied', component: ScholarshipApplied },
+      { path: '/MemberPage/CBTEDForm_Page', name: 'CBTEDForm_Page', component: CBTEDForm_Page },
+      { path: '/MemberPage/CEEOForm_Page', name: 'CEEOForm_Page', component: CEEOForm_Page },
+      { path: '/MemberPage/UpdateForm_Page', name: 'UpdateForm_Page', component: UpdateForm_Page },
+      { path: '/MemberPage/PrintLayout', name: 'PrintLayout', component: PrintLayout },
 
-        path: '',
-        name: 'AdminViewDashboard',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: AdminViewDashboard,
-      },
-      {
-        path: '/AdminPage/AdminDashboard',
-        name: 'AdminDashboard',
-        component: AdminDashboard
-      },
-      {
-        path: '/AdminPage/ApprovalList',
-        name: 'ApprovalList',
-        component: ApprovalList
-      },
-      {
-        path: '/AdminPage/RecommendationList',
-        name: 'RecommendationList',
-        component: RecommendationList
-      },
+      { path: '/MemberPage/ApplicantAnnouncement', name: 'ApplicantAnnouncement', component: ApplicantAnnouncement },
+      { path: '/MemberPage/ApplicantProfile', name: 'ApplicantProfile', component: ApplicantProfile },
+    ]
+  },
+
+  //adminPage
+  {
+    path: '/AdminPage', name: 'AdminPage', component: Adminpage,
+    children: [
+      { path: '', name: 'AdminViewDashboard', component: AdminViewDashboard },
+      { path: '/AdminPage/AdminApplicant', name: 'AdminApplicant', component: AdminApplicant },
+      { path: '/AdminPage/AdminDashboard', name: 'AdminDashboard', component: AdminDashboard },
+      { path: '/AdminPage/AdminForms', name: 'AdminForms', component: AdminForms },
+      { path: '/AdminPage/ApprovalList', name: 'ApprovalList', component: ApprovalList },
+      { path: '/AdminPage/RecommendationList', name: 'RecommendationList', component: RecommendationList },
+      { path: '/AdminPage/ProcessingList', name: 'ProcessingList', component: ProcessingList },
+      { path: '/AdminPage/StudentProgram', name: 'StudentProgram', component: StudentProgram },
+      { path: '/AdminPage/TrainingOffer', name: 'TrainingOffer', component: TrainingOffer },
+      { path: '/AdminPage/AdminJobPost', name: 'AdminJobPost', component: AdminJobPost },
+      { path: '/AdminPage/AdminAnnouncement', name: 'AdminAnnouncement', component: AdminAnnouncement },
+      { path: '/AdminPage/StudentList', name: 'StudentList', component: StudentList },
+      { path: '/AdminPage/ApplicantList', name: 'ApplicantList', component: ApplicantList },
+      { path: '/AdminPage/EmployerList', name: 'EmployerList', component: EmployerList },
+      { path: '/AdminPage/OFWList', name: 'OFWList', component: OFWList },
+      { path: '/AdminPage/AdminProfile', name: 'AdminProfile', component: AdminProfile },
     ],
   },
   {
@@ -127,11 +147,6 @@ const routes = [
   //   name: 'AdminDashboard',
   //   component: AdminDashboard
   // },
-  {
-    path: '/studentdashboard',
-    name: 'StudentDashboard',
-    component: StudentDashboard
-  },
   {
     path: '/employerdashboard',
     name: 'EmployerDashboard',
@@ -158,16 +173,16 @@ const routes = [
     name: 'StudentProfile',
     component: StudentProfile
   },
-  {
-    path: '/ScholarshipApplied',
-    name: 'ScholarshipApplied',
-    component: ScholarshipApplied_Page
-  },
-  {
-    path: '/ScholarshipAvail',
-    name: 'ScholarshipAvail',
-    component: ScholarshipAvail_Page
-  },
+  // {
+  //   path: '/ScholarshipApplied',
+  //   name: 'ScholarshipApplied',
+  //   component: ScholarshipApplied_Page
+  // },
+  // {
+  //   path: '/ScholarshipAvail',
+  //   name: 'ScholarshipAvail',
+  //   component: ScholarshipAvail_Page
+  // },
   {
     path: '/StudentAnnouncement',
     name: 'StudentAnnouncement',
@@ -211,6 +226,12 @@ const routes = [
     name: 'AppointmentId',
     component: AppointmentId
   },
+  {
+    // path: '/AppointmentId/:id?',
+    path: '/Appointmentsetting/:id',
+    name: 'AppointmentSetting',
+    component: AppointmentSetting
+  },
 
 
   //applicant_view
@@ -219,31 +240,31 @@ const routes = [
     name: 'ApplicantProfile',
     component: ApplicantProfile
   },
-  {
-    path: '/ApplicantAnnouncement',
-    name: 'ApplicantAnnouncement',
-    component: ApplicantAnnouncement_Page
-  },
-  {
-    path: '/AvailableTraining',
-    name: 'AvailableTraining',
-    component: AvailableTraining_Page
-  },
-  {
-    path: '/AvailableJobs',
-    name: 'AvailableJobs',
-    component: AvailableJobs_Page
-  },
-  {
-    path: '/AppliedJobs',
-    name: 'AppliedJobs',
-    component: AppliedJobs_Page
-  },
-  {
-    path: '/AppliedTraining',
-    name: 'AppliedTraining',
-    component: AppliedTraining_Page
-  },
+  // {
+  //   path: '/ApplicantAnnouncement',
+  //   name: 'ApplicantAnnouncement',
+  //   component: ApplicantAnnouncement_Page
+  // },
+  // {
+  //   path: '/AvailableTraining',
+  //   name: 'AvailableTraining',
+  //   component: AvailableTraining_Page
+  // },
+  // {
+  //   path: '/AvailableJobs',
+  //   name: 'AvailableJobs',
+  //   component: AvailableJobs_Page
+  // },
+  // {
+  //   path: '/AppliedJobs',
+  //   name: 'AppliedJobs',
+  //   component: AppliedJobs_Page
+  // },
+  // {
+  //   path: '/AppliedTraining',
+  //   name: 'AppliedTraining',
+  //   component: AppliedTraining_Page
+  // },
   {
     path: '/CBTEDForm_Page',
     name: 'CBTEDForm_Page',
@@ -266,11 +287,11 @@ const routes = [
     name: 'AdminApplicant',
     component: AdminApplicant
   },
-  {
-    path: '/AdminProfile',
-    name: 'AdminProfile',
-    component: AdminProfile
-  },
+  // {
+  //   path: '/AdminProfile',
+  //   name: 'AdminProfile',
+  //   component: AdminProfile
+  // },
   {
     path: '/AdminForms',
     name: 'AdminForms',
@@ -302,51 +323,6 @@ const routes = [
     component: EntrepreneurialProgram
   },
   {
-    path: '/StudentList',
-    name: 'StudentList',
-    component: StudentList
-  },
-  {
-    path: '/ApplicantList',
-    name: 'ApplicantList',
-    component: ApplicantList
-  },
-  {
-    path: '/EmployerList',
-    name: 'EmployerList',
-    component: EmployerList
-  },
-  // {
-  //   path: '/ApprovalList',
-  //   name: 'ApprovalList',
-  //   component: ApprovalList
-  // },
-  // {
-  //   path: '/RecommendationList',
-  //   name: 'RecommendationList',
-  //   component: RecommendationList
-  // },
-  {
-    path: '/ProcessingList',
-    name: 'ProcessingList',
-    component: ProcessingList
-  },
-  {
-    path: '/TrainingOffer',
-    name: 'TrainingOffer',
-    component: TrainingOffer
-  },
-  {
-    path: '/StudentProgram',
-    name: 'StudentProgram',
-    component: StudentProgram
-  },
-  {
-    path: '/AdminJobPost',
-    name: 'AdminJobPost',
-    component: AdminJobPost
-  },
-  {
     path: '/AdminAnnouncement',
     name: 'AdminAnnouncement',
     component: AdminAnnouncement
@@ -374,16 +350,5 @@ const router = new VueRouter({
   routes,
   mode: "history"
 })
-
-// router.beforeEach((to, from, next) => {
-
-//   if (to.name == 'AdminDashboard' && localStorage.getItem('auth') == null)
-//     next({ name: 'LoginPage' });
-//   else if (localStorage.getItem('auth') != null && (to.name == 'RegisterPage' || to.name == 'LoginPage'))
-//     next({ name: 'AdminDashboard' });
-//   else
-//     next();
-
-// });
 
 export default router

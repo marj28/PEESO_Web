@@ -4,7 +4,7 @@
       <v-col cols="6" md="3">
         <v-card height="100" dark class="pa-2 rounded-lg" 
         style="background: linear-gradient(75.7deg, rgb(34, 126, 34) 3.8%, rgb(99, 162, 17) 87.1%);"
-        @click="$router.push({path: 'AdminApplicant'})">
+        @click="$router.push({path: '/DailyApplicants'})">
         
         <h2 class="ma-1"> 
           <v-icon
@@ -21,7 +21,7 @@
       <v-col cols="6" md="3">
         <v-card height="100" dark class="pa-2 rounded-lg" 
         style="background: linear-gradient(75.7deg, rgb(34, 126, 34) 3.8%, rgb(99, 162, 17) 87.1%);" 
-        @click="$router.push({path: 'AdminApplicant'})">
+        @click="$router.push({path: '/HiredApplicants'})">
           <h2 class="ma-1"> <v-icon
             dark
             right
@@ -80,7 +80,7 @@ export default {
   font-size: clamp(1.5rem, 0.875rem + 2vw, 2rem);
   -webkit-background-clip: text;
 } */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px)  {
   p.ma-4 {
     font-size: 13px;
   }

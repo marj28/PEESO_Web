@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <v-card class="pa-2">
+  <div id="chart" class="">
+    <v-card class="pa-2" elevation="">
       <apexcharts height="300" :options="chartOptions" :series="series"></apexcharts>
     </v-card>
-
   </div>
 </template>
   

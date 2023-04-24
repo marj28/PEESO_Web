@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <applicant-navbar />
-    <v-main>
       <v-col>
         <v-card outlined color="#1B5E20">
           <v-card-title
@@ -57,8 +55,6 @@
           <ceeo-form />
         </v-card>
       </v-col>
-      <!-- <CBTEDForm /> -->
-    </v-main>
   </v-app>
 </template>
     <script>

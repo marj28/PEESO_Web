@@ -7,8 +7,7 @@ const state = () => ({
   },
   auth: {},
   address: {},
-  
-
+  countries: {},
 });
 
 
@@ -22,8 +21,11 @@ const getters = {
     return state.auth;
   },
   getadd(state) {
-    console.log("getaddress=>", state.address)
+
     return state.address;
+  },
+  getcountry(state) {
+    return state.countries;
   }
 
 }
@@ -32,7 +34,7 @@ const mutations = {
   setUsers(state, payload) {
 
     state.users.status = payload;
-    console.log("state=>", state.users.status)
+
   },
 
   setAuth(state, payload) {
@@ -45,6 +47,11 @@ const mutations = {
     state.address = payload;
 
   },
+  setcountries(state, payload) {
+
+    state.countries = payload;
+
+  }
 
 }
 
@@ -108,15 +115,16 @@ const actions = {
   async fetchaddress({ commit }) {
     {
       let res = await axios.get(`https://raw.githubusercontent.com/flores-jacob/philippine-regions-provinces-cities-municipalities-barangays/master/philippine_provinces_cities_municipalities_and_barangays_2019v2.json`)
-      
-      // let res2 ={}
-      // for(let i=0;i<16;i++){
-      //   res2.push(res.data[`0${i}`])
-      // }
-      console.log("fetchaddress=>",Object.values(res.data))
       commit('setaddress', Object.values(res.data));
     }
-  }
+  },
+  async fetchcountry({ commit }) {
+    {
+      let res = await axios.get(`https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-name.json`)
+      commit('setcountries', res.data);
+    }
+  },
+
 
 }
 

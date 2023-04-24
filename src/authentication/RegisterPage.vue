@@ -6,17 +6,16 @@
           <v-form @submit.prevent="submitHandler" ref="form">
             <v-container>
               <v-layout row wrap>
-                <v-card class="mx-auto" width="600">
+                <v-card class="mx-auto mt-16" width="500">
                   <div class=" mt-n6 mb-n6 text-center pa-4">
                     <h4 class="green--text">CREATE AN ACCOUNT</h4>
                   </div>
                   <v-container class="mb-n6">
-
-
                     <v-row class="text-center pa-4 mt-n10" v-show="title">
                       <v-col cols="12" sm="12" md="12">
-                        <v-btn type="submit" class="mr-1" color="green" block outlined dark @click="
-                          employer = false, applicant = true">
+                        <v-btn type="submit" class="mr-1" :color="green" block @click="
+                          employer = false, applicant = true, type = 'member'"
+                          v-bind:color="type === 'member' ? 'success' : 'white'">
                           <v-icon left>
                             mdi-account
                           </v-icon>
@@ -26,9 +25,9 @@
                         <h6 class="text-center green--text mb-n12 mt-n4">OR</h6>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
-                        <v-btn type="submit" class="mr-1 mt-n4" color="green" block outlined @click="
-                          employer = true, applicant = false
-                        ">
+                        <v-btn type="submit" class="mr-1 mt-n4" block @click="
+                          employer = true, applicant = false, type = 'employer'"
+                          v-bind:color="type === 'employer' ? 'success' : 'white'">
                           <v-icon left>
                             mdi-account-multiple
                           </v-icon>BE AN EMPLOYER</v-btn>
@@ -107,11 +106,12 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "App",
+  name: "RegisterPage",
   components: {},
 
   data: function () {
     return {
+      type: "member",
       alertColor: "success",
       dialog: true,
       loading: false,
@@ -160,6 +160,15 @@ export default {
 </script>    
       
 <style scoped>
+.mr-1 {
+  border: 1px solid gray;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-family: 'Segoe UI';
+  font-weight: bold;
+
+}
+
 input[type="sample"] {
   border-bottom: 1px solid rgb(28, 110, 4);
   outline: none;

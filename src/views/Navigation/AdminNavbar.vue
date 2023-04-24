@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" color="#1B5E20" dark app height="1200" width="280">
+    <v-navigation-drawer v-model="drawer" color="#1B5E20" dark app height="1200" width="310">
       <v-container>
         <v-layout column align-center>
           <v-flex class="mt-5">
@@ -12,50 +12,48 @@
           <v-flex class="mt-3">
             <h3 class="white--text subheading mt-1 text-center">PEESO Personnel</h3>
           </v-flex>
-
         </v-layout>
       </v-container>
       <v-divider dark></v-divider>
 
-      <v-list shaped class="clickable">
+      <v-list shaped class="clickable mb-n2" >
         <template v-for="item in items">
-          <v-list-group v-if="item.children" :key="item.text" v-model="item.model"  :prepend-icon="item['icon-ctr']"
-            :append-icon="item.model ? item.icon : item['icon-alt']" active-class="orange--text" >
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ item.text }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </template>
-            <v-list-item v-for="(child, i) in item.children" :key="i" route :to="child.route" active-class="orange--text" @click="closeAllOpen(item.text)">
-              <v-list-item-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ child.text }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-group>
-          <v-list-item v-else :key="item.text"  route :to="item.route" active-class="orange--text" @click="closeAllOpen(item.text)" >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
+        <v-list-group v-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item['icon-ctr']"
+          :append-icon="item.model ? item.icon : item['icon-alt']" active-class="orange--text" class="">
+          <template v-slot:activator>
             <v-list-item-content>
-              <v-list-item-title>
-                {{ item.text }}
-              </v-list-item-title>
+              {{ item.text }}
+            </v-list-item-content>
+          </template>
+          <v-list-item v-for="(child, i) in item.children" :key="i" route :to="child.route" active-class="orange--text"
+            @click="closeAllOpen(item.text)">
+            <v-list-item-content v-if="child.icon">
+              <v-icon>{{ child.icon }}</v-icon>
+            </v-list-item-content>
+            <v-list-item-content>
+              {{ child.text }}
             </v-list-item-content>
           </v-list-item>
+        </v-list-group>
+
+        <v-list-item v-else=":key='item.text' " route :to="item.route" active-class="orange--text"
+          @click="closeAllOpen(item.text)" >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ item.text }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar color="#388E3C" dark app elevate-on-scroll>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase">
-        <v-btn text @click="$router.push({ name: 'AdminPage' })" >
+        <v-btn text @click="$router.push({ name: 'AdminDashboard' })">
           <span class="font-weight-bold ml-n9"> CPEESO Admin </span>
         </v-btn>
       </v-toolbar-title>
@@ -79,43 +77,39 @@
 export default {
   methods: {
     closeAllOpen(name) {
-      // let temp = Object.assign({}, this.items);
 
-      // temp.map((item) => {
-      //   if (item.hasOwnProperty('model')){
-      //     item.model = false;
-      //   }
-
-      //   return item;
-      // });
-
-      // this.item = temp;
-      
-      if(name == 'Dashboard'){
-      this.items[2].model=false
-      this.items[3].model=false
-      this.items[4].model=false
-      console.log(name)
-    }
-    else
-    {
-      
-    }
+      if (name == 'Dashboard') {
+        this.items[2].model = false
+        this.items[3].model = false
+        this.items[4].model = false
+        console.log(name)
+      }
+      else if (name == 'Forms') {
+        this.items[2].model = false
+        this.items[3].model = false
+        this.items[4].model = false
+        console.log(name)
+      }
+      else if (name == 'Profile') {
+        this.items[2].model = false
+        this.items[3].model = false
+        this.items[4].model = false
+        console.log(name)
+      }
     }
   },
   data: () => ({
-    
+
     drawer: null,
     items: [
       { icon: "mdi-home", text: "Dashboard", route: "/AdminPage/AdminDashboard" },
       {
         icon: "mdi-form-select",
         text: "Forms",
-        route: "/AdminForms",
+        route: "/AdminPage/AdminForms",
       },
       {
-        icon: "mdi-chevron-up",
-        "icon-alt": "mdi-chevron-down",
+        icon: "mdi-chevron-down",       
         "icon-ctr": "mdi-clipboard-check-outline",
         text: "To Do's",
         model: false,
@@ -127,13 +121,13 @@ export default {
           },
           {
             icon: "mdi-clipboard-file-outline",
-            text: "For Recommendation",
+            text: "To Recommend",
             route: "/AdminPage/RecommendationList",
           },
           {
             icon: "mdi-clipboard-clock-outline",
             text: "For Processing",
-            route: "/ProcessingList",
+            route: "/AdminPage/ProcessingList",
           },
         ],
       },
@@ -147,22 +141,22 @@ export default {
           {
             icon: "mdi-clipboard-check-outline",
             text: "Student Programs",
-            route: "/StudentProgram",
+            route: "/AdminPage/StudentProgram",
           },
           {
             icon: "mdi-clipboard-check-outline",
             text: "Training Offering",
-            route: "/TrainingOffer",
+            route: "/AdminPage/TrainingOffer",
           },
           {
             icon: "mdi-clipboard-file-outline",
             text: "Job Posting",
-            route: "/AdminJobPost",
+            route: "/AdminPage/AdminJobPost",
           },
           {
             icon: "mdi-clipboard-clock-outline",
             text: "Announcement",
-            route: "/AdminAnnouncement",
+            route: "/AdminPage/AdminAnnouncement",
           },
         ],
       },
@@ -170,27 +164,32 @@ export default {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         "icon-ctr": "mdi-clipboard-file-outline",
-        text: "Users",
+        text: "Members",
         model: false,
         children: [
           {
             icon: "mdi-clipboard-check-outline",
             text: "Students",
-            route: "/StudentList",
+            route: "/AdminPage/StudentList",
           },
           {
             icon: "mdi-clipboard-file-outline",
             text: "Job Applicant",
-            route: "/ApplicantList",
+            route: "/AdminPage/ApplicantList",
           },
           {
             icon: "mdi-clipboard-clock-outline",
             text: "Employers",
-            route: "/EmployerList",
+            route: "/AdminPage/EmployerList",
+          },
+          {
+            icon: "mdi-earth",
+            text: "OFW",
+            route: "/AdminPage/OFWList",
           },
         ],
       },
-      { icon: "mdi-account", text: "Profile", route: "/AdminProfile" },
+      { icon: "mdi-account", text: "Profile", route: "/AdminPage/AdminProfile" },
       { icon: "", text: "", route: "" },
       { icon: "mdi-logout", text: "Log Out", route: "/" },
     ],
@@ -204,6 +203,7 @@ export default {
   span {
     font-size: 7px;
   }
+
   div #search {
     size: 5px;
   }

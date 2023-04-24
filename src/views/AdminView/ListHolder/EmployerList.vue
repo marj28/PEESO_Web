@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <admin-navbar />
-    <v-main >
       <employer-card />
-    </v-main>
   </v-app>      
   </template>
   

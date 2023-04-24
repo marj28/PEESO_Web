@@ -39,17 +39,17 @@ export default {
       {
         title: "CBTED",
         headline: "Community-based Training for Enterprise Development (CBTED)",
-        route: 'CBTEDForm_Page',
+        route: '/MemberPage/CBTEDForm_Page',
       },
       {
         title: "CEE-O Star Program",
         headline: "Community-based Training for Economic Opportunity (CEE-O Star Program)",
-        route: "/CEEOForm_Page",
+        route: "/MemberPage/CEEOForm_Page",
       },
       {
         title: "Project UPDATE",
         headline: "Virtual and Digital Training",
-        route: "/UpdateForm_Page",
+        route: "/MemberPage/UpdateForm_Page",
       },
     ],
   }),

@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div id="chart" class="d-flex">
         <v-card class="pa-2">
-            <apexcharts height="300" :options="chartOptions" :series="series" label="Job Applicant"></apexcharts>
+            <apexcharts class="pa-2" height="300" :options="chartOptions" :series="series" label="Job Applicant"></apexcharts>
         </v-card>
 
     </div>
