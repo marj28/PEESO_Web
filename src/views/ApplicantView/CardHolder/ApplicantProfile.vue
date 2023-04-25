@@ -11,6 +11,9 @@
           <p class="font-weight-black">Applicant Name:</p>
         </v-card-text>
       </v-card>
+       <!-- start student details -->
+        <student-profile-card v-show="student_details"/>
+      <!-- end student details -->
 
       <v-stepper v-model="e1" v-show="member_normal">
 
@@ -132,8 +135,8 @@
                       </v-combobox>
                     </v-col>
                     <v-col cols=" 12" md="2" sm="6">
-                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined dense
-                        color="success">
+                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined
+                        dense color="success">
                       </v-combobox>
                     </v-col>
                     <v-col cols=" 12" md="3" sm="6">
@@ -158,15 +161,15 @@
 
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false" outlined
-                        dense color="success" label="Province" @change="formattype('PROVINCE')" return-object single-line
-                        :rules="[rules.required]">
+                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false"
+                        outlined dense color="success" label="Province" @change="formattype('PROVINCE')" return-object
+                        single-line :rules="[rules.required]">
 
                       </v-combobox>
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined dense
-                        label="Municipality / City" @change="formattype('CITY')" return-object color="success"
+                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined
+                        dense label="Municipality / City" @change="formattype('CITY')" return-object color="success"
                         :rules="[rules.required]" single-line>
 
                       </v-combobox>
@@ -228,8 +231,8 @@
                       </v-radio-group>
                     </v-row>
                     <v-col cols="12" md="4">
-                      <v-text-field outlined label="Specify Highest Educational Attainment" v-show="highest_education"
-                        dense color="success"></v-text-field>
+                      <v-combobox outlined label="Specify Highest Educational Attainment" v-show="highest_education"
+                        :items="highest_education_attainment" dense color="success"></v-combobox>
                     </v-col>
 
                     <v-row v-show="education_status">
@@ -258,33 +261,31 @@
                         </p>
 
                         <v-spacer></v-spacer>
-                        <v-radio-group row>
-                          <v-radio label="Graduate"
-                            @click="(graduate = true), (undergraduate = false), (secondarylvl = true), (tertiarylvl = true), (graduatelvl = true)"
-                            color="success" value="graduate">
+                        <v-radio-group row v-model="elem">
+                          <v-radio label="Graduate" @click="clear_elem_graduate()" color="success" value="graduate">
                           </v-radio>
-                          <v-radio label="Undergraduate"
-                            @click="(graduate = false), (undergraduate = true), (secondarylvl = false), (tertiarylvl = false), (graduatelvl = false)"
-                            color="success" value="undergraduate">
+                          <v-radio label="Undergraduate" @click="clear_elem_undergraduate()" color="success"
+                            value="undergraduate">
                           </v-radio>
                           <v-container v-show="graduate">
                             <v-row>
                               <v-col cols="12" md="12" sm="12" lg="12">
-                                <v-text-field outlined label="Year Graduated" dense color="success"
-                                  type="number"></v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success"
-                                  type="text"></v-text-field>
+                                <v-text-field outlined label="Year Graduated" dense color="success" type="number"
+                                  hide-spin-buttons v-model="elem_grad_year"></v-text-field>
+                                <v-text-field v-model="elem_grad_school" outlined label="School Graduated" dense
+                                  color="success" type="text"></v-text-field>
                               </v-col>
                             </v-row>
                           </v-container>
                           <v-container v-show="undergraduate">
                             <v-select :items="levelreachedElem" label="Level reached" required outlined dense
-                              color="success">
+                              color="success" v-model="elem_undergrad_level">
                             </v-select>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            <v-text-field hide-spin-buttons outlined label="Year Last Attended" dense color="success"
+                              type="number" v-model="elem_undergrad_year">
                             </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="elem_undergrad_school"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -294,62 +295,45 @@
                         <p class="font-weight-bold" id="move">SECONDARY</p>
 
                         <v-spacer></v-spacer>
-                        <v-radio-group row>
-                          <v-radio label="Graduate" color="success" @click="
-                            (sec_graduate = true), (sec_undergraduate = false), (elementarylvl = true), (tertiarylvl = true), (graduatelvl = true)
-                          " value="sec_graduate">
+                        <v-radio-group row v-model="sec">
+                          <v-radio label="Graduate" color="success" @click="clear_sec_graduate()" value="sec_graduate">
                           </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="
-                            (sec_graduate = false), (sec_undergraduate = true), (elementarylvl = true), (tertiarylvl = false), (graduatelvl = false)
-                          " value="sec_ungraduate">
+                          <v-radio label="Undergraduate" color="success" @click="clear_sec_undergraduate()"
+                            value="sec_ungraduate">
                           </v-radio>
                           <v-container v-show="sec_graduate">
-                            <v-radio-group>
+                            <v-radio-group v-model="sec_details">
                               <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
-                                @click="(non_K = true), (K = false)"></v-radio>
-                              <v-radio label="Secondary (K12)" value="K" color="success"
-                                @click="(non_K = false), (K = true)"></v-radio>
+                                @click="clear_sec_non_K()"></v-radio>
+                              <v-radio label="Secondary (K12)" value="K" color="success" @click="clear_sec_K()"></v-radio>
                               <div v-show="non_K">
-                                <v-text-field outlined label="Year Graduated" dense color="success"
-                                  type="number"></v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success"
-                                  type="text"></v-text-field>
+                                <v-text-field hide-spin-buttons outlined label="Year Graduated" dense color="success"
+                                  type="number" v-model="sec_grad_year"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                                  v-model="sec_grad_school"></v-text-field>
                               </div>
                               <div v-show="K">
-                                <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
+                                <v-select :items="strand" label="SHS Strand" required outlined dense color="success"
+                                  v-model="sec_grad_strand">
                                 </v-select>
-                                <v-text-field outlined label="Year Graduated" dense color="success" type="number">
+                                <v-text-field hide-spin-buttons outlined label="Year Graduated" dense color="success"
+                                  type="number" v-model="sec_grad_year_K">
                                 </v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success"
-                                  type="text"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                                  v-model="sec_grad_school_K"></v-text-field>
                               </div>
                             </v-radio-group>
 
                           </v-container>
                           <v-container v-show="sec_undergraduate">
-                            <!-- <v-radio-group>
-                            <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
-                              @click="(non_K = true), (K = false)"></v-radio>
-                            <v-radio label="Secondary (K12)" value="K" color="success"
-                              @click="(non_K = false), (K = true)"></v-radio>
-                            <div v-show="non_K">
-                              <v-text-field outlined label="Year Graduated" dense color="success"
-                                type="number"></v-text-field>
-                            </div>
-                            <div v-show="K">
-                              <v-select :items="strand" label="SHS Strand" required outlined dense color="success">
-                              </v-select>
-                              <v-text-field outlined label="Year Graduated" dense color="success" type="number">
-                              </v-text-field>
-                            </div>
-                          </v-radio-group> -->
                             <v-select :items="levelreachedSec" label="Level Reached" required outlined dense
-                              color="success">
+                              color="success" v-model="sec_undergrad_level">
                             </v-select>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            <v-text-field hide-spin-buttons outlined label="Year Last Attended" dense color="success"
+                              type="number" v-model="sec_undergrad_year">
                             </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="sec_undergrad_school"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -360,31 +344,32 @@
 
                         <v-spacer></v-spacer>
 
-                        <v-radio-group row>
-                          <v-radio label="Graduate" color="success" @click="
-                            (ter_graduate = true), (ter_undergraduate = false), (secondarylvl = true), (elementarylvl = true), (graduatelvl = true)
+                        <v-radio-group row v-model="ter">
+                          <v-radio label="Graduate" color="success" @click="clear_ter_graduate()
                           " value="ter_graduate">
                           </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="
-                            (ter_graduate = false), (ter_undergraduate = true), (secondarylvl = true), (elementarylvl = true), (graduatelvl = false)
+                          <v-radio label="Undergraduate" color="success" @click="clear_ter_undergraduate()
                           " value="ter_undergraduate">
                           </v-radio>
                           <v-container v-show="ter_graduate">
-                            <v-combobox :items="course" label="Course" required outlined dense color="success">
+                            <v-combobox :items="course" label="Course" required outlined dense color="success"
+                              v-model="ter_grad_course">
                             </v-combobox>
-                            <v-text-field outlined label="Year Graduated" dense color="success" type="number">
+                            <v-text-field outlined hide-spin-buttons label="Year Graduated" dense color="success"
+                              type="number" v-model="ter_grad_year">
                             </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="ter_grad_school"></v-text-field>
                           </v-container>
                           <v-container v-show="ter_undergraduate">
                             <v-select :items="levelreachedTer" label="Level Reached" required outlined dense
-                              color="success">
+                              color="success" v-model="ter_undergrad_level">
                             </v-select>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            <v-text-field outlined hide-spin-buttons label="Year Last Attended" dense color="success"
+                              type="number" v-model="ter_undergrad_year">
                             </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="ter_undergrad_school"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -395,34 +380,31 @@
                           GRADUATE STUDIES/POST-GRADUATE
                         </p>
                         <v-spacer></v-spacer>
-                        <v-radio-group row>
-                          <v-radio label="Graduate" color="success" @click="
-                            (post_graduates = true),
-                            (post_undergraduate = false), (elementarylvl = true), (tertiarylvl = true), (secondarylvl = true)
+                        <v-radio-group row v-model="post">
+                          <v-radio label="Graduate" color="success" @click="clear_post_graduate()
                           " value="post_graduates">
                           </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="
-                            (post_graduates = false),
-                            (post_undergraduate = true), (elementarylvl = true), (tertiarylvl = true), (secondarylvl = true)
+                          <v-radio label="Undergraduate" color="success" @click="clear_post_undergraduate()
                           " value="post_graduate">
                           </v-radio>
                           <v-container v-show="post_graduates">
                             <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
-                              color="success">
+                              color="success" v-model="post_grad_course">
                             </v-combobox>
-                            <v-text-field outlined label="Year Graduated" dense color="success"
-                              type="number"></v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
+                            <v-text-field outlined hide-spin-buttons label="Year Graduated" dense color="success"
+                              type="number" v-model="post_grad_year"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="post_grad_school"></v-text-field>
                           </v-container>
                           <v-container v-show="post_undergraduate">
                             <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
-                              color="success">
+                              color="success" v-model="post_undergrad_course">
                             </v-combobox>
-                            <v-text-field outlined label="Year Last Attended" dense color="success" type="number">
+                            <v-text-field outlined hide-spin-buttons label="Year Last Attended" dense color="success"
+                              type="number" v-model="post_undergrad_year">
                             </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success"
-                              type="text"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="post_undergrad_school"></v-text-field>
                           </v-container>
                         </v-radio-group>
                       </v-col>
@@ -470,15 +452,15 @@
 
 
                           <v-container v-show="unemployed">
-                            <v-checkbox class="ma-2 pa-2" label="Fresh Graduate" color="secondary" value="Fresh Graduate"
+                            <v-checkbox class="ma-2 pa-2" label="Fresh Graduate" color="success" value="Fresh Graduate"
                               hide-details></v-checkbox>
-                            <v-checkbox class="ma-2 pa-2" label="Finished Contract" color="secondary"
+                            <v-checkbox class="ma-2 pa-2" label="Finished Contract" color="success"
                               value="Finished Contract" hide-details></v-checkbox>
-                            <v-checkbox class="ma-2 pa-2" label="Resigned" color="secondary" value="Resigned"
+                            <v-checkbox class="ma-2 pa-2" label="Resigned" color="success" value="Resigned"
                               hide-details></v-checkbox>
-                            <v-checkbox class="ma-2 pa-2" label="Terminated" color="secondary" value="Terminated"
+                            <v-checkbox class="ma-2 pa-2" label="Terminated" color="success" value="Terminated"
                               hide-details></v-checkbox>
-                            <v-checkbox class="ma-2 pa-2" label="Retiree" color="secondary" value="Retiree"
+                            <v-checkbox class="ma-2 pa-2" label="Retiree" color="success" value="Retiree"
                               hide-details></v-checkbox>
                             <v-text-field label="Others: " class="ma-2 pa-2" outlined dense color="success">
                             </v-text-field>
@@ -926,16 +908,39 @@
 
             <v-card-actions class="align-right">
               <v-spacer></v-spacer>
-              <v-btn color="success" text @click="dialog2 = false, ofw_details = true, member_normal = false">
+              <v-btn color="success" text
+                @click="dialog2 = false, dialog3 = false, ofw_details = true, member_normal = false">
                 YES
               </v-btn>
-              <v-btn color="warning" text @click="dialog2 = false, ofw_details = false, member_normal = true">
+              <v-btn color="warning" text @click="dialog2 = false, dialog3 = true, ofw_details = false, student_details=false, member_normal = true">
+                No
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="dialog3" width="400" persistent>
+
+          <v-card>
+            <v-card-title class="text-h6 green darken-2 white--text">
+              Currently in School?
+            </v-card-title>
+            <v-divider></v-divider>
+
+            <v-card-actions class="align-right">
+              <v-spacer></v-spacer>
+              <v-btn color="success" text @click="dialog3 = false, student_details = true, ofw_details = false, member_normal = false">
+                YES
+              </v-btn>
+              <v-btn color="warning" text @click="dialog3 = false, ofw_details = false, student_details = false, member_normal = true">
                 No
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </div>
+
+     
 
       <!-- OFW Information -->
       <v-stepper v-model="e2" v-show="ofw_details">
@@ -1009,8 +1014,8 @@
                       </v-combobox>
                     </v-col>
                     <v-col cols=" 12" md="2" sm="6">
-                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined dense
-                        color="success">
+                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined
+                        dense color="success">
                       </v-combobox>
                     </v-col>
                     <v-col cols=" 12" md="3" sm="6">
@@ -1035,15 +1040,16 @@
 
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false" outlined
-                        dense color="success" label="Province" @change="formattype('PROVINCE')" return-object single-line :rules="[rules.required]">
+                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false"
+                        outlined dense color="success" label="Province" @change="formattype('PROVINCE')" return-object
+                        single-line :rules="[rules.required]">
 
                       </v-combobox>
                     </v-col>
                     <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined dense
-                        label="Municipality / City" @change="formattype('CITY')" return-object color="success" :rules="[rules.required]"
-                        single-line>
+                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined
+                        dense label="Municipality / City" @change="formattype('CITY')" return-object color="success"
+                        :rules="[rules.required]" single-line>
 
                       </v-combobox>
                     </v-col>
@@ -1095,7 +1101,8 @@
                       <p class="font-weight-bold">Fill up the following:</p>
                       <v-row>
                         <v-col cols="12" md="6" lg="6">
-                          <v-combobox :items="countries" item-text="country"  label="Specify Country: " outlined color="success" dense></v-combobox>
+                          <v-combobox :items="countries" item-text="country" label="Specify Country: " outlined
+                            color="success" dense></v-combobox>
                         </v-col>
                         <v-col cols="12" md="6" lg="6">
                           <v-text-field label="Occupation: " outlined color="success" dense></v-text-field>
@@ -1107,9 +1114,9 @@
               </v-card-text>
             </v-card>
             <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
-                Save
-              </v-btn>
-              <v-btn @click="e2 = 1" class="ma-2"> Back </v-btn>
+              Save
+            </v-btn>
+            <v-btn @click="e2 = 1" class="ma-2"> Back </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -1191,7 +1198,7 @@ export default {
     provincename: {},
     cityname: {},
     brgyname: {},
-    countries2:{},
+    countries2: {},
     region: '',
     province: '',
     city: '',
@@ -1221,6 +1228,37 @@ export default {
       applicationletter: '',
       certificate: '',
     },
+
+    elem_grad_year: '',
+    elem_grad_school: '',
+    elem_undergrad_level: '',
+    elem_undergrad_school: '',
+    elem_undergrad_year: '',
+
+    sec_details: '',
+    sec_grad_school: '',
+    sec_grad_strand: '',
+    sec_grad_year: '',
+    sec_grad_school_K: '',
+    sec_grad_year_K: '',
+    sec_undergrad_level: '',
+    sec_undergrad_school: '',
+    sec_undergrad_year: '',
+
+    ter_undergrad_level: '',
+    ter_undergrad_year: '',
+    ter_undergrad_school: '',
+    ter_grad_school: '',
+    ter_grad_course: '',
+    ter_grad_year: '',
+
+    post_grad_course: '',
+    post_grad_year: '',
+    post_grad_school: '',
+    post_undergrad_course: '',
+    post_undergrad_year: '',
+    post_undergrad_school: '',
+
     rules: {
       required: v => !!v || 'Required',
       email: v => {
@@ -1229,7 +1267,7 @@ export default {
       },
       counter: v => v.length <= 11 || 'Max 11 digits',
     },
-    e1: 1,
+    e1: 2,
     e2: 1,
     employment_status: false,
     education_status: false,
@@ -1263,6 +1301,7 @@ export default {
 
     dialog: false,
     dialog2: true,
+    dialog3: false,
     ofw_details: false,
     member_normal: true,
     activePicker: null,
@@ -1673,6 +1712,11 @@ export default {
       "Sports Track",
       "Arts and Design Track",
     ],
+    highest_education_attainment: [
+      "Elementary Level",
+      "High School Level",
+      "College Level"
+    ],
     birthDate: '',
     years: null,
     months: null,
@@ -1681,13 +1725,13 @@ export default {
   created() {
     this.fetchaddress(),
 
-    this.fetchcountry();
-    
+      this.fetchcountry();
+
   },
-  mounted() {    
+  mounted() {
   },
   computed: {
-    ...mapGetters('users', { address: 'getadd',countries:'getcountry' } ),
+    ...mapGetters('users', { address: 'getadd', countries: 'getcountry' }),
   },
   methods: {
     formattype(type) {
@@ -1709,8 +1753,8 @@ export default {
         this.brgyname = Object.values(res.barangay_list)
       }
     },
-    ...mapActions('users', ['fetchaddress','fetchcountry']),
-    
+    ...mapActions('users', ['fetchaddress', 'fetchcountry']),
+
     calculateAge(birthDate) {
       const currentDate = new Date();
       if (new Date(birthDate) > currentDate) {
@@ -1789,7 +1833,108 @@ export default {
         this.hint = "You can only choose 3"
         e.pop()
       }
-    }
+    },
+    //schooling
+    clear_elem_graduate() {
+      this.elem_undergrad_level = ''
+      this.elem_undergrad_year = ''
+      this.elem_undergrad_school = ''
+      this.graduate = true
+      this.undergraduate = false
+      this.secondarylvl = true
+      this.tertiarylvl = false
+      this.graduatelvl = false
+    },
+    clear_elem_undergraduate() {
+      this.elem_grad_year = ''
+      this.elem_grad_school = ''
+      this.graduate = false
+      this.undergraduate = true
+      this.secondarylvl = false
+      this.tertiarylvl = false
+      this.graduatelvl = false
+      this.sec_details = ''
+      this.sec = ''
+    },
+    clear_sec_graduate() {
+      this.sec_undergrad_level = ''
+      this.sec_undergrad_school = ''
+      this.sec_undergrad_year = ''
+      this.sec_graduate = true
+      this.sec_undergraduate = false
+      this.elementarylvl = true
+      this.tertiarylvl = true
+      this.graduatelvl = false
+    },
+    clear_sec_undergraduate() {
+      this.sec_details = ''
+      this.sec_grad_strand = ''
+      this.sec_grad_school = ''
+      this.sec_grad_year = ''
+      this.sec_grad_school_K = ''
+      this.sec_grad_year_K = ''
+      this.sec_graduate = false
+      this.sec_undergraduate = true
+      this.elementarylvl = true
+      this.tertiarylvl = false
+      this.graduatelvl = false
+      this.ter = ''
+    },
+    clear_sec_non_K() {
+      this.sec_grad_strand = ''
+      this.sec_grad_year_K = ''
+      this.sec_grad_school_K = ''
+      this.non_K = true
+      this.K = false
+    },
+    clear_sec_K() {
+      this.sec_grad_year = ''
+      this.sec_grad_school = ''
+      this.non_K = false
+      this.K = true
+    },
+    clear_ter_graduate() {
+      this.ter_undergrad_level = ''
+      this.ter_undergrad_year = ''
+      this.ter_undergrad_school = ''
+      this.ter_graduate = true
+      this.ter_undergraduate = false
+      this.secondarylvl = true
+      this.elementarylvl = true
+      this.graduatelvl = true
+    },
+    clear_ter_undergraduate() {
+      this.ter_grad_school = ''
+      this.ter_grad_course = ''
+      this.ter_grad_year = ''
+      this.ter_graduate = false
+      this.ter_undergraduate = true
+      this.secondarylvl = true
+      this.elementarylvl = true
+      this.graduatelvl = false
+      this.post = ''
+    },
+    clear_post_graduate() {
+      this.post_undergrad_course = ''
+      this.post_undergrad_school = ''
+      this.post_undergrad_year = ''
+      this.post_graduates = true
+      this.post_undergraduate = false
+      this.elementarylvl = true
+      this.tertiarylvl = true
+      this.secondarylvl = true
+    },
+    clear_post_undergraduate() {
+      this.post_grad_course = ''
+      this.post_grad_school = ''
+      this.post_grad_year = ''
+      this.post_graduates = false
+      this.post_undergraduate = true
+      this.elementarylvl = true
+      this.tertiarylvl = true
+      this.secondarylvl = true
+    },
+
   },
 };
 </script>

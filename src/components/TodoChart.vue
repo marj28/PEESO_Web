@@ -1,7 +1,7 @@
 <template>
-  <div id="chart" class="d-flex">
+  <div id="chart">
     <v-card class="" elevation="20" >
-      <apexcharts id="" class="todochart"  height="450" width="700" type="" :options="chartOptions" :series="series" ></apexcharts>
+      <apexcharts id="" class="todochart"  height="390"  type="" :options="chartOptions" :series="series" ></apexcharts>
     </v-card>
 
   </div>
@@ -84,14 +84,8 @@ export default {
 /* .pa-2 {
   min-width: 90%;
 } */
-@media screen and (max-width: 400px)  {
-  /* p.ma-4 {
-    font-size: 13px;
-  }
-  h2.ma-1{
-    font-size: 13px;
-  } */
-  .todochart {
+@media screen and (max-width: 300px)  {
+    .todochart {
     width: 400px;
   }
 }

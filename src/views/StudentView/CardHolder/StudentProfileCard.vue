@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-col>
-      <v-card outlined color="#1B5E20">
+      <!-- <v-card outlined color="#1B5E20">
         <v-card-title class="d-flex flex-column justify-space-between align-center">
           <v-avatar size="100">
             <img src="@/assets/download.png" />
@@ -10,7 +9,7 @@
         <v-card-text class="d-flex flex-column justify-space-between align-center" style="color: white">
           <p class="font-weight-black">Student Name</p>
         </v-card-text>
-      </v-card>
+      </v-card> -->
 
       <v-stepper v-model="e1">
         <v-stepper-header style="font-size: 16px">
@@ -269,7 +268,6 @@
           </v-card>
         </v-dialog>
       </v-row>
-    </v-col>
   </div>
 </template>
 <script>

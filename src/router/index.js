@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import AdminDashboard from '../views/Dashboard/AdminDashboard.vue'
 import EmployerDashboard from '../views/Dashboard/EmployerDashboard.vue'
 import ApplicantDashboard from '../views/Dashboard/ApplicantDashboard.vue'
+import StudentDashboard from '../views/Dashboard/StudentDashboard.vue'
 
 //authentication
 import LoginPage from '@/authentication/LoginPage.vue'

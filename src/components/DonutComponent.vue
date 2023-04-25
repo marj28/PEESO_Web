@@ -1,7 +1,7 @@
 <template>
   <div id="chart" >
-    <v-card  class="" elevation="20" >
-      <apexcharts  height="450" width="700" type="pie" :options="options" :series="series"></apexcharts>
+    <v-card  class="" elevation="20"  height="">
+      <apexcharts   type="pie" :options="options" :series="series"></apexcharts>
     </v-card>
   </div>
 </template>

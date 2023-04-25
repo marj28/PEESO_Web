@@ -5,8 +5,8 @@
       <v-divider class="test"></v-divider>
 
       <!-- <div v-bind:class="{'d-flex justify-center mb-6 bg-surface-variant pt-5': isMobile, 'd-flex justify-center mb-6 bg-surface-variant pt-5': !isMobile }" > -->
-        <v-row class="pa-4" >
-        <v-col cols="12" md="6" sm="12">
+        <v-row class="" >
+        <v-col cols="12" md="6" sm="12" >
           <TodoChart />
         </v-col>
         <v-col cols="12" md="6">
