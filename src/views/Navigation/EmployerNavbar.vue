@@ -6,7 +6,7 @@
       dark
       app
       height="1200"
-      width="280"
+      width="310"
     >
     <v-container>
       <v-layout column align-center>

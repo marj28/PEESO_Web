@@ -11,8 +11,8 @@
           <p class="font-weight-black">Applicant Name:</p>
         </v-card-text>
       </v-card>
-       <!-- start student details -->
-        <student-profile-card v-show="student_details"/>
+      <!-- start student details -->
+      <student-profile-card v-show="student_details" />
       <!-- end student details -->
 
       <v-stepper v-model="e1" v-show="member_normal">
@@ -27,22 +27,22 @@
           <v-divider></v-divider>
 
           <v-stepper-step :complete="e1 > 2" step="2" style="height=" color="success">
-            Employment / Educational
-            <v-spacer></v-spacer>
-            Information
+            Employment
+            <v-spacer></v-spacer> Information
           </v-stepper-step>
+          
 
-          <!-- <v-divider></v-divider>
+          <v-divider></v-divider>
 
           <v-stepper-step :complete="e1 > 3" step="3" color="success">
             Educational
             <v-spacer></v-spacer>
             Background
-          </v-stepper-step> -->
+          </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 3" step="3" color="success">
+          <v-stepper-step :complete="e1 > 4" step="4" color="success">
             Client's
             <v-spacer></v-spacer>
             Classification
@@ -50,7 +50,7 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 4" step="4" color="success">
+          <v-stepper-step :complete="e1 > 5" step="5" color="success">
             Technical/Vocational
             <v-spacer></v-spacer>
             and Other Training
@@ -58,7 +58,7 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 5" step="5" color="success">
+          <v-stepper-step :complete="e1 > 6" step="6" color="success">
             Eligibility/
             <v-spacer></v-spacer>
             Professional License
@@ -66,13 +66,13 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 6" step="6" color="success">
+          <v-stepper-step :complete="e1 > 7" step="7" color="success">
             Other Skills
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="e1 > 7" step="7" color="success">
+          <v-stepper-step :complete="e1 > 8" step="8" color="success">
             Requirements
           </v-stepper-step>
         </v-stepper-header>
@@ -218,7 +218,7 @@
               <v-card id="step2">
                 <v-card-text>
                   <v-container fluid>
-                    <v-row>
+                    <!-- <v-row>
                       <v-radio-group row>
                         <p class="mr-6 mb-n1 font-weight-bold green--text">Currently in School?</p>
                         <v-radio label="Yes" value="yes"
@@ -229,189 +229,14 @@
                           color="success"></v-radio>
 
                       </v-radio-group>
-                    </v-row>
-                    <v-col cols="12" md="4">
-                      <v-combobox outlined label="Specify Highest Educational Attainment" v-show="highest_education"
+                    </v-row> -->
+                    <!-- <v-col cols="12" md="4">
+                      <v-combobox outlined label="Specify Highest Educational Attainment" 
                         :items="highest_education_attainment" dense color="success"></v-combobox>
-                    </v-col>
-
-                    <v-row v-show="education_status">
-                      <v-col cols="12" sm="12" md="6">
-                        <h3>Literacy Indicators:</h3>
-
-                        <v-checkbox label="Can Read?" color="success"></v-checkbox>
-                        <v-checkbox label="Can Write?" color="success"></v-checkbox>
-
-                      </v-col>
-                      <v-col cols="12" sm="12" md="6">
-                        <v-checkbox label="Can Perform Mathematical Operation?" color="success"
-                          @click="mathematical_operation = true"></v-checkbox>
-                        <v-container v-show="mathematical_operation" style="margin-top: -35px">
-                          <v-checkbox label="Addition" value="a" color="success" style="margin-top: -10px"></v-checkbox>
-                          <v-checkbox label="Multiplication" value="m" color="success"
-                            style="margin-top: -10px"></v-checkbox>
-                          <v-checkbox label="Subtraction" value="s" color="success"
-                            style="margin-top: -10px"></v-checkbox>
-                        </v-container>
-                      </v-col>
-                      <!-- Elementary -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="elementarylvl">
-                        <p class="font-weight-bold" style="margin-top: 0px">
-                          ELEMENTARY
-                        </p>
-
-                        <v-spacer></v-spacer>
-                        <v-radio-group row v-model="elem">
-                          <v-radio label="Graduate" @click="clear_elem_graduate()" color="success" value="graduate">
-                          </v-radio>
-                          <v-radio label="Undergraduate" @click="clear_elem_undergraduate()" color="success"
-                            value="undergraduate">
-                          </v-radio>
-                          <v-container v-show="graduate">
-                            <v-row>
-                              <v-col cols="12" md="12" sm="12" lg="12">
-                                <v-text-field outlined label="Year Graduated" dense color="success" type="number"
-                                  hide-spin-buttons v-model="elem_grad_year"></v-text-field>
-                                <v-text-field v-model="elem_grad_school" outlined label="School Graduated" dense
-                                  color="success" type="text"></v-text-field>
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                          <v-container v-show="undergraduate">
-                            <v-select :items="levelreachedElem" label="Level reached" required outlined dense
-                              color="success" v-model="elem_undergrad_level">
-                            </v-select>
-                            <v-text-field hide-spin-buttons outlined label="Year Last Attended" dense color="success"
-                              type="number" v-model="elem_undergrad_year">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                              v-model="elem_undergrad_school"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-
-                      <!-- Secondary -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="secondarylvl">
-                        <p class="font-weight-bold" id="move">SECONDARY</p>
-
-                        <v-spacer></v-spacer>
-                        <v-radio-group row v-model="sec">
-                          <v-radio label="Graduate" color="success" @click="clear_sec_graduate()" value="sec_graduate">
-                          </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="clear_sec_undergraduate()"
-                            value="sec_ungraduate">
-                          </v-radio>
-                          <v-container v-show="sec_graduate">
-                            <v-radio-group v-model="sec_details">
-                              <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
-                                @click="clear_sec_non_K()"></v-radio>
-                              <v-radio label="Secondary (K12)" value="K" color="success" @click="clear_sec_K()"></v-radio>
-                              <div v-show="non_K">
-                                <v-text-field hide-spin-buttons outlined label="Year Graduated" dense color="success"
-                                  type="number" v-model="sec_grad_year"></v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                                  v-model="sec_grad_school"></v-text-field>
-                              </div>
-                              <div v-show="K">
-                                <v-select :items="strand" label="SHS Strand" required outlined dense color="success"
-                                  v-model="sec_grad_strand">
-                                </v-select>
-                                <v-text-field hide-spin-buttons outlined label="Year Graduated" dense color="success"
-                                  type="number" v-model="sec_grad_year_K">
-                                </v-text-field>
-                                <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                                  v-model="sec_grad_school_K"></v-text-field>
-                              </div>
-                            </v-radio-group>
-
-                          </v-container>
-                          <v-container v-show="sec_undergraduate">
-                            <v-select :items="levelreachedSec" label="Level Reached" required outlined dense
-                              color="success" v-model="sec_undergrad_level">
-                            </v-select>
-                            <v-text-field hide-spin-buttons outlined label="Year Last Attended" dense color="success"
-                              type="number" v-model="sec_undergrad_year">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                              v-model="sec_undergrad_school"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-
-                      <!-- Tertiary -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="tertiarylvl">
-                        <p class="font-weight-bold">TERTIARY</p>
-
-                        <v-spacer></v-spacer>
-
-                        <v-radio-group row v-model="ter">
-                          <v-radio label="Graduate" color="success" @click="clear_ter_graduate()
-                          " value="ter_graduate">
-                          </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="clear_ter_undergraduate()
-                          " value="ter_undergraduate">
-                          </v-radio>
-                          <v-container v-show="ter_graduate">
-                            <v-combobox :items="course" label="Course" required outlined dense color="success"
-                              v-model="ter_grad_course">
-                            </v-combobox>
-                            <v-text-field outlined hide-spin-buttons label="Year Graduated" dense color="success"
-                              type="number" v-model="ter_grad_year">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                              v-model="ter_grad_school"></v-text-field>
-                          </v-container>
-                          <v-container v-show="ter_undergraduate">
-                            <v-select :items="levelreachedTer" label="Level Reached" required outlined dense
-                              color="success" v-model="ter_undergrad_level">
-                            </v-select>
-                            <v-text-field outlined hide-spin-buttons label="Year Last Attended" dense color="success"
-                              type="number" v-model="ter_undergrad_year">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                              v-model="ter_undergrad_school"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-
-                      <!-- Post-Graduate -->
-                      <v-col cols="12" sm="12" md="6" lg="6" v-show="graduatelvl">
-                        <p class="font-weight-bold">
-                          GRADUATE STUDIES/POST-GRADUATE
-                        </p>
-                        <v-spacer></v-spacer>
-                        <v-radio-group row v-model="post">
-                          <v-radio label="Graduate" color="success" @click="clear_post_graduate()
-                          " value="post_graduates">
-                          </v-radio>
-                          <v-radio label="Undergraduate" color="success" @click="clear_post_undergraduate()
-                          " value="post_graduate">
-                          </v-radio>
-                          <v-container v-show="post_graduates">
-                            <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
-                              color="success" v-model="post_grad_course">
-                            </v-combobox>
-                            <v-text-field outlined hide-spin-buttons label="Year Graduated" dense color="success"
-                              type="number" v-model="post_grad_year"></v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                              v-model="post_grad_school"></v-text-field>
-                          </v-container>
-                          <v-container v-show="post_undergraduate">
-                            <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
-                              color="success" v-model="post_undergrad_course">
-                            </v-combobox>
-                            <v-text-field outlined hide-spin-buttons label="Year Last Attended" dense color="success"
-                              type="number" v-model="post_undergrad_year">
-                            </v-text-field>
-                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
-                              v-model="post_undergrad_school"></v-text-field>
-                          </v-container>
-                        </v-radio-group>
-                      </v-col>
-                    </v-row>
-                    <v-row v-show="employment_status">
+                    </v-col> -->
+                    <v-row>
                       <v-col cols="12" sm="12" md="12">
-                        <p class="font-weight-bold">Employment Status:</p>
+                        <p class="font-weight-bold">EMPLOYMENT STATUS</p>
                       </v-col>
                       <v-col cols="12" sm="12" md="3" id="step2">
                         <v-radio-group row>
@@ -425,13 +250,11 @@
                           <v-container v-show="employed">
                             <v-radio-group row>
                               <v-radio class="ma-2 pa-2; font-weight-bold" label="Wage Employed" color="success"
-                                value="Wage Employed" hide-details @change="
-                                  (wage_employed = true), (self_employed = false)
-                                "></v-radio>
+                                value="Wage Employed" hide-details @change="(wage_employed = true), (self_employed = false)
+                                  "></v-radio>
                               <v-radio class="ma-2 pa-2; font-weight-bold" label="Self-Employed" color="success"
-                                value="Self-Employed" style="margin-top: -30px" hide-details @change="
-                                  (wage_employed = false), (self_employed = true)
-                                "></v-radio>
+                                value="Self-Employed" style="margin-top: -30px" hide-details @change="(wage_employed = false), (self_employed = true)
+                                  "></v-radio>
                               <v-container v-show="wage_employed">
                                 <v-text-field class="pa-2" style="margin-top: -10px; margin-left:" outlined
                                   label="Name of Company" dense color="success"></v-text-field>
@@ -565,9 +388,216 @@
             </v-stepper-content>
 
 
-
-            <!-- 3rd Stepper -->
+            <!-- Third Stepper -->
             <v-stepper-content step="3">
+              <v-card id="step2">
+                <v-card-text>
+                  <v-container fluid>
+                    <!-- <v-row>
+                      <v-radio-group row>
+                        <p class="mr-6 mb-n1 font-weight-bold green--text">Currently in School?</p>
+                        <v-radio label="Yes" value="yes"
+                          @click="highest_education = false, employment_status = false, education_status = true"
+                          color="success"></v-radio>
+                        <v-radio label="No" value="no"
+                          @click="highest_education = true, employment_status = true, education_status = false"
+                          color="success"></v-radio>
+
+                      </v-radio-group>
+                    </v-row> -->
+                    <!-- <v-col cols="12" md="4">
+                      <v-combobox outlined label="Specify Highest Educational Attainment" 
+                        :items="highest_education_attainment" dense color="success"></v-combobox>
+                    </v-col> -->
+
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <p class="font-weight-bold">EDUCATIONAL INFORMATION</p>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <h3>Literacy Indicators:</h3>
+
+                        <v-checkbox label="Can Read?" color="success"></v-checkbox>
+                        <v-checkbox label="Can Write?" color="success"></v-checkbox>
+
+                      </v-col>
+                      <v-col cols="12" sm="12" md="6">
+                        <v-checkbox label="Can Perform Mathematical Operation?" color="success"
+                          @click="mathematical_operation = true"></v-checkbox>
+                        <v-container v-show="mathematical_operation" style="margin-top: -35px">
+                          <v-checkbox label="Addition" value="a" color="success" style="margin-top: -10px"></v-checkbox>
+                          <v-checkbox label="Multiplication" value="m" color="success"
+                            style="margin-top: -10px"></v-checkbox>
+                          <v-checkbox label="Subtraction" value="s" color="success"
+                            style="margin-top: -10px"></v-checkbox>
+                        </v-container>
+                      </v-col>
+                      <!-- Elementary -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="elementarylvl">
+                        <p class="font-weight-bold" style="margin-top: 0px">
+                          Elementary
+                        </p>
+
+                        <v-spacer></v-spacer>
+                        <v-radio-group row v-model="elem">
+                          <v-radio label="Graduate" @click="clear_elem_graduate()" color="success" value="graduate">
+                          </v-radio>
+                          <v-radio label="Undergraduate" @click="clear_elem_undergraduate()" color="success"
+                            value="undergraduate">
+                          </v-radio>
+                          <v-container v-show="graduate">
+                            <v-row>
+                              <v-col cols="12" md="12" sm="12" lg="12">
+                                <v-text-field outlined label="Year Graduated" dense color="success" type="number"
+                                  hide-spin-buttons v-model="elem_grad_year"></v-text-field>
+                                <v-text-field v-model="elem_grad_school" outlined label="School Graduated" dense
+                                  color="success" type="text"></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <v-container v-show="undergraduate">
+                            <v-select :items="levelreachedElem" label="Level reached" required outlined dense
+                              color="success" v-model="elem_undergrad_level">
+                            </v-select>
+                            <v-text-field hide-spin-buttons outlined label="Year Last Attended" dense color="success"
+                              type="number" v-model="elem_undergrad_year">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="elem_undergrad_school"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+
+                      <!-- Secondary -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="secondarylvl">
+                        <p class="font-weight-bold" id="move">Secondary</p>
+
+                        <v-spacer></v-spacer>
+                        <v-radio-group row v-model="sec">
+                          <v-radio label="Graduate" color="success" @click="clear_sec_graduate()" value="sec_graduate">
+                          </v-radio>
+                          <v-radio label="Undergraduate" color="success" @click="clear_sec_undergraduate()"
+                            value="sec_ungraduate">
+                          </v-radio>
+                          <v-container v-show="sec_graduate">
+                            <v-radio-group v-model="sec_details">
+                              <v-radio label="Secondary (Non-K12)" id="move" value="non_K" color="success"
+                                @click="clear_sec_non_K()"></v-radio>
+                              <v-radio label="Secondary (K12)" value="K" color="success" @click="clear_sec_K()"></v-radio>
+                              <div v-show="non_K">
+                                <v-text-field hide-spin-buttons outlined label="Year Graduated" dense color="success"
+                                  type="number" v-model="sec_grad_year"></v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                                  v-model="sec_grad_school"></v-text-field>
+                              </div>
+                              <div v-show="K">
+                                <v-select :items="strand" label="SHS Strand" required outlined dense color="success"
+                                  v-model="sec_grad_strand">
+                                </v-select>
+                                <v-text-field hide-spin-buttons outlined label="Year Graduated" dense color="success"
+                                  type="number" v-model="sec_grad_year_K">
+                                </v-text-field>
+                                <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                                  v-model="sec_grad_school_K"></v-text-field>
+                              </div>
+                            </v-radio-group>
+
+                          </v-container>
+                          <v-container v-show="sec_undergraduate">
+                            <v-select :items="levelreachedSec" label="Level Reached" required outlined dense
+                              color="success" v-model="sec_undergrad_level">
+                            </v-select>
+                            <v-text-field hide-spin-buttons outlined label="Year Last Attended" dense color="success"
+                              type="number" v-model="sec_undergrad_year">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="sec_undergrad_school"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+
+                      <!-- Tertiary -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="tertiarylvl">
+                        <p class="font-weight-bold">Tertiary</p>
+
+                        <v-spacer></v-spacer>
+
+                        <v-radio-group row v-model="ter">
+                          <v-radio label="Graduate" color="success" @click="clear_ter_graduate()
+                            " value="ter_graduate">
+                          </v-radio>
+                          <v-radio label="Undergraduate" color="success" @click="clear_ter_undergraduate()
+                            " value="ter_undergraduate">
+                          </v-radio>
+                          <v-container v-show="ter_graduate">
+                            <v-combobox :items="course" label="Course" required outlined dense color="success"
+                              v-model="ter_grad_course">
+                            </v-combobox>
+                            <v-text-field outlined hide-spin-buttons label="Year Graduated" dense color="success"
+                              type="number" v-model="ter_grad_year">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="ter_grad_school"></v-text-field>
+                          </v-container>
+                          <v-container v-show="ter_undergraduate">
+                            <v-select :items="levelreachedTer" label="Level Reached" required outlined dense
+                              color="success" v-model="ter_undergrad_level">
+                            </v-select>
+                            <v-text-field outlined hide-spin-buttons label="Year Last Attended" dense color="success"
+                              type="number" v-model="ter_undergrad_year">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="ter_undergrad_school"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+
+                      <!-- Post-Graduate -->
+                      <v-col cols="12" sm="12" md="6" lg="6" v-show="graduatelvl">
+                        <p class="font-weight-bold">
+                          Graduate Studies/Post-Graduate
+                        </p>
+                        <v-spacer></v-spacer>
+                        <v-radio-group row v-model="post">
+                          <v-radio label="Graduate" color="success" @click="clear_post_graduate()
+                            " value="post_graduates">
+                          </v-radio>
+                          <v-radio label="Undergraduate" color="success" @click="clear_post_undergraduate()
+                            " value="post_graduate">
+                          </v-radio>
+                          <v-container v-show="post_graduates">
+                            <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
+                              color="success" v-model="post_grad_course">
+                            </v-combobox>
+                            <v-text-field outlined hide-spin-buttons label="Year Graduated" dense color="success"
+                              type="number" v-model="post_grad_year"></v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="post_grad_school"></v-text-field>
+                          </v-container>
+                          <v-container v-show="post_undergraduate">
+                            <v-combobox :items="courseGraduateStudies" label="Course" required outlined dense
+                              color="success" v-model="post_undergrad_course">
+                            </v-combobox>
+                            <v-text-field outlined hide-spin-buttons label="Year Last Attended" dense color="success"
+                              type="number" v-model="post_undergrad_year">
+                            </v-text-field>
+                            <v-text-field outlined label="School Graduated" dense color="success" type="text"
+                              v-model="post_undergrad_school"></v-text-field>
+                          </v-container>
+                        </v-radio-group>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+              </v-card>
+              <v-btn id="v-btn-c" color="success" @click="e1 = 4">
+                Continue
+              </v-btn>
+              <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+            </v-stepper-content>
+
+            <!-- 4th Stepper -->
+            <v-stepper-content step="4">
               <v-card>
                 <v-card-text>
                   <v-container fluid>
@@ -605,14 +635,14 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 4">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 5">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 3" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Fourth Stepper -->
-            <v-stepper-content step="4">
+            <!-- 5th Stepper -->
+            <v-stepper-content step="5">
               <v-card class="mb-6">
                 <v-col cols="12" md="12" sm="12">
                   <h4 class="green--text">
@@ -665,16 +695,16 @@
                 </v-col>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 5">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 6">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 3" class="ma-2" outlined color="success">
+              <v-btn @click="e1 = 4" class="ma-2" outlined color="success">
                 Back
               </v-btn>
             </v-stepper-content>
 
-            <!-- Fifth Stepper -->
-            <v-stepper-content step="5">
+            <!-- 6th Stepper -->
+            <v-stepper-content step="6">
               <v-card class="mb-6">
                 <v-col cols="12" md="12" sm="12">
                   <h4 class="green--text">Eligibility</h4>
@@ -741,14 +771,14 @@
                   </v-btn>
                 </v-col>
               </v-card>
-              <v-btn id="v-btn-c" color="success" @click="e1 = 6">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 7">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 4" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 5" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Sixth Stepper -->
-            <v-stepper-content step="6">
+            <!-- 7th Stepper -->
+            <v-stepper-content step="7">
               <v-card>
                 <v-card-text>
                   <v-container fluid>
@@ -807,14 +837,14 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 7">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 8">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 5" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 6" class="ma-2"> Back </v-btn>
             </v-stepper-content>
 
-            <!-- Seventh Stepper -->
-            <v-stepper-content step="7">
+            <!-- 8th Stepper -->
+            <v-stepper-content step="8">
               <v-card>
                 <v-card-text>
                   <v-container fluid>
@@ -870,7 +900,7 @@
               <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
                 Save
               </v-btn>
-              <v-btn @click="e1 = 6" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 7" class="ma-2"> Back </v-btn>
             </v-stepper-content>
           </v-form>
         </v-stepper-items>
@@ -912,7 +942,8 @@
                 @click="dialog2 = false, dialog3 = false, ofw_details = true, member_normal = false">
                 YES
               </v-btn>
-              <v-btn color="warning" text @click="dialog2 = false, dialog3 = true, ofw_details = false, student_details=false, member_normal = true">
+              <v-btn color="warning" text
+                @click="dialog2 = false, dialog3 = true, ofw_details = false, student_details = false, member_normal = true">
                 No
               </v-btn>
             </v-card-actions>
@@ -929,10 +960,12 @@
 
             <v-card-actions class="align-right">
               <v-spacer></v-spacer>
-              <v-btn color="success" text @click="dialog3 = false, student_details = true, ofw_details = false, member_normal = false">
+              <v-btn color="success" text
+                @click="dialog3 = false, student_details = true, ofw_details = false, member_normal = false">
                 YES
               </v-btn>
-              <v-btn color="warning" text @click="dialog3 = false, ofw_details = false, student_details = false, member_normal = true">
+              <v-btn color="warning" text
+                @click="dialog3 = false, ofw_details = false, student_details = false, member_normal = true">
                 No
               </v-btn>
             </v-card-actions>
@@ -940,7 +973,7 @@
         </v-dialog>
       </div>
 
-     
+
 
       <!-- OFW Information -->
       <v-stepper v-model="e2" v-show="ofw_details">
@@ -1267,7 +1300,7 @@ export default {
       },
       counter: v => v.length <= 11 || 'Max 11 digits',
     },
-    e1: 2,
+    e1: 1,
     e2: 1,
     employment_status: false,
     education_status: false,

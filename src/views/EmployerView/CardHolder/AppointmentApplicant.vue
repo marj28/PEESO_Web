@@ -1,10 +1,11 @@
 <template>
     <div>
         <v-row class="pa-2">
-            <v-col lg="6" cols="12" md="5">
+            <v-col lg="6" cols="12" md="6">
                 <v-card color="#1B5E20">
                     <v-card-title class="subtitle-2">
                         APPLICANTS
+
                         <v-spacer></v-spacer>
                         <v-spacer></v-spacer>
                         <v-spacer></v-spacer>
@@ -12,6 +13,9 @@
                             outlined rounded dark dense></v-text-field>
                     </v-card-title>
                     <v-card-text>
+                        <v-btn color="green darken-1" class="mb-2 mt-n2" dark @click="invitedApplicants()" floating align-right>
+                            Invite
+                        </v-btn>
                         <v-data-table :headers="headers" :items="desserts" :search="search" @click:row="editItem"
                             show-select v-model="selected" class="btn-hover elevation-1 pa-4" item-key="id">
                             <template v-slot:top>
@@ -83,12 +87,12 @@
                     Invite
                 </v-btn>
             </v-col> -->
-            <v-btn color="green darken-1" dark @click="invitedApplicants()" floating align-right>
+            <!-- <v-btn color="green darken-1" dark @click="invitedApplicants()" floating align-right>
                 Invite
-            </v-btn>
+            </v-btn> -->
 
             <!-- invited -->
-            <v-col md="5" cols="12">
+            <v-col md="6" cols="12">
                 <v-card class="wrapper" color="#1B5E20">
                     <v-card-title class="subtitle-2">
                         INVITED APPLICANTS
@@ -262,12 +266,12 @@ export default {
             for (let i = 0; i < this.selected.length; i++) {
                 this.hired.push(this.selected[i])
                 this.desserts = this.desserts.filter((nem) => nem.id !== this.selected[i].id)
-                
+
             }
             for (let i = 0; i < this.hired.length; i++) {
-                
+
                 this.selected = this.selected.filter((nem) => nem.id !== this.hired[i].id)
-                
+
             }
 
         },

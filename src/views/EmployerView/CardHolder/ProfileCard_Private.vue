@@ -54,28 +54,40 @@
                         </v-select>
                       </v-col>
                       <v-col cols="12" md="3" sm="12">
-                        <v-text-field label="Province" readonly outlined dense color="success"
-                          value="Davao del Norte"></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="2" sm="12">
-                        <v-text-field label="Municipality / City" readonly outlined dense color="success"
-                          value="Tagum City" :rules="rules"></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="3" sm="12">
-                        <v-select label="Baranggay" required outlined dense color="success" :items="baranggay"
-                          :rules="rules"></v-select>
-                      </v-col>
-                      <v-col cols="12" md="4" sm="12">
-                        <v-text-field label="House No. / Street / Village" required outlined dense color="success"
-                          :rules="rules"></v-text-field>
-                      </v-col>
+                      <v-combobox v-model="region" :items="address" item-text="region_name" outlined dense color="success"
+                        label="Region" @change="formattype('REGION')" return-object single-line :rules="[rules.required]">
+                      </v-combobox>
+
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false"
+                        outlined dense color="success" label="Province" @change="formattype('PROVINCE')" return-object
+                        single-line :rules="[rules.required]">
+
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined
+                        dense label="Municipality / City" @change="formattype('CITY')" return-object color="success"
+                        :rules="[rules.required]" single-line>
+
+                      </v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="3" sm="12">
+                      <v-combobox label="Baranggay" :disabled="city == '' ? true : false" outlined dense color="success"
+                        :items="brgyname" :rules="[rules.required]"></v-combobox>
+                    </v-col>
+                    <v-col cols="12" md="12" sm="12">
+                      <v-text-field label="House No. / Street / Village" required outlined dense color="success"
+                        :rules="[rules.required]" v-model="house"></v-text-field>
+                    </v-col>
                     </v-row>
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="validate(e1)">
+              <v-btn id="v-btn-c" color="success" @click="validate(e1)" class="ma-2">
                 Continue
               </v-btn>
             </v-stepper-content>
@@ -116,7 +128,7 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="validate(e1)">
+              <v-btn id="v-btn-c" color="success" @click="validate(e1)" class="ma-2">
                 Continue
               </v-btn>
               <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
@@ -146,7 +158,7 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="validate(e1)">
+              <v-btn id="v-btn-c" color="success" @click="validate(e1)" class="ma-2">
                 Save
               </v-btn>
               <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
@@ -184,40 +196,25 @@
   </div>
 </template>
 <script>
+
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {},
   data: () => ({
     e1: 1,
+    provincename: {},
+    cityname: {},
+    brgyname: {},
+    region: '',
+    province: '',
+    city: '',
+    brgy: '',
     dialog: false,
     valid: true,
     rules: [
       v => !!v || 'Required',
     ],
-    baranggay: [
-      "APOKON",
-      "BINCUNGAN",
-      "BUSAON",
-      "CANOCOTAN",
-      "CUAMBOGAN",
-      "LA FILIPINA",
-      "LIBOGANON",
-      "MADAUM",
-      "MAGDUM",
-      "MAGUGPO EAST",
-      "MAGUGPO NORTH",
-      "MAGUGPO POBLACION",
-      "MAGUGPO SOUTH",
-      "MAGUGPO WEST",
-      "MANKILAM",
-      "NEW BALAMBAN",
-      "NUEVA FUERZA",
-      "PAGSABANGAN",
-      "PANDAPAN",
-      "SAN AGUSTIN",
-      "SAN ISIDRO",
-      "SAN MIGUEL",
-      "VISAYAN VILLAGE",
-    ],
+   
     title: [
       "Mr.",
       "Mrs."
@@ -253,7 +250,34 @@ export default {
       "Wholesale and Retail",
     ],
   }),
+  created() {
+    this.fetchaddress()
+
+  },
+  computed: {
+    ...mapGetters('users', { address: 'getadd' }),
+  },
   methods: {
+    formattype(type) {
+      if (type == "REGION") {
+        let res = this.region
+
+        this.provincename = Object.keys(res.province_list)
+      }
+      if (type == "PROVINCE") {
+
+
+        let res = this.region.province_list[this.province]
+
+        this.cityname = Object.keys(res.municipality_list)
+      }
+      if (type == "CITY") {
+        let res = this.region.province_list[this.province].municipality_list[this.city]
+        // console.log("province=>",res.barangay_list)
+        this.brgyname = Object.values(res.barangay_list)
+      }
+    },
+    ...mapActions('users', ['fetchaddress']),
     validate(step) {
       // console.log(step)
       if (step == 1) {
@@ -279,6 +303,7 @@ export default {
       }
 
     },
+    
   }
 }
 </script>
