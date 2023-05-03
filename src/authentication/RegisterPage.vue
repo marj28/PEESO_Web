@@ -13,20 +13,27 @@
                   <v-container class="mb-n6">
                     <v-row class="text-center pa-4 mt-n10" v-show="title">
                       <v-col cols="12" sm="12" md="12">
-                        <v-btn type="submit" class="mr-1" :color="green" block @click="
-                          employer = false, applicant = true, type = 'member'"
-                          v-bind:color="type === 'member' ? 'success' : 'white'">
-                          <v-icon left>
-                            mdi-account
-                          </v-icon>
-                          BE A MEMBER</v-btn>
+                        <v-tooltip bottom >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn type="submit" class="mr-1" :color="green" block
+                              @click="employer = false, applicant = true, type = 'member'"
+                              v-bind:color="type === 'member' ? 'success' : 'white'" v-bind="attrs" v-on="on">
+                              <v-icon left>
+                                mdi-account
+                              </v-icon>
+                              BE A MEMBER</v-btn>
+
+                          </template>
+                          <span>For Student / Job Applicant / OFW</span>
+                        </v-tooltip>
+
                       </v-col>
                       <v-col cols="12">
                         <h6 class="text-center green--text mb-n12 mt-n4">OR</h6>
                       </v-col>
                       <v-col cols="12" sm="12" md="12">
-                        <v-btn type="submit" class="mr-1 mt-n4" block @click="
-                          employer = true, applicant = false, type = 'employer'"
+                        <v-btn type="submit" class="mr-1 mt-n4" block
+                          @click="employer = true, applicant = false, type = 'employer'"
                           v-bind:color="type === 'employer' ? 'success' : 'white'">
                           <v-icon left>
                             mdi-account-multiple

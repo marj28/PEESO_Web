@@ -138,7 +138,7 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="validate">
+              <v-btn id="v-btn-c" color="success" @click="validate" class="ma-2">
                 Continue
               </v-btn>
             </v-stepper-content>
@@ -194,10 +194,10 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn id="v-btn-c" color="success" @click="e1 = 3">
+              <v-btn id="v-btn-c" color="success" @click="e1 = 3" class="ma-2">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 1" class="ma-2" text color="warning"> Back </v-btn>
+              <v-btn @click="e1 = 1" class="ma-2" text color="warning" outlined> Back </v-btn>
             </v-stepper-content>
 
             <!-- Third Stepper -->
@@ -236,7 +236,7 @@
                 </v-card-text>
               </v-card>
 
-              <v-btn @click="e1 = 2" class="ma-2" text color="warning"> Back </v-btn>
+              <v-btn @click="e1 = 2" class="ma-2" text color="warning" outlined> Back </v-btn>
               <v-btn class="ma-2" color="success" @click="dialog = true" value="save">
                 Save
               </v-btn>

@@ -16,37 +16,37 @@
       </v-container>
       <v-divider dark></v-divider>
 
-      <v-list shaped class="clickable mb-n2" >
+      <v-list shaped class="clickable mb-n2">
         <template v-for="item in items">
-        <v-list-group v-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item['icon-ctr']"
-          :append-icon="item.model ? item.icon : item['icon-alt']" active-class="orange--text" class="">
-          <template v-slot:activator>
-            <v-list-item-content>
-              {{ item.text }}
-            </v-list-item-content>
-          </template>
-          <v-list-item v-for="(child, i) in item.children" :key="i" route :to="child.route" active-class="orange--text"
+          <v-list-group v-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item['icon-ctr']"
+            :append-icon="item.model ? item.icon : item['icon-alt']" active-class="orange--text" class="">
+            <template v-slot:activator>
+              <v-list-item-content>
+                {{ item.text }}
+              </v-list-item-content>
+            </template>
+            <v-list-item v-for="(child, i) in item.children" :key="i" route :to="child.route" active-class="orange--text"
+              @click="closeAllOpen(item.text)">
+              <v-list-item-content v-if="child.icon">
+                <v-icon>{{ child.icon }}</v-icon>
+              </v-list-item-content>
+              <v-list-item-content>
+                {{ child.text }}
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+
+          <v-list-item v-else=":key='item.text' " route :to="item.route" active-class="orange--text"
             @click="closeAllOpen(item.text)">
-            <v-list-item-content v-if="child.icon">
-              <v-icon>{{ child.icon }}</v-icon>
-            </v-list-item-content>
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
             <v-list-item-content>
-              {{ child.text }}
+              <v-list-item-title>
+                {{ item.text }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </v-list-group>
-
-        <v-list-item v-else=":key='item.text' " route :to="item.route" active-class="orange--text"
-          @click="closeAllOpen(item.text)" >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ item.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -96,6 +96,12 @@ export default {
         this.items[4].model = false
         console.log(name)
       }
+      else if (name == 'Announcement') {
+        this.items[2].model = false
+        this.items[3].model = false
+        this.items[4].model = false
+        console.log(name)
+      }
     }
   },
   data: () => ({
@@ -108,63 +114,41 @@ export default {
         text: "Forms",
         route: "/AdminPage/AdminForms",
       },
-      {
-        icon: "mdi-chevron-down",       
-        "icon-ctr": "mdi-clipboard-check-outline",
-        text: "To Do's",
-        model: false,
-        children: [
-          {
-            icon: "mdi-clipboard-check-outline",
-            text: "For Approval",
-            route: "/AdminPage/ApprovalList",
-          },
-          {
-            icon: "mdi-clipboard-file-outline",
-            text: "To Recommend",
-            route: "/AdminPage/RecommendationList",
-          },
-          {
-            icon: "mdi-clipboard-clock-outline",
-            text: "For Processing",
-            route: "/AdminPage/ProcessingList",
-          },
-        ],
-      },
+
       {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
-        "icon-ctr": "mdi-clipboard-file-outline",
-        text: "Listing",
+        "icon-ctr": "mdi-animation-outline",
+        text: "Divisions",
         model: false,
         children: [
           {
-            icon: "mdi-clipboard-check-outline",
-            text: "Student Programs",
+            icon: "mdi-book-education-outline",
+            text: "Education",
             route: "/AdminPage/StudentProgram",
           },
           {
-            icon: "mdi-clipboard-check-outline",
-            text: "Training Offering",
+            icon: "mdi-account-key",
+            text: "Training",
             route: "/AdminPage/TrainingOffer",
           },
           {
-            icon: "mdi-clipboard-file-outline",
-            text: "Job Posting",
+            icon: "mdi-briefcase-outline",
+            text: "Employment",
             route: "/AdminPage/AdminJobPost",
           },
-          {
-            icon: "mdi-clipboard-clock-outline",
-            text: "Announcement",
-            route: "/AdminPage/AdminAnnouncement",
-          },
+          // {
+          //   icon: "mdi-clipboard-clock-outline",
+          //   text: "Announcement",
+          //   route: "/AdminPage/AdminAnnouncement",
+          // },
         ],
       },
       {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         "icon-ctr": "mdi-clipboard-file-outline",
-        text: "Members",
+        text: "Client",
         model: false,
         children: [
           {
@@ -177,17 +161,45 @@ export default {
             text: "Job Applicant",
             route: "/AdminPage/ApplicantList",
           },
-          {
-            icon: "mdi-clipboard-clock-outline",
-            text: "Employers",
-            route: "/AdminPage/EmployerList",
-          },
+          // {
+          //   icon: "mdi-clipboard-clock-outline",
+          //   text: "Employers",
+          //   route: "/AdminPage/EmployerList",
+          // },
           {
             icon: "mdi-earth",
             text: "OFW",
             route: "/AdminPage/OFWList",
           },
         ],
+      },
+      {
+        icon: "mdi-chevron-down",
+        "icon-ctr": "mdi-clipboard-check-outline",
+        text: "Employers",
+        model: false,
+        children: [
+          {
+            icon: "mdi-clipboard-check-outline",
+            text: "Approved",
+            route: "/AdminPage/ApprovalList",
+          },
+          {
+            icon: "mdi-clipboard-file-outline",
+            text: "For Approval",
+            route: "/AdminPage/RecommendationList",
+          },
+          // {
+          //   icon: "mdi-clipboard-clock-outline",
+          //   text: "For Processing",
+          //   route: "/AdminPage/ProcessingList",
+          // },
+        ],
+      },
+      {
+        icon: "mdi-clipboard-clock-outline",
+        text: "Announcement",
+        route: "/AdminPage/AdminAnnouncement",
       },
       { icon: "mdi-account", text: "Profile", route: "/AdminPage/AdminProfile" },
       { icon: "", text: "", route: "" },

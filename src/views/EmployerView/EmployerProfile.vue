@@ -18,19 +18,19 @@
               <v-col cols="12" sm="12" md="12" lg="12">
                 <v-dialog v-model="dialog2" width="400" persistent>
 
-                  <v-card>
+                  <v-card flat>
                     <v-card-title class="text-h6 green darken-2 white--text">
                       Establishment Type
                     </v-card-title>
                     <v-divider></v-divider>
 
-                    <v-card-actions class="align-right">
+                    <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn color="success" text
                         @click="dialog2 = false, profilecard_private = true, profilecard_government = false">
                         PRIVATE
                       </v-btn>
-                      <v-btn color="success" text
+                      <v-btn color="warning" text
                         @click="dialog2 = false, profilecard_private = false, profilecard_government = true">
                         PUBLIC
                       </v-btn>

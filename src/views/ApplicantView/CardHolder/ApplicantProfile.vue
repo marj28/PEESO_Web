@@ -11,9 +11,9 @@
           <p class="font-weight-black">Applicant Name:</p>
         </v-card-text>
       </v-card>
-      <!-- start student details -->
       <student-profile-card v-show="student_details" />
-      <!-- end student details -->
+      <ofw-profile-card v-show="ofw_details" />
+     
 
       <v-stepper v-model="e1" v-show="member_normal">
 
@@ -384,7 +384,7 @@
               <v-btn id="v-btn-c" color="success" @click="e1 = 3">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 1" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 1" class="ma-2" color="success" outlined> Back </v-btn>
             </v-stepper-content>
 
 
@@ -593,7 +593,7 @@
               <v-btn id="v-btn-c" color="success" @click="e1 = 4">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 2" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 2" class="ma-2" color="success" outlined> Back </v-btn>
             </v-stepper-content>
 
             <!-- 4th Stepper -->
@@ -638,7 +638,7 @@
               <v-btn id="v-btn-c" color="success" @click="e1 = 5">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 3" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 3" class="ma-2" color="success" outlined> Back </v-btn>
             </v-stepper-content>
 
             <!-- 5th Stepper -->
@@ -774,7 +774,7 @@
               <v-btn id="v-btn-c" color="success" @click="e1 = 7">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 5" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 5" class="ma-2" color="success" outlined> Back </v-btn>
             </v-stepper-content>
 
             <!-- 7th Stepper -->
@@ -840,7 +840,7 @@
               <v-btn id="v-btn-c" color="success" @click="e1 = 8">
                 Continue
               </v-btn>
-              <v-btn @click="e1 = 6" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 6" class="ma-2" color="success" outlined> Back </v-btn>
             </v-stepper-content>
 
             <!-- 8th Stepper -->
@@ -900,7 +900,7 @@
               <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
                 Save
               </v-btn>
-              <v-btn @click="e1 = 7" class="ma-2"> Back </v-btn>
+              <v-btn @click="e1 = 7" class="ma-2" color="success" outlined> Back </v-btn>
             </v-stepper-content>
           </v-form>
         </v-stepper-items>
@@ -972,187 +972,6 @@
           </v-card>
         </v-dialog>
       </div>
-
-
-
-      <!-- OFW Information -->
-      <v-stepper v-model="e2" v-show="ofw_details">
-
-        <v-stepper-header style="font-size: 14px">
-          <v-stepper-step :complete="e1 > 1" step="1" style="height=" color="success">
-            Personal
-            Information
-          </v-stepper-step>
-
-          <v-divider></v-divider>
-
-          <v-stepper-step :complete="e1 > 2" step="2" style="height=" color="success">
-            Employment
-            Information
-          </v-stepper-step>
-        </v-stepper-header>
-        <v-stepper-items>
-          <!-- First Stepper -->
-          <v-form ref="formes2" v-model="valid" lazy-validation>
-            <v-stepper-content step="1">
-              <v-card id="step1">
-                <v-card-text>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field label="Surname" v-model="value.surname" outlined dense color="success" required
-                        :rules="[rules.required]" autofocus></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field label="First Name" v-model="value.firstname" outlined dense color="success" required
-                        :rules="[rules.required]"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field label="Middle Name" v-model="value.middlename" :rules="[rules.required]" outlined
-                        dense color="success"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-select :items="suffix" :rules="[rules.required]" label="Suffix" v-model="defaultSelected"
-                        required outlined dense color="success">
-                      </v-select>
-                    </v-col>
-
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field v-model="birthDate" @input="calculateAge(birthDate)" label="Date of Birth" outlined
-                        type="date" dense color="success" :rules="[rules.required]"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-text-field label="Age" dense outlined color="success" readonly :rules="[rules.required]"
-                        v-model="years">
-                      </v-text-field>
-
-                    </v-col>
-                    <v-col cols="12" md="3" sm="6">
-                      <v-select :items="civilstatus" v-model="value.civilstatus" label="Civil Status" required outlined
-                        dense color="success" :rules="[rules.required]">
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="6">
-                      <v-select :items="sex" label="Sex" v-model="value.sex" required outlined dense color="success"
-                        :rules="[rules.required]">
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" md="2" sm="6">
-                      <v-combobox :items="religion" label="Religion" v-model="value.religion" required outlined dense
-                        color="success">
-                      </v-combobox>
-                    </v-col>
-                    <v-col cols="12" md="2" sm="6">
-                      <v-combobox :items="disabilities" label="Disability" v-model="value.disability" required outlined
-                        dense color="success">
-                      </v-combobox>
-                    </v-col>
-                    <v-col cols=" 12" md="2" sm="6">
-                      <v-combobox :items="ethnicity" label="Ethnic Group" required v-model="value.ethnicity" outlined
-                        dense color="success">
-                      </v-combobox>
-                    </v-col>
-                    <v-col cols=" 12" md="3" sm="6">
-                      <v-combobox :items="idtype" label="Type of ID" required v-model="value.idtype" outlined dense
-                        color="success">
-                      </v-combobox>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="3">
-                      <v-file-input label="Attach ID here" accept="image/x-png,image/gif,image/jpeg" outlined
-                        v-model="value.id" append-icon="mdi-camera" dense color="success"
-                        :rules="[rules.required]"></v-file-input>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12">
-                      <p class="font-weight-bold" style="margin-top: -35px">
-                        Home Address
-                      </p>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="region" :items="address" item-text="region_name" outlined dense color="success"
-                        label="Region" @change="formattype('REGION')" return-object single-line :rules="[rules.required]">
-                      </v-combobox>
-
-                    </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="province" :items="provincename" :disabled="region == '' ? true : false"
-                        outlined dense color="success" label="Province" @change="formattype('PROVINCE')" return-object
-                        single-line :rules="[rules.required]">
-
-                      </v-combobox>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-combobox v-model="city" :items="cityname" :disabled="province == '' ? true : false" outlined
-                        dense label="Municipality / City" @change="formattype('CITY')" return-object color="success"
-                        :rules="[rules.required]" single-line>
-
-                      </v-combobox>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-combobox label="Baranggay" :disabled="city == '' ? true : false" outlined dense color="success"
-                        :items="brgyname" :rules="[rules.required]"></v-combobox>
-                    </v-col>
-                    <v-col cols="12" md="12" sm="12">
-                      <v-text-field label="House No. / Street / Village" required outlined dense color="success"
-                        :rules="[rules.required]" v-model="value.house"></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12" md="3" sm="12">
-                      <v-text-field label="Contact Number" required outlined dense color="success" type="number"
-                        hide-spin-buttons maxlength="11" oninput="this.value=this.value.slice(0,this.maxLength)"
-                        :rules="[rules.required, rules.counter]" v-model="value.number"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="12">
-                      <v-text-field label="E-mail" required outlined dense color="success" type="email"
-                        :rules="[rules.required, rules.email]" v-model="value.email"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="6">
-                      <v-text-field label="SSS" required outlined dense color="success"
-                        v-model="value.sss"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="3" sm="6">
-                      <v-text-field label="TIN" required outlined dense color="success"
-                        v-model="value.tin"></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <!-- </v-form> -->
-                  <small>*indicates required field</small>
-                </v-card-text>
-              </v-card>
-
-
-              <v-btn id="v-btn-c" color="success" @click="validate()" class="mt-2">
-                Continue
-              </v-btn>
-            </v-stepper-content>
-
-          </v-form>
-          <v-stepper-content step="2">
-            <v-card id="step2">
-              <v-card-text>
-                <v-container fluid>
-                  <v-row>
-                    <v-col>
-                      <p class="font-weight-bold">Fill up the following:</p>
-                      <v-row>
-                        <v-col cols="12" md="6" lg="6">
-                          <v-combobox :items="countries" item-text="country" label="Specify Country: " outlined
-                            color="success" dense></v-combobox>
-                        </v-col>
-                        <v-col cols="12" md="6" lg="6">
-                          <v-text-field label="Occupation: " outlined color="success" dense></v-text-field>
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
-            <v-btn id="v-btn-c" color="success" @click.stop="dialog = true">
-              Save
-            </v-btn>
-            <v-btn @click="e2 = 1" class="ma-2"> Back </v-btn>
-          </v-stepper-content>
-        </v-stepper-items>
-      </v-stepper>
     </v-col>
   </div>
 </template>
@@ -1301,7 +1120,6 @@ export default {
       counter: v => v.length <= 11 || 'Max 11 digits',
     },
     e1: 1,
-    e2: 1,
     employment_status: false,
     education_status: false,
     altLabels: true,
@@ -1810,16 +1628,11 @@ export default {
 
 
       this.$refs.formes.validate();
-      this.$refs.formes2.validate();
 
       let v = this.$refs.formes.validate();
-      let x = this.$refs.formes2.validate();
 
       if (v) {
         this.e1 = this.e1 + 1
-      }
-      if (x) {
-        this.e2 = this.e2 + 1
       }
     },
     validaterow() {
